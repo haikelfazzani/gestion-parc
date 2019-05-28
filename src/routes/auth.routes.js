@@ -10,9 +10,9 @@ router.get('/login', authMiddleware.redirectHome, (req, res) => {
 
 
 router.post('/login', authMiddleware.redirectHome, (req, res) => {
-  let { email } = req.body;
+  let { email, password } = req.body;
   
-  utilisateurDao.getOneByEmail(email, (resolve) => {
+  utilisateurDao.getOneByEmail(email,password, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
       req.session.userInfo = resolve.data[0];

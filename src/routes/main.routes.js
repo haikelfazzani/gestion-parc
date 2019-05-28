@@ -1,7 +1,6 @@
-const express = require("express");
-const authMiddleware = require('../middlewares/auth.middleware');
-
-const router = express.Router();
+const express = require("express"),
+  router = express.Router(),
+  authMiddleware = require('../middlewares/auth.middleware');
 
 
 router.get("/", authMiddleware.redirectLogin, (req, res) => {

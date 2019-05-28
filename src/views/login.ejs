@@ -9,14 +9,14 @@
     <form action="/auth/login" method="POST">
         <div class="form-group">
             <label for="email">Adresse Email</label>
-            <input type="email" class="form-control" id="email" name="email"             
-            placeholder="Entrer adresse email" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Entrer adresse email"
+                required>
 
         </div>
         <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" id="password" 
-            name="password" placeholder="Entrer mot de passe" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe"
+                required>
         </div>
 
         <div class="form-check">
@@ -27,13 +27,19 @@
         <button type="submit" class="btn btn-primary btn-lg btn-block mt-2">Login</button>
     </form>
 
+    <% if(locals.msg) { %>
+    <div class="alert alert-danger mt-2" role="alert">
+        <%= msg %>
+    </div>
+    <% } %>
+
 
     <style>
         img {
             margin: auto;
         }
 
-        form {
+        form , .alert {
             margin: auto;
             max-width: 400px;
         }

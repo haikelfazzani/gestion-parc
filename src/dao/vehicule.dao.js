@@ -1,9 +1,9 @@
 const db = require('../database/DbConnection');
 
-class UtilisateurDao {
+class VehiculeDao {
 
     constructor() {
-        this.tabelName = "utilisateur";
+        this.tabelName = "vehicule";
         // les champs
         this.id = "id";
         this.nomComplet = "nom_complet";
@@ -79,5 +79,5 @@ class UtilisateurDao {
 
 }
 
-const utilisateurDao = new UtilisateurDao();
-module.exports = utilisateurDao;
+const vehiculeDao = new VehiculeDao();
+module.exports = vehiculeDao;

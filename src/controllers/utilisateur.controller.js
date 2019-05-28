@@ -1,6 +1,6 @@
 
 const utilisateurDao = require("../dao/utilisateur.dao");
-const { Utilisateur } = require("../models/IUtilisateur.model");
+const Utilisateur = require("../models/Utilisateur.model");
 
 class UtilisateurController {
 
