@@ -16,13 +16,12 @@ const cookeParser = require("cookie-parser");
 const expressSession = require("express-session");
 // Routes
 const main_routes_1 = require("./routes/main.routes");
-const car_routes_1 = require("./routes/car.routes");
+const utilisateur_routes_1 = require("./routes/utilisateur.routes");
+const auth_routes_1 = require("./routes/auth.routes");
+const Role_enum_1 = require("./models/Role.enum");
 class App {
     constructor() {
         this.app = express();
-        this.config();
-    }
-    config() {
         // cors setup
         this.app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             yield this.setHeaderOrigin(req);
@@ -37,6 +36,14 @@ class App {
                 maxAge: 60 * 60 * 24 * 1000,
             }
         }));
+        this.app.use((req, res, next) => {
+            res.locals.role = Role_enum_1.default;
+            if (req.session && req.session.userInfo) {
+                const { userInfo } = req.session;
+                res.locals.userInfo = userInfo;
+            }
+            next();
+        });
         // view engine setup
         this.app.set('views', path.join(__dirname, 'views'));
         this.app.set('view engine', 'ejs');
@@ -46,8 +53,9 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(cookeParser());
         // Routers
+        this.app.use("/auth", cors_middleware_1.default, auth_routes_1.authRoutes);
         this.app.use("/", cors_middleware_1.default, main_routes_1.mainRoutes);
-        this.app.use("/car", cors_middleware_1.default, car_routes_1.carRoutes);
+        this.app.use("/utilisateur", cors_middleware_1.default, utilisateur_routes_1.utilisateurRoute);
     }
     setHeaderOrigin(req) {
         req.headers.origin = req.headers.origin || req.headers.host;

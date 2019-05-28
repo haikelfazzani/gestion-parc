@@ -9,16 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
 class MainRoute {
     constructor() {
         this.router = express.Router();
         this.mainRoute();
     }
     mainRoute() {
-        this.router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //await mainController.root(req, res)
-            res.render("index");
-        }));
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.router.get("/", auth_middleware_1.authMiddleware.redirectLogin, (req, res) => __awaiter(this, void 0, void 0, function* () {
+                res.render("index");
+            }));
+        });
     }
 }
 exports.mainRoutes = new MainRoute().router;
