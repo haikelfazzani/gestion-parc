@@ -1,0 +1,4 @@
+const IResolve = {
+    error:"",
+    data:""
+}

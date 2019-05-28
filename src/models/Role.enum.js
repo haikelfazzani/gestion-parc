@@ -4,4 +4,4 @@ const Role = {
     admin : "admin"
 }
 
-export default Role;
+module.exports = Role;

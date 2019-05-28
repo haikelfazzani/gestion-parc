@@ -1,9 +1,6 @@
-import * as cors from 'cors';
+let cors = require('cors');
 
 class CorsMiddleware {
-  
-  cors: cors;  
-  corsOptions: object;  
 
   constructor() {
     this.corsOptions = this.setCorsOptions();
@@ -28,4 +25,4 @@ class CorsMiddleware {
 
 }
 
-export default new CorsMiddleware().cors;
+module.exports = new CorsMiddleware().cors;
