@@ -7,15 +7,7 @@ const expressSession = require("express-session");
 
 const Role = require('./models/Role.enum');
 
-const cors = require('./middlewares/cors.middleware');
-
 const app = express();
-
-// cors setup
-app.use((req, res, next) => {
-  req.headers.origin = req.headers.origin || req.headers.host;
-  next();
-});
 
 // sessions
 app.use(expressSession({
@@ -31,8 +23,6 @@ app.use(expressSession({
 app.use((req, res, next) => {
 
   res.locals.role = Role;
-
-  console.log(Role)
 
   if (req.session && req.session.userInfo) {
     const { userInfo } = req.session;
@@ -55,10 +45,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookeParser());
 
 // Routers
-app.use("/auth", cors, require("./routes/auth.routes"));
+app.use("/auth", require("./routes/auth.routes"));
 
-app.use("/", cors, require("./routes/main.routes"));
-app.use("/utilisateur", cors, require("./routes/utilisateur.routes"));
+app.use("/", require("./routes/main.routes"));
+app.use("/utilisateur", require("./routes/utilisateur.routes"));
 
 // error route
 app.use("*", (req, res) => {

@@ -11,7 +11,7 @@ router.get('/login', authMiddleware.redirectHome, (req, res) => {
 
 router.post('/login', authMiddleware.redirectHome, (req, res) => {
   let { email } = req.body;
-  console.log(email)
+  
   utilisateurDao.getOneByEmail(email, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
