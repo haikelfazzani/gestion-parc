@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon -L",
-    "start": "node ./dist/server.js"
+    "start": "node dist/server.js",
+    "server": "node dist/server.js"
   },
   "author": "Haikel Fazzani",
   "license": "MIT",
