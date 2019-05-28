@@ -50,6 +50,7 @@ app.use("/auth", require("./routes/auth.routes"));
 app.use("/", require("./routes/main.routes"));
 app.use("/profile", require("./routes/profile.routes"));
 app.use("/utilisateur", require("./routes/utilisateur.routes"));
+app.use("/vehicules", require("./routes/vehicules.routes"));
 
 // error route
 app.use("*", (req, res) => {

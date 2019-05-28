@@ -5,30 +5,31 @@
     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-    <ul class="navbar-nav ml-auto">
 
-
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="/utilisateur">
           <i class="fas fa-plus"></i> Utilisateur</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/utilisateur">
+        <a class="nav-link" href="/vehicules">
           <i class="fas fa-plus"></i> Véhicules</a>
       </li>
+    </ul>
+
+
+    <ul class="navbar-nav ml-auto">
 
 
       <% if(locals.userInfo) { %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" 
-        data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           <i class="fas fa-user"></i> <%= userInfo.nom_complet %> </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" 
-        aria-labelledby="navbarDropdownMenuLink-4">
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
           <a class="dropdown-item" href="/profile">Profile</a>
           <a class="dropdown-item" href="/auth/logout">Log out</a>
         </div>
