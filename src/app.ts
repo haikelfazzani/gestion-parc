@@ -65,6 +65,10 @@ class App {
 
     this.app.use("/", cors, mainRoutes);
     this.app.use("/utilisateur", cors, utilisateurRoute);
+
+    this.app.use("*", (req, res) => {
+      res.redirect("/");  
+    });
   }
 
   setHeaderOrigin(req: express.Request): void {

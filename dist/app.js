@@ -56,6 +56,9 @@ class App {
         this.app.use("/auth", cors_middleware_1.default, auth_routes_1.authRoutes);
         this.app.use("/", cors_middleware_1.default, main_routes_1.mainRoutes);
         this.app.use("/utilisateur", cors_middleware_1.default, utilisateur_routes_1.utilisateurRoute);
+        this.app.use("*", (req, res) => {
+            res.redirect("/");
+        });
     }
     setHeaderOrigin(req) {
         req.headers.origin = req.headers.origin || req.headers.host;
