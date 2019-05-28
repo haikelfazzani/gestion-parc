@@ -6,17 +6,16 @@ class UtilisateurController {
 
     ajouter(req, res) {
         let { nom, email, password, role } = req.body;
-
         let user = new Utilisateur(nom, email, password, role);
 
-        utilisateurDao.insert(user, (resolve) => {
-            res.render("users/ajout", { msg: resolve.data || resolve.error });
+        utilisateurDao.insert(user, (resolve) => {            
+            return res.render("users/ajout", { msg: resolve.data || resolve.error });
         });
     }
 
     getAll(req, res) {
         utilisateurDao.getAll((resolve) => {
-            res.render("users/list-users", { msg: resolve.error, data: resolve.data });
+            return res.render("users/list-users", { msg: resolve.error, data: resolve.data });
         });
     }
 

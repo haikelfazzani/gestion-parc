@@ -4,7 +4,7 @@ class UtilisateurDao {
 
     constructor() {
         this.tabelName = "utilisateur";
-        // les champs
+        // fields
         this.id = "id";
         this.nomComplet = "nom_complet";
         this.email = "email";
@@ -20,13 +20,19 @@ class UtilisateurDao {
         values('${user.nomComplet}', '${user.email}', '${user.password}', '${user.role}')`;
 
         db.query(sql, (err, rows) => {
-            resolve({
-                error: "erreur d'insertion!",
-                data: "un utilisateur a été bien inséré"
-            });
+            if(!err) {
+                resolve({
+                    error: "",
+                    data: "un utilisateur a été bien inséré"
+                });
+            }   
+            else {
+                resolve({
+                    error: "erreur d'insertion!",
+                    data: ""
+                });
+            }         
         });
-
-        //db.end();
     }
 
     /** Update user */
@@ -38,11 +44,19 @@ class UtilisateurDao {
         const sql = `delete from ${this.tabelName} where ${this.email} = '${email}'`;
 
         db.query(sql, (err, rows) => {
-            resolve({
-                error: "erreur de suppression",
-                data: "un utilisateur a été supprimé"
-            });
-            if(err || (rows && rows.length > 0)) db.end();
+            if(!err) {
+                resolve({
+                    error: "",
+                    data: "un utilisateur a été bien supprimé"
+                });
+            }   
+            else {
+                resolve({
+                    error: "erreur de suppression!",
+                    data: ""
+                });
+            }
+            
         });
     }
 
@@ -58,8 +72,7 @@ class UtilisateurDao {
             resolve({
                 error: err,
                 data: rows
-            });
-            if(err || (rows && rows.length > 0)) db.end();
+            });            
         });        
     }
 
@@ -71,9 +84,7 @@ class UtilisateurDao {
             resolve({
                 error: err,
                 data: rows
-            });
-
-            if(err || (rows && rows.length > 0)) db.end();
+            });            
         });
     }
 

@@ -12,6 +12,4 @@ db.connect(function (err) {
     console.log("connected")
 });
 
-//this.dbConn.end();
-
 module.exports = db;
