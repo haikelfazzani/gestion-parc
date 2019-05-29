@@ -12,39 +12,23 @@
     <div class="col-md-8">
 
       <h2>Ajout d'une véhicule</h2>
-      <form action="/utilisateur/ajout" method="POST">
+      <form action="/vehicules/ajout" method="POST">
 
         <div class="form-group">
-          <label for="nom">Nom employé</label>
-          <input type="text" class="form-control" id="nom" name="nom" placeholder="Enter nom complet" required>
+          <label for="numSerie">Num serie</label>
+          <input type="text" class="form-control" id="numSerie" name="numSerie" 
+          placeholder="Enter num serie" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Adresse Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Entrer email" required>
+          <label for="model">Model</label>
+          <input type="text" class="form-control" id="model" name="model" 
+          placeholder="Entrer model" required>
         </div>
-
-
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe" required>
-        </div>
-
-        <% if(locals.role) { %>
-        <div class="form-group">
-          <label for="role">Choisir un role</label>
-          <select class="form-control" id="role" name="role">
-            <% for(let a in role) {%>
-            <option value="<%= role[a] %>"><%= role[a] %></option>
-            <% } %>
-          </select>
-        </div>
-        <% } %>
 
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
         <button type="reset" class="btn btn-danger">Reset</button>
-
 
       </form>
 

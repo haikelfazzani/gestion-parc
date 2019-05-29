@@ -1,5 +1,7 @@
 body {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
+    background-color: #3c3c3c;
+    color: #ffffff;
 }
 
 .navbar {
@@ -16,7 +18,7 @@ a, label, .btn {
 h2 {
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #3c3c3c;
+    border-bottom: 2px solid #525252;
     text-transform: uppercase;
 }
 
@@ -24,6 +26,14 @@ h2 {
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16),0 1px 2px 0 rgba(0,0,0,0.12)!important;
 }
 
+
+.jumbotron {
+    background-color: #ffffff !important;
+    color: #3c3c3c;
+    border-radius: 5px;
+}
+
+.navbar-nav { cursor: pointer;}
 
 @media screen and (max-width: 600px) {
     .navbar {

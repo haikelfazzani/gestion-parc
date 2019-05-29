@@ -12,20 +12,34 @@
     <div class="col-md-8">
 
       <% if(locals.data) { 
-                    let i = 1;    %>
+        let i = 1;
+        if(locals.etatQuery) {
+          data = data.filter(d => d.etat === etatQuery)
+        }
+      %>
+
       <h2>Liste des véhicules
         <span class="badge badge-primary"><%= data.length %>
         </span>
       </h2>
 
+      <% if(locals.Etat) { console.log(Etat) %>
+      <div class="d-flex flex-row-reverse mb-2">
+        <% for(let e in Etat) { %>
+        <a href="/vehicules/list?etatQuery=<%= Etat[e] %>" class="mr-2">
+          <span class="badge badge-primary"><%= Etat[e] %></span>
+        </a>
+        <% } %>
+      </div>
+      <% } %>
 
       <table class="table table-hover table-light">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
+            <th scope="col">Num serie</th>
+            <th scope="col">Model</th>
+            <th scope="col">Etat</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -34,17 +48,17 @@
 
           <% for(let user of data) { %>
           <tr>
-            <th scope="row"><%= i++ %></th>
-            <td><%= user.nom_complet %></td>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
+            <td><%= i++ %></td>
+            <td><%= user.num_serie %></td>
+            <td><%= user.model %></td>
+            <td><%= user.etat %></td>
 
             <td>
-              <a href="/utilisateur/modifier?u=<%= user.email %>" class="btn btn-success">
+              <a href="/vehicules/modifier?u=<%= user.num_serie %>" class="btn btn-success">
                 Modifier
               </a>
 
-              <a href="/utilisateur/modifier?u=<%= user.email %>" class="btn btn-danger">
+              <a href="/vehicules/modifier?u=<%= user.num_serie %>" class="btn btn-danger">
                 Supprimer
               </a>
 

@@ -5,9 +5,17 @@ const router = express.Router();
 const { redirectLogin } = require('../middlewares/auth.middleware');
 const { isAdmin } = require("../middlewares/permission.middleware");
 
+// controller
+const vehiculeController = require("../controllers/vehicule.controller");
+
+
+// index : main route
 router.get("/", [redirectLogin, isAdmin], (req, res) => {
     res.render("vehicules/index");
 });
+
+
+
 
 /** Add vehicule to database */
 router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
@@ -16,8 +24,11 @@ router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
 
 
 router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
-
+    vehiculeController.ajouter(req, res);
 });
+
+
+
 
 
 
@@ -43,9 +54,11 @@ router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
 
 
 
+
+
 /** Get all vehicules from database */
-router.get("/list", (req, res) => {
-    utilisateurController.getAll(req, res);
+router.get("/list", [redirectLogin, isAdmin], (req, res) => {    
+    vehiculeController.getAll(req, res);
 });
 
 

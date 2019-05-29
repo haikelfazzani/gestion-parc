@@ -6,6 +6,7 @@ const expressSession = require("express-session");
 
 const Role = require('./models/Role.enum');
 const Division = require("./models/Division.enum");
+const Etat = require("./models/Etat.enum");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
   res.locals.role = Role;
   res.locals.division = Division;
+  res.locals.Etat = Etat;
 
   if (req.session && req.session.userInfo) {
     const { userInfo } = req.session;
@@ -53,6 +55,7 @@ app.use("/", require("./routes/main.routes"));
 app.use("/profile", require("./routes/profile.routes"));
 app.use("/utilisateur", require("./routes/utilisateur.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
+app.use("/reservations", require("./routes/reservations.routes"));
 
 
 
