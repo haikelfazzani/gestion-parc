@@ -23,7 +23,7 @@
         </span>
       </h2>
 
-      <% if(locals.Etat) { console.log(Etat) %>
+      <% if(locals.Etat) { %>
       <div class="d-flex flex-row-reverse mb-2">
         <% for(let e in Etat) { %>
         <a href="/vehicules/list?etatQuery=<%= Etat[e] %>" class="mr-2">
