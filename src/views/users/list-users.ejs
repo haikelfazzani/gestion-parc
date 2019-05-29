@@ -24,8 +24,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
+            <th scope="col">Email</th>            
+            <th scope="col">Division</th> 
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -36,8 +36,8 @@
           <tr>
             <th scope="row"><%= i++ %></th>
             <td><%= user.nom_complet %></td>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
+            <td><%= user.email %></td>            
+            <td><%= user.division %></td>     
 
             <td>
               <a href="/utilisateur/modifier?u=<%= user.email %>" class="btn btn-success">

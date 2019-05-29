@@ -27,19 +27,38 @@
 
         <div class="form-group">
           <label for="password">Mot de passe</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe" required>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe"
+            required>
         </div>
 
-        <% if(locals.role) { %>
-        <div class="form-group">
-          <label for="role">Choisir un role</label>
-          <select class="form-control" id="role" name="role">
-            <% for(let a in role) {%>
-            <option value="<%= role[a] %>"><%= role[a] %></option>
+        <div class="row">
+          <div class="col-md-6">
+            <% if(locals.division) { %>
+            <div class="form-group">
+              <label for="division">Choisir un division</label>
+              <select class="form-control" id="division" name="division">
+                <% for(let d in division) {%>
+                <option value="<%= division[d] %>"><%= division[d] %></option>
+                <% } %>
+              </select>
+            </div>
             <% } %>
-          </select>
-        </div>
-        <% } %>
+
+          </div>
+
+          <div class="col-md-6">
+            <% if(locals.role) { %>
+            <div class="form-group">
+              <label for="role">Choisir un role</label>
+              <select class="form-control" id="role" name="role">
+                <% for(let a in role) {%>
+                <option value="<%= role[a] %>"><%= role[a] %></option>
+                <% } %>
+              </select>
+            </div>
+            <% } %>
+          </div>
+        </div><!-- / ROW -->
 
 
         <button type="submit" class="btn btn-primary">Ajouter</button>

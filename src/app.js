@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -6,8 +5,10 @@ const cookeParser = require("cookie-parser");
 const expressSession = require("express-session");
 
 const Role = require('./models/Role.enum');
+const Division = require("./models/Division.enum");
 
 const app = express();
+
 
 // sessions
 app.use(expressSession({
@@ -19,10 +20,11 @@ app.use(expressSession({
   }
 }));
 
-
+// set globall variables
 app.use((req, res, next) => {
 
   res.locals.role = Role;
+  res.locals.division = Division;
 
   if (req.session && req.session.userInfo) {
     const { userInfo } = req.session;
@@ -39,7 +41,7 @@ app.set('view engine', 'ejs');
 // set path for static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// data parse
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookeParser());
@@ -51,6 +53,8 @@ app.use("/", require("./routes/main.routes"));
 app.use("/profile", require("./routes/profile.routes"));
 app.use("/utilisateur", require("./routes/utilisateur.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
+
+
 
 // error route
 app.use("*", (req, res) => {

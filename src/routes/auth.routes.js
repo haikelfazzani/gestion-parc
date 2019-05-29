@@ -1,18 +1,18 @@
 const express = require("express");
-const authMiddleware = require("../middlewares/auth.middleware");
+const { redirectHome } = require("../middlewares/auth.middleware");
 let utilisateurDao = require("../dao/utilisateur.dao");
 
 const router = express.Router();
 
-router.get('/login', authMiddleware.redirectHome, (req, res) => {
+router.get('/login', redirectHome, (req, res) => {
   return res.render("login")
 });
 
 
-router.post('/login', authMiddleware.redirectHome, (req, res) => {
+router.post('/login', redirectHome, (req, res) => {
   let { email, password } = req.body;
-  
-  utilisateurDao.getOneByEmail(email,password, (resolve) => {
+
+  utilisateurDao.getOneByEmail(email, password, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
       req.session.userInfo = resolve.data[0];

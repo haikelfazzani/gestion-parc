@@ -1,49 +1,57 @@
-const utilisateurController = require('../controllers/utilisateur.controller');
 const express = require("express");
-const authMiddleware = require('../middlewares/auth.middleware');
 const router = express.Router();
 
-router.get("/", authMiddleware.redirectLogin, (req, res) => {
+// controller
+const utilisateurController = require('../controllers/utilisateur.controller');
+
+// middlewares
+const { redirectLogin } = require('../middlewares/auth.middleware');
+const { isAdmin } = require("../middlewares/permission.middleware");
+
+
+router.get("/", [redirectLogin, isAdmin], (req, res) => {
   //await utilisateurController.root(req, res)
   res.render("users/index");
 });
 
 /** Add user to database */
-router.get("/ajout", authMiddleware.redirectLogin, (req, res) => {
+router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
+
   res.render("users/ajout")
+
 });
 
 
-router.post("/ajout", authMiddleware.redirectLogin, (req, res) => {
+router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
   utilisateurController.ajouter(req, res)
 });
 
 
 
 /** Update user */
-router.get("/update", authMiddleware.redirectLogin, (req, res) => {
+router.get("/update", [redirectLogin, isAdmin], (req, res) => {
   res.render("users/ajout")
 });
 
-router.post("/update", authMiddleware.redirectLogin, (req, res) => {
+router.post("/update", [redirectLogin, isAdmin], (req, res) => {
   utilisateurController.ajouter(req, res)
 });
 
 
 
 /** Delete user from database */
-router.get("/delete", authMiddleware.redirectLogin, (req, res) => {
+router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
   res.render("users/ajout")
 });
 
-router.post("/delete", authMiddleware.redirectLogin, (req, res) => {
+router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
   utilisateurController.ajouter(req, res)
 });
 
 
 
 /** Get all user from database */
-router.get("/list", (req, res) => {
+router.get("/list", [redirectLogin, isAdmin], (req, res) => {
   utilisateurController.getAll(req, res);
 });
 

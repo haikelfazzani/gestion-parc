@@ -9,54 +9,79 @@ class UtilisateurDao {
         this.nomComplet = "nom_complet";
         this.email = "email";
         this.password = "password";
+        this.division = "division";
         this.role = "role";
     }
 
     insert(user, resolve) {
 
         const sql = `insert into ${this.tabelName} (
-            ${this.nomComplet}, ${this.email}, ${this.password}, ${this.role}
+            ${this.nomComplet}, ${this.email}, ${this.password}, ${this.division}, ${this.role}
         ) 
-        values('${user.nomComplet}', '${user.email}', '${user.password}', '${user.role}')`;
+        values('${user.nomComplet}', '${user.email}', '${user.password}', '${user.division}' ,
+        '${user.role}')`;
 
         db.query(sql, (err, rows) => {
-            if(!err) {
+            if (!err) {
                 resolve({
                     error: "",
                     data: "un utilisateur a été bien inséré"
                 });
-            }   
+            }
             else {
                 resolve({
                     error: "erreur d'insertion!",
                     data: ""
                 });
-            }         
+            }
         });
     }
 
+
+
     /** Update user */
-    update(email, resolve) { }
+    update(email, password, resolve) {
+        const sql = `update ${this.tabelName} 
+        set ${this.password} = '${password}' 
+        where ${this.email} = '${email}' `;
+
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: "votre mot de passe a été modifié"
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur de modification!",
+                    data: ""
+                });
+            }
+        });
+    }
+
+
 
 
     /** Delete user by email */
-    delete(email, resolve) { 
+    delete(email, resolve) {
         const sql = `delete from ${this.tabelName} where ${this.email} = '${email}'`;
 
         db.query(sql, (err, rows) => {
-            if(!err) {
+            if (!err) {
                 resolve({
                     error: "",
                     data: "un utilisateur a été bien supprimé"
                 });
-            }   
+            }
             else {
                 resolve({
                     error: "erreur de suppression!",
                     data: ""
                 });
             }
-            
+
         });
     }
 
@@ -72,8 +97,8 @@ class UtilisateurDao {
             resolve({
                 error: err,
                 data: rows
-            });            
-        });        
+            });
+        });
     }
 
     /** Get all users from database */
@@ -84,7 +109,7 @@ class UtilisateurDao {
             resolve({
                 error: err,
                 data: rows
-            });            
+            });
         });
     }
 

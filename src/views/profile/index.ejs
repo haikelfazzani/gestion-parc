@@ -5,8 +5,6 @@
   <% include ../partials/menu %>
 
   <div class="container mt-5">
-
-
     <h2 class="mb-4">Profile</h2>
 
     <div class="row">
@@ -18,28 +16,33 @@
 
       <div class="col-md-8">
         <% if(locals.userInfo){ %>
-        <form action="/profile/modifier" method="POST">
+
+        <form action="/profile" method="POST">
 
 
           <div class="form-group">
             <label for="nomcomplet">Nom Complet</label>
             <input type="text" class="form-control" id="nomcomplet" name="nomcomplet"
-              value="<%= locals.userInfo.nom_complet %>" disabled>
+              value="<%= locals.userInfo.nom_complet %>" disabled required>
           </div>
 
 
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="<%= locals.userInfo.email %>"
-              disabled>
+            <input type="email" class="form-control" id="email" name="email" 
+            value="<%= locals.userInfo.email %>"
+              readonly required>
           </div>
 
           <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" 
+            value="*******"
+            name="password" required>
           </div>
 
-          <button class="btn btn-success">MODIFIER</button>
+          <button type="submit" class="btn btn-success">MODIFIER</button>
+          <button type="reset" class="btn btn-danger">VIDER</button>
 
         </form>
 

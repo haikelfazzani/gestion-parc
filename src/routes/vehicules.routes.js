@@ -1,40 +1,43 @@
-const express = require("express"),
-    authMiddleware = require('../middlewares/auth.middleware'),
-    router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-router.get("/", authMiddleware.redirectLogin, (req, res) => {
+// middlewares
+const { redirectLogin } = require('../middlewares/auth.middleware');
+const { isAdmin } = require("../middlewares/permission.middleware");
+
+router.get("/", [redirectLogin, isAdmin], (req, res) => {
     res.render("vehicules/index");
 });
 
 /** Add vehicule to database */
-router.get("/ajout", authMiddleware.redirectLogin, (req, res) => {
+router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
     res.render("vehicules/ajout")
 });
 
 
-router.post("/ajout", authMiddleware.redirectLogin, (req, res) => {
+router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
 
 });
 
 
 
 /** Update vehicule */
-router.get("/update", authMiddleware.redirectLogin, (req, res) => {
+router.get("/update", [redirectLogin, isAdmin], (req, res) => {
     res.render("vehicules/ajout")
 });
 
-router.post("/update", authMiddleware.redirectLogin, (req, res) => {
+router.post("/update", [redirectLogin, isAdmin], (req, res) => {
 
 });
 
 
 
 /** Delete vehicule from database */
-router.get("/delete", authMiddleware.redirectLogin, (req, res) => {
+router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
     res.render("vehicules/ajout")
 });
 
-router.post("/delete", authMiddleware.redirectLogin, (req, res) => {
+router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
 
 });
 

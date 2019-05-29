@@ -1,11 +1,15 @@
 const express = require("express");
-const authMiddleware = require('../middlewares/auth.middleware');
+const { redirectLogin } = require('../middlewares/auth.middleware');
 const router = express.Router();
 
-router.get("/", authMiddleware.redirectLogin, (req, res) => {  
+const profileController = require("../controllers/profile.controller");
+
+router.get("/", redirectLogin, (req, res) => {
   res.render("profile/index");
 });
 
-
+router.post("/", redirectLogin, (req, res) => {
+  profileController.modifier(req, res);
+});
 
 module.exports = router;
