@@ -2,7 +2,7 @@ const utilisateurDao = require("../dao/utilisateur.dao");
 
 class ProfileController {
 
-    /** Modification de mot de passe */
+    /** Modification de mot de passe de profile */
     modifier(req, res) {
         let { email, password } = req.body;
 

@@ -46,5 +46,4 @@ class VehiculeDao {
 
 }
 
-const vehiculeDao = new VehiculeDao();
-module.exports = vehiculeDao;
+module.exports = new VehiculeDao();

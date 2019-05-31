@@ -25,5 +25,5 @@ class UtilisateurController {
 
 }
 
-const utilisateurController = new UtilisateurController();
-module.exports = utilisateurController;
+
+module.exports = new UtilisateurController();

@@ -36,5 +36,4 @@ class VehiculeController {
 
 }
 
-const vehiculeController = new VehiculeController();
-module.exports = vehiculeController;
+module.exports = new VehiculeController();

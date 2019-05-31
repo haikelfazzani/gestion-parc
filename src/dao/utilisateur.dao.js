@@ -115,5 +115,5 @@ class UtilisateurDao {
 
 }
 
-const utilisateurDao = new UtilisateurDao();
-module.exports = utilisateurDao;
+
+module.exports = new UtilisateurDao();
