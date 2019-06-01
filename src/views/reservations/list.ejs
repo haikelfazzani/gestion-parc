@@ -33,15 +33,15 @@
         <tbody>
 
 
-          <% for(let user of data) { %>
+          <% for(let v of data) { %>
           <tr>
             <td><%= i++ %></td>
-            <td><%= user.num_serie %></td>
-            <td><%= user.model %></td>
-            <td><%= user.etat %></td>
+            <td><%= v.num_serie %></td>
+            <td><%= v.model %></td>
+            <td><%= v.etat %></td>
 
             <td>
-              <a href="/vehicules/modifier?u=<%= user.num_serie %>" class="btn btn-success">
+              <a href="/vehicules/reserver?u=<%= v.num_serie %>" class="btn btn-success">
                 reserver
               </a>
 

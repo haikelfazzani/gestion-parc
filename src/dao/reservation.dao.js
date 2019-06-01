@@ -63,14 +63,15 @@ class ReservationDao {
     }
 
     // les vehicules non reservées
-    listerReserved(resolve) {
+    listerReserved(userId , resolve) {
 
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
-        where v.etat = '${Etat.reserve}' and r.user_id = 1`;
+        where r.user_id = ${userId}`;
 
         db.query(sql, (err, rows) => {
+
             resolve({
                 error: err,
                 data: rows

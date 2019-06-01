@@ -8,7 +8,9 @@ class ReservationController {
     annuler() { }
 
     getAllReserved(req, res) {
-        reservationDao.listerReserved((resolve) => {
+        let { id } = req.session.userInfo;
+
+        reservationDao.listerReserved(id, (resolve) => {
             res.render("reservations/list-reserved", { msg: resolve.error, data: resolve.data });
             return;
         });
