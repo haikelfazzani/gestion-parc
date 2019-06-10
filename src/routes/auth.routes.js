@@ -3,6 +3,7 @@ const { redirectHome } = require("../middlewares/auth.middleware");
 let utilisateurDao = require("../dao/utilisateur.dao");
 
 const router = express.Router();
+let isConnected = false;
 
 router.get('/login', redirectHome, (req, res) => {
   return res.render("login")
@@ -15,6 +16,7 @@ router.post('/login', redirectHome, (req, res) => {
   utilisateurDao.getOneByEmail(email, password, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
+      isConnected = true;
       req.session.userInfo = resolve.data[0];
       return res.redirect("/");
     }

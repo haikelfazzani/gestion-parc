@@ -20,15 +20,48 @@ class ReservationDao {
     }
 
 
+    getAllReservations(resolve) {
+
+        const sql = `select * from ${this.tableName} r 
+        join ${this.userTable} u on r.user_id = u.id
+        join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
+        where v.etat = '${Etat.enAttente}'`;
+
+        db.query(sql, (err, rows) => {
+            
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: rows
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur !",
+                    data: ""
+                });
+            }
+        });
+    }
+
 
     // change status of vehicule from "en attente" to "reservée"
     confirmer(vehiculeId, resolve) {
 
-        const sql = `update ${this.vehiculeTable} 
-        set etat = ${Etat.reserve}
-        where ${this.vehiculeId} = ${vehiculeId}`;
+        modifierEtatVehicule(vehiculeId, etat = Etat.reserve, (resolveMod) => {
 
-        db.query(sql, (err, rows) => {
+            if (!resolveMod.data) {
+                resolve({
+                    error: "",
+                    data: "une reservation a été bien confirmée"
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur de confirmation",
+                    data: ""
+                });
+            }
 
         });
     }
@@ -36,34 +69,83 @@ class ReservationDao {
 
 
     // remove the reservation
-    annuler(userId, resolve) {
+    annuler(userId, vehiculeId, resolve) {
 
-        const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;
+        const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;        
 
         db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: "une reservation a été bien annulée"
+                });
+                modifierEtatVehicule(vehiculeId, etat = Etat.nonReserved, resolveMod);
+            }
+            else {
+                resolve({
+                    error: "erreur d'annulation",
+                    data: ""
+                });
+            }
+        });
+    }
 
+
+    modifierEtatVehicule(vehiculeId, etat = Etat.enAttente, resolve) {
+
+        const sql = `update ${this.vehiculeTable} set etat = '${etat}'
+        where id_vehicule = ${vehiculeId} `;
+
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({ data: true });
+            }
+            else {
+                resolve({ data: false });
+            }
         });
     }
 
 
 
+    /* Utilisateur reservation handling */
     envoyerDemande(reservation, resolve) {
 
         let { dateDepart, dateRetour, bossOrder, descMission, userId, vehiculeId } = reservation;
 
-        const sql = `insert into ${this.tableName} 
+        const sql = `insert into 
+        ${this.tableName} (date_depart,date_retour,boss_order,desc_mission,user_id,vehicule_id)
         values(
             '${dateDepart}' ,'${dateRetour}' ,'${bossOrder}' ,'${descMission}' ,
             ${userId} ,${vehiculeId} 
         )`;
 
-        db.query(sql, (err, rows) => {
 
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: "votre demande a été bien envoyée"
+                });
+
+                // update vehicule stat after client send demand
+                this.modifierEtatVehicule(vehiculeId, "en attente", resolve => {
+
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur d'envoie",
+                    data: ""
+                });
+            }
         });
+
     }
 
-    // les vehicules non reservées
-    listerReserved(userId , resolve) {
+
+    // les vehicules non reservées par utilisateurs
+    listerReserved(userId, resolve) {
 
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id
@@ -79,7 +161,7 @@ class ReservationDao {
         });
     }
 
-    // les vehicules non reservées
+    // les vehicules non reservées pour l'utilisateur
     lister(resolve) {
 
         const sql = `select * from ${this.vehiculeTable} where etat = '${Etat.nonReserved}'`;

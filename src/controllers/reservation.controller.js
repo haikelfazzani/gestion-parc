@@ -1,17 +1,34 @@
-
 const reservationDao = require("../dao/reservation.dao");
+let Reservation = require("../models/Reservation.model");
 
 class ReservationController {
 
-    confirmer() { }
+    confirmer(req, res) { }
 
-    annuler() { }
+    annuler(req, res) { }
 
+    // by all users
+    listReservations(req, res) {
+        reservationDao.getAllReservations(resolve => {
+            const reservations = resolve.data;
+            req.session.reservations = reservations;
+
+            res.render("reservations/admin/list",
+                { msg: resolve.error, data: resolve.data });
+            return;
+
+        });
+    }
+
+
+
+    /** User reservation handling */
     getAllReserved(req, res) {
         let { id } = req.session.userInfo;
 
         reservationDao.listerReserved(id, (resolve) => {
-            res.render("reservations/list-reserved", { msg: resolve.error, data: resolve.data });
+            res.render("reservations/user/list-reserved",
+                { msg: resolve.error, data: resolve.data });
             return;
         });
     }
@@ -20,21 +37,50 @@ class ReservationController {
         reservationDao.lister((resolve) => {
             const vehicules = resolve.data;
             req.session.vehicules = vehicules;
-            res.render("reservations/list", { msg: resolve.error, data: vehicules });
+            res.render("reservations/user/list", { msg: resolve.error, data: vehicules });
             return;
         });
     }
 
-    /** Client une demande de reservation */
-    reserver(req, res, numserie) { // get
-        if (req.session && req.session.vehicules) {
-            let { vehicules, userInfo } = req.session;
-            let vehicule = vehicules.find(v => v.num_serie = numserie);
+    /** Client envoi une demande de reservation */
+    rendFormReserver(req, res) { // get
 
-            res.render("reservations/reserver-form", { vehicule })
+        const numserie = req.query.v;
+
+        if (req.session && req.session.vehicules) {
+
+            const { vehicules } = req.session;
+            let vehicule = vehicules.find(v => v.num_serie === numserie);
+
+            res.render("reservations/user/reserver-form", { vehicule })
             return;
         }
-        res.render("reservations/reserver-form")
+        else {
+            res.render("reservations/user/list");
+            return;
+        }
+    }
+
+    envoyer(req, res) { // post
+
+        let { dateDepart, dateRetour, bossOrder, descMission, numSerie } = req.body;
+        let { vehicules, userInfo } = req.session;
+        let vehicule = vehicules.find(v => v.num_serie === numSerie.trim());
+
+        let reservation = new Reservation(
+            dateDepart,
+            dateRetour,
+            bossOrder,
+            descMission.trim(),
+            userInfo.id,
+            vehicule.id_vehicule
+        );
+
+        reservationDao.envoyerDemande(reservation, resolve => {
+            res.render("reservations/user/reserver-form", { msg: resolve.data || resolve.error })
+            return;
+        });
+
     }
 
 }

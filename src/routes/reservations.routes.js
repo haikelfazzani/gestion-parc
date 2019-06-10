@@ -13,23 +13,43 @@ router.get("/", [redirectLogin], (req, res) => {
   res.render("reservations/index");
 });
 
-router.get("/list-vehicules", [redirectLogin], (req, res) => {
+
+
+
+/** Admin routes reservations handling */
+router.get("/list", [redirectLogin], (req, res) => {
+  reservationController.listReservations(req, res);
+});
+
+
+router.get("/confirmer", [redirectLogin], (req, res) => {
+  reservationController.listReservations(req, res);
+});
+
+
+router.get("/annuler", [redirectLogin], (req, res) => {
+  reservationController.listReservations(req, res);
+});
+
+
+
+/** User routes reservation handling */
+router.get("/user/list-vehicules", [redirectLogin], (req, res) => {
   reservationController.getAll(req, res);
 });
 
-router.get("/list-reserved", [redirectLogin], (req, res) => {
+router.get("/user/list-reserved", [redirectLogin], (req, res) => {
   reservationController.getAllReserved(req, res);
 });
 
 
 /** Client envoi une demande de reservation */
-router.get("/reserver", [redirectLogin], (req, res) => {
-  let numserie = req.query.v;
-  reservationController.reserver(req, res, numserie);
+router.get("/user/reserver", [redirectLogin], (req, res) => {  
+  reservationController.rendFormReserver(req, res);
 });
 
-router.post("/reserver", [redirectLogin], (req, res) => {
-  reservationController.reserver(req, res);
+router.post("/user/reserver", [redirectLogin], (req, res) => {
+  reservationController.envoyer(req, res);
 });
 
 module.exports = router;

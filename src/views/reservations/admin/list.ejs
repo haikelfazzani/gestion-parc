@@ -1,0 +1,72 @@
+<% include ../../partials/head %>
+
+<% include ../../partials/menu %>
+
+<div class="container mt-5 mb-3">
+
+  <div class="row">
+    <div class="col-md-4">
+      <% include ../left-menu %>
+    </div>
+
+    <div class="col-md-8">
+
+      <% if(locals.data) { 
+        data = locals.data.reverse()
+        let i = 1;
+      %>
+
+      <h2>Liste des véhicules
+        <span class="badge badge-primary"><%= data.length %>
+        </span>
+      </h2>
+
+      <table class="table table-hover table-light">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Reserver par</th>
+            <th scope="col">Num serie</th>
+            <th scope="col">Model</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <% for(let v of data) { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= v.email %></td>
+            <td><%= v.num_serie %></td>            
+            <td><%= v.model %></td>
+            <td><%= v.etat %></td>
+
+            <td>
+              <a href="/reservations/confirmer?v=<%= v.vehicule_id %>" 
+                class="btn btn-success">
+                Confirmer
+              </a>
+
+              <a href="/reservations/annuler?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" 
+                class="btn btn-danger">
+                Annuler
+              </a>
+
+            </td>
+
+          </tr>
+          <% } %>
+
+        </tbody>
+      </table>
+
+    </div>
+    <% } %>
+
+  </div>
+
+</div>
+
+<% include ../../partials/footer %>
