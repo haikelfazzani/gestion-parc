@@ -39,7 +39,7 @@ class UtilisateurDao {
 
 
 
-    /** Update user */
+    /** Update profile user */
     update(email, password, resolve) {
         const sql = `update ${this.tabelName} 
         set ${this.password} = '${password}' 
@@ -50,6 +50,37 @@ class UtilisateurDao {
                 resolve({
                     error: "",
                     data: "votre mot de passe a été modifié"
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur de modification!",
+                    data: ""
+                });
+            }
+        });
+    }
+
+
+    /** modification d'un utilisateur par l'admin */
+    modifier(user, resolve) {
+
+        const { nomComplet, email, password, division, role } = user;
+
+        const sql = `update ${this.tabelName} 
+                    set 
+                        ${this.nomComplet} = '${nomComplet}',
+                        ${this.password} = '${password}',
+                        ${this.division} = '${division}' ,
+                        ${this.role} = '${role}' 
+                    where ${this.email} = '${email}' 
+        `;
+
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: "un utilisateur a été modifié"
                 });
             }
             else {
@@ -100,6 +131,33 @@ class UtilisateurDao {
             });
         });
     }
+
+
+
+
+    /** Get user by email and password */
+    isExist(email, resolve) {
+        const sql = `select * from ${this.tabelName} 
+        where ${this.email} = '${email}' `;
+
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: rows[0]
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur! l'utilisateur n'existe pas",
+                    data: ""
+                });
+            }
+        });
+    }
+
+
+
 
     /** Get all users from database */
     getAll(resolve) {

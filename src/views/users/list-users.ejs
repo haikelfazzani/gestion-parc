@@ -12,7 +12,9 @@
     <div class="col-md-8">
 
       <% if(locals.data) { 
-                    let i = 1;    %>
+        let i = 1;    
+        data = data.filter(data => data.role !== locals.role.admin)
+      %>
       <h2>Liste des utilisateurs
         <span class="badge badge-primary"><%= data.length %>
         </span>
@@ -44,7 +46,7 @@
                 Modifier
               </a>
 
-              <a href="/utilisateur/modifier?u=<%= user.email %>" class="btn btn-danger">
+              <a href="/utilisateur/supprimer?u=<%= user.email %>" class="btn btn-danger">
                 Supprimer
               </a>
 

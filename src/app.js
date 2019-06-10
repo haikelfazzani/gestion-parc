@@ -60,9 +60,9 @@ app.use("/reservations", require("./routes/reservations.routes"));
 
 
 // error route
-app.use("*", (req, res) => {
-  res.redirect("/");
-});
+// app.use("*", (req, res) => {
+//   res.redirect("/");
+// });
 
 
 module.exports = app;

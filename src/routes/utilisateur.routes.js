@@ -28,24 +28,24 @@ router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
 
 
 
-/** Update user */
-router.get("/update", [redirectLogin, isAdmin], (req, res) => {
-  res.render("users/ajout")
+/** modifier user */
+router.get("/modifier", [redirectLogin, isAdmin], (req, res) => {
+  utilisateurController.getUserByEmail(req, res);
 });
 
-router.post("/update", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.ajouter(req, res)
+router.post("/modifier", [redirectLogin, isAdmin], (req, res) => {
+  utilisateurController.modifier(req, res)
 });
 
 
 
-/** Delete user from database */
-router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
-  res.render("users/ajout")
+/** supprimer user from database */
+router.get("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+  utilisateurController.getUserByEmail(req, res);
 });
 
-router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.ajouter(req, res)
+router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+  utilisateurController.supprimer(req, res)
 });
 
 
