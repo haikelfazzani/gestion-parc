@@ -33,23 +33,23 @@ router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
 
 
 /** Update vehicule */
-router.get("/update", [redirectLogin, isAdmin], (req, res) => {
-    res.render("vehicules/ajout")
+router.get("/modifier", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.getVehicule(req, res);
 });
 
-router.post("/update", [redirectLogin, isAdmin], (req, res) => {
-
+router.post("/modifier", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.update(req , res);
 });
 
 
 
 /** Delete vehicule from database */
-router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
-    res.render("vehicules/ajout")
+router.get("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.getVehicule(req, res);
 });
 
-router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
-
+router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.supprimer(req , res);
 });
 
 
