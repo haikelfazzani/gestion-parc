@@ -13,4 +13,16 @@ function isAdmin(req, res, next) {
     next();
 }
 
-module.exports = { isAdmin };
+function isNotAdmin(req, res, next) {
+
+    const { userInfo } = req.session;
+
+    if (userInfo.role === Role.admin) {
+        res.redirect("/");
+        return;
+    }
+
+    next();
+}
+
+module.exports = { isAdmin, isNotAdmin };
