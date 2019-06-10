@@ -25,10 +25,10 @@ class ReservationDao {
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
-        where v.etat = '${Etat.enAttente}'`;
+        where v.etat = 'en attente' `;
 
         db.query(sql, (err, rows) => {
-            
+
             if (!err) {
                 resolve({
                     error: "",
@@ -48,17 +48,19 @@ class ReservationDao {
     // change status of vehicule from "en attente" to "reservée"
     confirmer(vehiculeId, resolve) {
 
-        modifierEtatVehicule(vehiculeId, etat = Etat.reserve, (resolveMod) => {
+        const sql = `update ${this.vehiculeTable} set etat = 'réservée'
+        where id_vehicule = ${vehiculeId} `;
 
-            if (!resolveMod.data) {
+        db.query(sql, (err, rows) => {
+            if (!err) {
                 resolve({
                     error: "",
-                    data: "une reservation a été bien confirmée"
+                    data: "une reservation a été bien confrimée"
                 });
             }
             else {
                 resolve({
-                    error: "erreur de confirmation",
+                    error: "erreur de confirmation!",
                     data: ""
                 });
             }
@@ -71,7 +73,7 @@ class ReservationDao {
     // remove the reservation
     annuler(userId, vehiculeId, resolve) {
 
-        const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;        
+        const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
@@ -79,7 +81,7 @@ class ReservationDao {
                     error: "",
                     data: "une reservation a été bien annulée"
                 });
-                modifierEtatVehicule(vehiculeId, etat = Etat.nonReserved, resolveMod);
+                this.modifierEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod=>{});
             }
             else {
                 resolve({

@@ -2,7 +2,7 @@
 
 <% include ../../partials/menu %>
 
-<div class="container mt-5 mb-3">
+<div class="container mt-5 mb-5">
 
   <div class="row">
     <div class="col-md-4">
@@ -12,19 +12,47 @@
     <div class="col-md-8">
 
 
+      <h2>Confirmation</h2>
 
-      <h2>Reserver une véhicules</h2>
+      <% if(locals.data) { %>
+      <form action="/reservations/annuler" method="POST">
 
-      <% if(locals.vehicule) { %>
-      <form action="/reservations/user/reserver" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+              <!-- User name -->
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" id="nom" 
+                name="nom" 
+                value="<%= data.nom_complet %>"
+                  required readonly>
+              </div>
+  
+            </div>
+  
+            <div class="col-md-6">
+              <!-- User email -->
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" 
+                name="email" value="<%= data.email %>"
+                  required readonly>
+              </div>
+            </div>
+          </div>
+
+
+
 
         <div class="row">
           <div class="col-md-6">
             <!-- Date de depart -->
             <div class="form-group">
               <label for="date-depart">Date de depart</label>
-              <input type="date" class="form-control" id="date-depart" name="dateDepart" placeholder="Enter date depart"
-                required>
+              <input type="date" class="form-control" id="date-depart" 
+              name="dateDepart" placeholder="Enter date depart"
+              value="<%= data.date_depart %>"
+                required readonly>
             </div>
 
           </div>
@@ -33,8 +61,9 @@
             <!-- Date de retour -->
             <div class="form-group">
               <label for="date-retour">Date de retour</label>
-              <input type="date" class="form-control" id="date-retour" name="dateRetour" placeholder="Enter date retour"
-                required>
+              <input type="date" class="form-control" id="date-retour" 
+              name="dateRetour" value="<%= data.date_retour %>"
+                required readonly>
             </div>
           </div>
         </div>
@@ -44,15 +73,18 @@
         <!-- Boss order -->
         <div class="form-group">
           <label for="boss-order">Boss order</label>
-          <input type="number" class="form-control" id="boss-order" name="bossOrder" placeholder="Enter boss order"
-            required>
+          <input type="number" class="form-control" id="boss-order" 
+          name="bossOrder" value="<%= data.boss_order %>"
+            required readonly>
         </div>
 
         <!-- Description de mission -->
         <div class="form-group">
           <label for="desc-mission">Description de mission</label>
-          <textarea class="form-control" id="desc-mission" name="descMission" rows="3" required>
-
+          <textarea class="form-control" id="desc-mission" 
+          name="descMission" rows="3" 
+          required readonly>
+          <%= data.desc_mission %>
           </textarea>
         </div>
 
@@ -60,14 +92,16 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="vehicule">Vehicule</label>
-              <input type="text" class="form-control" id="vehicule" value="<%= vehicule.model %>" readonly required>
+              <input type="text" class="form-control" id="vehicule" 
+              value="<%= data.model %>" readonly required>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label for="numSerie">Num serie</label>
-              <input type="text" class="form-control" id="numSerie" value="<%= vehicule.num_serie %>" name="numSerie"
+              <input type="text" class="form-control" id="numSerie" 
+              value="<%= data.num_serie %>" name="numSerie"
                 readonly required>
             </div>
           </div>
@@ -75,8 +109,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-        <button type="reset" class="btn btn-danger">Reset</button>
+        <button type="submit" class="btn btn-primary">Annuler</button>        
 
       </form>
       <% } %>

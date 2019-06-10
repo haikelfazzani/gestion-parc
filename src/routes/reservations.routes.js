@@ -22,13 +22,25 @@ router.get("/list", [redirectLogin], (req, res) => {
 });
 
 
+
+
 router.get("/confirmer", [redirectLogin], (req, res) => {
-  reservationController.listReservations(req, res);
+  reservationController.rendConfirmerForm(req, res);
+});
+
+router.post("/confirmer", [redirectLogin], (req, res) => {
+  reservationController.confirmer(req, res);
 });
 
 
+
+
 router.get("/annuler", [redirectLogin], (req, res) => {
-  reservationController.listReservations(req, res);
+  reservationController.rendAnnulerForm(req, res);
+});
+
+router.post("/annuler", [redirectLogin], (req, res) => {
+  reservationController.annuler(req, res);
 });
 
 
