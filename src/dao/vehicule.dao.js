@@ -77,7 +77,7 @@ class VehiculeDao {
             }
             else {
                 resolve({
-                    error: "erreur d'envoie",
+                    error: "aucun vehicule trouvée!",
                     data: ""
                 });
             }

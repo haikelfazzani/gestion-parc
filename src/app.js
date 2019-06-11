@@ -25,14 +25,13 @@ app.use(expressSession({
 // set globall variables
 app.use((req, res, next) => {
 
-  res.locals.role = Role;
-  res.locals.division = Division;
-  res.locals.Etat = Etat;
-  res.locals.formatDate = formatDate;
-
   if (req.session && req.session.userInfo) {
     const { userInfo } = req.session;
     res.locals.userInfo = userInfo;
+    res.locals.role = Role;
+    res.locals.division = Division;
+    res.locals.Etat = Etat;
+    res.locals.formatDate = formatDate;
   }
   next();
 });
