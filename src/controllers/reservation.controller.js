@@ -1,5 +1,7 @@
 const reservationDao = require("../dao/reservation.dao");
 let Reservation = require("../models/Reservation.model");
+let Etat = require("../models/Etat.enum");
+let vehiculeDao = require("../dao/vehicule.dao");
 
 class ReservationController {
 
@@ -100,8 +102,10 @@ class ReservationController {
         });
     }
 
+    
+
     getAll(req, res) {
-        reservationDao.lister((resolve) => {
+        vehiculeDao.getVehiculeByEtat(Etat.nonReserved, (resolve) => {
             const vehicules = resolve.data;
             req.session.vehicules = vehicules;
             res.render("reservations/user/list", { msg: resolve.error, data: vehicules });

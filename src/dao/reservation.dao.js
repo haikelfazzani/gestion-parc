@@ -81,7 +81,7 @@ class ReservationDao {
                     error: "",
                     data: "une reservation a été bien annulée"
                 });
-                this.modifierEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod=>{});
+                this.modifierEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod => { });
             }
             else {
                 resolve({
@@ -146,7 +146,7 @@ class ReservationDao {
     }
 
 
-    // les vehicules non reservées par utilisateurs
+    // les vehicules reservées par utilisateurs
     listerReserved(userId, resolve) {
 
         const sql = `select * from ${this.tableName} r 
@@ -161,20 +161,7 @@ class ReservationDao {
                 data: rows
             });
         });
-    }
-
-    // les vehicules non reservées pour l'utilisateur
-    lister(resolve) {
-
-        const sql = `select * from ${this.vehiculeTable} where etat = '${Etat.nonReserved}'`;
-
-        db.query(sql, (err, rows) => {
-            resolve({
-                error: err,
-                data: rows
-            });
-        });
-    }
+    }        
 
 }
 

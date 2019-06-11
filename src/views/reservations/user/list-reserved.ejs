@@ -11,9 +11,7 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data) { 
-        let i = 1;
-      %>
+      <% if(locals.data) { data = data.reverse() %>
 
       <h2>Liste des véhicules
         <span class="badge badge-primary"><%= data.length %>
@@ -23,27 +21,25 @@
       <table class="table table-hover table-light">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom employé</th>
-            <th scope="col">Email</th>
-            <th scope="col">Division</th>
+            <th scope="col">Nom employé</th>           
             <th scope="col">Num serie</th>
             <th scope="col">Model</th>
+            <th scope="col">Date de depart</th>
+            <th scope="col">Date de retour</th>
             <th scope="col">Etat</th>
           </tr>
         </thead>
         <tbody>
 
 
-          <% for(let user of data) { %>
+          <% for(let reservation of data) { %>
           <tr>
-            <td><%= i++ %></td>
-            <td><%= user.nom_complet %></td>
-            <td><%= user.email %></td>
-            <td><%= user.division %></td>
-            <td><%= user.num_serie %></td>
-            <td><%= user.model %></td>
-            <td><%= user.etat %></td>
+            <td><%= reservation.nom_complet %></td>
+            <td><%= reservation.num_serie %></td>
+            <td><%= reservation.model %></td>
+            <td><%= locals.formatDate(reservation.date_depart) %> </td>
+            <td><%= locals.formatDate(reservation.date_retour) %></td>
+            <td><%= reservation.etat %></td>
 
           </tr>
           <% } %>

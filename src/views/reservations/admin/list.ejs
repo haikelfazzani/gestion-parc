@@ -21,46 +21,47 @@
         </span>
       </h2>
 
-      <table class="table table-hover table-light">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Reserver par</th>
-            <th scope="col">Num serie</th>
-            <th scope="col">Model</th>
-            <th scope="col">Etat</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
+
+      <% for(let v of data){     %>
+      <div class="list-group mb-3" id="list-group">
+        
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <h5 class="mb-1"><%= v.nom_complet %></h5>
+            <p>Email : <%= v.email %></p>
+            <p>Division : <%= v.division %></p>
+          </div>
+
+          <div class="col-md-4">
+            <h5 class="mb-1"><%= v.model %></h5>
+            <p>Num serie : <%= v.num_serie %></p>
+            <p>Date depart : <%= locals.formatDate(v.date_depart) %></p>
+            <p>Date retour : <%= locals.formatDate(v.date_retour) %></p>
+          </div>
 
 
-          <% for(let v of data) { %>
-          <tr>
-            <td><%= i++ %></td>
-            <td><%= v.email %></td>
-            <td><%= v.num_serie %></td>            
-            <td><%= v.model %></td>
-            <td><%= v.etat %></td>
+          <div class="col-md-2">
+              <div class="badge badge-danger"><%= v.etat %></div>
+            </div>
 
-            <td>
-              <a href="/reservations/confirmer?v=<%= v.vehicule_id %>" 
-                class="btn btn-success">
-                Confirmer
-              </a>
+          <div class="col-md-2">
+            <a href="/reservations/confirmer?v=<%= v.vehicule_id %>" class="btn btn-success">
+              <i class="fas fa-check"></i>
+            </a>
 
-              <a href="/reservations/annuler?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" 
-                class="btn btn-danger">
-                Annuler
-              </a>
+            <a href="/reservations/annuler?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" class="btn btn-danger">
+              <i class="fas fa-window-close"></i>
+            </a>
+          </div>
 
-            </td>
+          
 
-          </tr>
-          <% } %>
+        </div>
 
-        </tbody>
-      </table>
+        
+      </div><% } %>
 
     </div>
     <% } %>

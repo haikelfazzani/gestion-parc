@@ -63,6 +63,27 @@ class VehiculeDao {
         });
     }
 
+    // lister les véhicules par etat
+    getVehiculeByEtat(etat, resolve) {
+
+        const sql = `select * from ${this.tabelName} where ${this.etat} = '${etat}'`;
+
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                resolve({
+                    error: "",
+                    data: rows
+                });
+            }
+            else {
+                resolve({
+                    error: "erreur d'envoie",
+                    data: ""
+                });
+            }
+        });
+    }
+
 
     delete(vehicule, resolve) {
         const { numSerie, model } = vehicule;
