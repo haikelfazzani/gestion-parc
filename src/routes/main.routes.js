@@ -1,5 +1,4 @@
-const express = require("express"),
-  router = express.Router(),
+const express = require("express"), router = express.Router(),
   { redirectLogin } = require('../middlewares/auth.middleware');
 
 

@@ -1,6 +1,4 @@
-const express = require("express");
-const router = express.Router();
-
+const express = require("express") , router = express.Router();
 
 // middlewares
 const { redirectLogin } = require('../middlewares/auth.middleware');
@@ -9,8 +7,8 @@ const { isAdmin, isNotAdmin } = require("../middlewares/permission.middleware");
 const reservationController = require("../controllers/reservation.controller");
 
 
-router.get("/", [redirectLogin], (req, res) => {
-  res.render("reservations/index");
+router.get("/", [redirectLogin], async (req, res) => {
+  await res.render("reservations/index");
 });
 
 
@@ -60,8 +58,8 @@ router.get("/user/reserver", [redirectLogin, isNotAdmin], (req, res) => {
   reservationController.rendFormReserver(req, res);
 });
 
-router.post("/user/reserver", [redirectLogin, isNotAdmin], (req, res) => {
-  reservationController.envoyer(req, res);
+router.post("/user/reserver", [redirectLogin, isNotAdmin], async (req, res) => {
+  await reservationController.envoyer(req, res);
 });
 
 module.exports = router;

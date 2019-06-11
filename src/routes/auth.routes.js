@@ -1,27 +1,28 @@
-const express = require("express");
-const { redirectHome } = require("../middlewares/auth.middleware");
-let utilisateurDao = require("../dao/utilisateur.dao");
-const path = require("path");
+const express = require("express"),
+  router = express.Router(),
+  { redirectHome } = require("../middlewares/auth.middleware"),
+  utilisateurDao = require("../dao/utilisateur.dao"),
+  path = require("path");
 
-const router = express.Router();
-let isConnected = false;
+const staticFiles = require("../config/static.config");
 
-router.get('/login', redirectHome, (req, res) => {
-  return res.render("login")
+router.get('/login', redirectHome, async (req, res) => {
+  await res.render("login", { staticFiles });
 });
 
 
-router.post('/login', redirectHome, (req, res) => {
+router.post('/login', redirectHome, async (req, res) => {
   let { email, password } = req.body;
 
-  utilisateurDao.getOneByEmail(email, password, (resolve) => {
+  await utilisateurDao.getOneByEmail(email, password, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
-      isConnected = true;
+
       req.session.userInfo = resolve.data[0];
-      res.cookie('user', JSON.stringify(resolve.data[0]), 
-          { expires: new Date(Date.now() + 900000) })
-      .redirect("/");
+      res.cookie('user', JSON.stringify(resolve.data[0]),
+        { expires: new Date(Date.now() + 900000) })
+        .redirect("/");
+
       return;
     }
     else {
@@ -32,11 +33,11 @@ router.post('/login', redirectHome, (req, res) => {
 });
 
 
-router.get('/logout', (req, res) => {
+router.get('/logout', async (req, res) => {
   req.session.destroy();
   req.session = null;
   res.locals = null;
-  res.redirect("/auth/login");
+  await res.redirect("/auth/login");
 });
 
 

@@ -1,7 +1,5 @@
-const express = require("express");
+const express = require("express"), router = express.Router();
 const { redirectLogin } = require('../middlewares/auth.middleware');
-const router = express.Router();
-
 const profileController = require("../controllers/profile.controller");
 
 router.get("/", redirectLogin, (req, res) => {

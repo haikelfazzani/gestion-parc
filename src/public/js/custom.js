@@ -11,7 +11,8 @@ window.onload = () => {
         function enableButton() {
             btnProfileUpdate.disabled = true;
             passwordProfile.onkeyup = (e) => {
-                btnProfileUpdate.disabled = e.target.value.length > 3 ? false : true;
+                let inputValue = e.target.value;
+                btnProfileUpdate.disabled = inputValue.length > 3 ? false : true;
             }
         }
         enableButton();

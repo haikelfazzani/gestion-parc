@@ -1,17 +1,16 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
-const cookeParser = require("cookie-parser");
-const expressSession = require("express-session");
+const express = require("express"),
+  app = express(),
+  bodyParser = require("body-parser"),
+  path = require("path"),
+  cookeParser = require("cookie-parser"),
+  expressSession = require("express-session");
 
-const staticFiles = require("./config/static.config");
-const routesStruct = require("./config/routes.config");
-const Role = require('./models/Role.enum');
-const Division = require("./models/Division.enum");
-const Etat = require("./models/Etat.enum");
-let { formatDate } = require("./service/date.service");
-
-const app = express();
+const staticFiles = require("./config/static.config"),
+  routesStruct = require("./config/routes.config"),
+  Role = require('./models/Role.enum'),
+  Division = require("./models/Division.enum"),
+  Etat = require("./models/Etat.enum"),
+  { formatDate } = require("./service/date.service");
 
 
 // sessions
@@ -56,9 +55,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookeParser());
 
 // Routers
+app.use("/", require("./routes/main.routes"));
 app.use("/auth", require("./routes/auth.routes"));
 
-app.use("/", require("./routes/main.routes"));
 app.use("/profile", require("./routes/profile.routes"));
 app.use("/utilisateur", require("./routes/utilisateur.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
