@@ -5,7 +5,7 @@ let vehiculeDao = require("../dao/vehicule.dao");
 
 class ReservationController {
 
-    rendConfirmerForm(req, res) {
+    async rendConfirmerForm(req, res) {
 
         if (req.session && req.session.reservationsUsers) {
 
@@ -15,12 +15,10 @@ class ReservationController {
 
             req.session.vehiculeIdToConfirm = vehiculeId;
 
-            res.render("reservations/admin/confirmer", { data: reserv });
-            return;
+            await res.render("reservations/admin/confirmer", { data: reserv });
         }
         else {
-            res.render("reservations/admin/confirmer");
-            return;
+            await res.render("reservations/admin/confirmer");
         }
 
     }
@@ -29,15 +27,15 @@ class ReservationController {
 
         let { vehiculeIdToConfirm } = req.session;
 
-        reservationDao.confirmer(parseInt(vehiculeIdToConfirm), (resolve) => {
+        reservationDao.confirmer(parseInt(vehiculeIdToConfirm), async (resolve) => {
 
-            res.render("reservations/admin/confirmer", { msg: resolve.data || resolve.error });
-            return;
-
+            await res.render("reservations/admin/confirmer",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
-    rendAnnulerForm(req, res) {
+    async rendAnnulerForm(req, res) {
 
         if (req.session && req.session.reservationsUsers) {
 
@@ -51,14 +49,10 @@ class ReservationController {
             req.session.vehiculeIdToConfirm = vehiculeId;
             req.session.userToConfirm = userId;
 
-            console.log(userId)
-
-            res.render("reservations/admin/annuler", { data: reserv });
-            return;
+            await res.render("reservations/admin/annuler", { data: reserv });
         }
         else {
-            res.render("reservations/admin/annuler");
-            return;
+            await res.render("reservations/admin/annuler");
         }
     }
 
@@ -95,26 +89,25 @@ class ReservationController {
     getAllReserved(req, res) {
         let { id } = req.session.userInfo;
 
-        reservationDao.listerReserved(id, (resolve) => {
-            res.render("reservations/user/list-reserved",
-                { msg: resolve.error, data: resolve.data });
-            return;
+        reservationDao.listerReserved(id, async (resolve) => {
+            await res.render("reservations/user/list-reserved",
+                { msg: resolve.error, data: resolve.data }
+            );
         });
     }
 
-    
+
 
     getAll(req, res) {
-        vehiculeDao.getVehiculeByEtat(Etat.nonReserved, (resolve) => {
+        vehiculeDao.getVehiculeByEtat(Etat.nonReserved, async (resolve) => {
             const vehicules = resolve.data;
             req.session.vehicules = vehicules;
-            res.render("reservations/user/list", { msg: resolve.error, data: vehicules });
-            return;
+            await res.render("reservations/user/list", { msg: resolve.error, data: vehicules });
         });
     }
 
     /** Client envoi une demande de reservation */
-    rendFormReserver(req, res) { // get
+    async rendFormReserver(req, res) { // get
 
         const numserie = req.query.v;
 
@@ -123,12 +116,10 @@ class ReservationController {
             const { vehicules } = req.session;
             let vehicule = vehicules.find(v => v.num_serie === numserie);
 
-            res.render("reservations/user/reserver-form", { vehicule })
-            return;
+            await res.render("reservations/user/reserver-form", { vehicule })
         }
         else {
-            res.render("reservations/user/list");
-            return;
+            await res.render("reservations/user/list");
         }
     }
 
@@ -147,9 +138,10 @@ class ReservationController {
             vehicule.id_vehicule
         );
 
-        reservationDao.envoyerDemande(reservation, resolve => {
-            res.render("reservations/user/reserver-form", { msg: resolve.data || resolve.error })
-            return;
+        reservationDao.envoyerDemande(reservation, async (resolve) => {
+            await res.render("reservations/user/reserver-form",
+                { msg: resolve.data || resolve.error }
+            );
         });
 
     }

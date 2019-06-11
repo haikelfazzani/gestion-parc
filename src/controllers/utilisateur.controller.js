@@ -5,15 +5,19 @@ const { getActionName } = require("../service/url.service");
 class UtilisateurController {
 
     async ajouter(req, res) {
-        let { nom, email, password, division, role } = req.body;
-        let user = new Utilisateur(
-            nom.trim(), email.trim(),
-            password.trim(), division.trim(),
+        const { nom, email, password, division, role } = req.body;
+        const user = new Utilisateur(
+            nom.trim(),
+            email.trim(),
+            password.trim(),
+            division.trim(),
             role.trim()
         );
 
-        await utilisateurDao.insert(user, (resolve) => {
-            return res.render("users/ajout", { msg: resolve.data || resolve.error });
+        await utilisateurDao.insert(user, async (resolve) => {
+            await res.render("users/ajout",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
@@ -21,23 +25,26 @@ class UtilisateurController {
         const { nom, email, password, division, role } = req.body;
 
         const user = new Utilisateur(
-            nom.trim(), email.trim(),
-            password.trim(), division.trim(),
+            nom.trim(),
+            email.trim(),
+            password.trim(),
+            division.trim(),
             role.trim()
         );
 
-        await utilisateurDao.modifier(user, (resolve) => {
-            return res.render("users/modifier", { msg: resolve.data || resolve.error });
+        await utilisateurDao.modifier(user, async (resolve) => {
+            await res.render("users/modifier",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
     async getUserByEmail(req, res) {
         let userEmail = req.query.u;
 
+        await utilisateurDao.isExist(userEmail, async (resolve) => {
 
-        await utilisateurDao.isExist(userEmail, (resolve) => {
-
-            res.render(`users/${getActionName(req)}`, {
+            await res.render(`users/${getActionName(req)}`, {
                 msg: resolve.error,
                 data: resolve.data
             });
@@ -46,8 +53,10 @@ class UtilisateurController {
     }
 
     async getAll(req, res) {
-        await utilisateurDao.getAll((resolve) => {
-            return res.render("users/list-users", { msg: resolve.error, data: resolve.data });
+        await utilisateurDao.getAll(async (resolve) => {
+            await res.render("users/list-users",
+                { msg: resolve.error, data: resolve.data }
+            );
         });
     }
 
@@ -56,8 +65,10 @@ class UtilisateurController {
 
         const { email } = req.body;
 
-        await utilisateurDao.delete(email, (resolve) => {
-            return res.render("users/supprimer", { msg: resolve.error || resolve.data });
+        await utilisateurDao.delete(email, async (resolve) => {
+            await res.render("users/supprimer",
+                { msg: resolve.error || resolve.data }
+            );
         });
     }
 }

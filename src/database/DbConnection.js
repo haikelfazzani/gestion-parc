@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-let db = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'remotemysql.com',
     user: 'LPx4ioQKlk',
     password: 'V638WJNvfq',

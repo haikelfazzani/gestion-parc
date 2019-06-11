@@ -4,6 +4,8 @@ const path = require("path");
 const cookeParser = require("cookie-parser");
 const expressSession = require("express-session");
 
+const staticFiles = require("./config/static.config");
+const routesStruct = require("./config/routes.config");
 const Role = require('./models/Role.enum');
 const Division = require("./models/Division.enum");
 const Etat = require("./models/Etat.enum");
@@ -23,17 +25,21 @@ app.use(expressSession({
 }));
 
 // set globall variables
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
 
   if (req.session && req.session.userInfo) {
     const { userInfo } = req.session;
+
+    res.locals.routesStruct = routesStruct;
+    res.locals.staticFiles = staticFiles;
+
     res.locals.userInfo = userInfo;
     res.locals.role = Role;
     res.locals.division = Division;
     res.locals.Etat = Etat;
     res.locals.formatDate = formatDate;
   }
-  next();
+  await next();
 });
 
 
@@ -59,9 +65,7 @@ app.use("/vehicules", require("./routes/vehicules.routes"));
 app.use("/reservations", require("./routes/reservations.routes"));
 
 // route
-app.use("*", (req, res) => {
-  res.redirect("/");
-});
+app.use("*", async (req, res) => { await res.redirect("/"); });
 
 
 module.exports = app;

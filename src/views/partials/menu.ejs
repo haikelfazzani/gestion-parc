@@ -1,6 +1,6 @@
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
-  <a class="navbar-brand" href="/">
+  <a class="navbar-brand" href="<%= routesStruct.index %>">
     <img src="/img/logooo.png" width="30" height="30" alt="">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
@@ -13,22 +13,22 @@
 
     <ul class="navbar-nav mr-auto">
 
-      <% if(locals.userInfo) { 
+      <% if(locals.userInfo && locals.routesStruct) { 
           if(userInfo.role === role.admin) {    
       %>
       <li class="nav-item">
-        <a class="nav-link" href="/utilisateur">
+        <a class="nav-link" href="<%= routesStruct.utilisateurs.index %>">
           <i class="fas fa-plus"></i> Utilisateur</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/vehicules">
+        <a class="nav-link" href="<%= routesStruct.vehicules.index %>">
           <i class="fas fa-plus"></i> Véhicules</a>
       </li>
 
       <% } }%>
       <li class="nav-item">
-        <a class="nav-link" href="/reservations">
+        <a class="nav-link" href="<%= routesStruct.reservations.index %>">
           <i class="fas fa-plus"></i> Reservations</a>
       </li>
 
@@ -38,14 +38,18 @@
     <ul class="navbar-nav ml-auto">
 
 
-      <% if(locals.userInfo) { %>
+      <% if(locals.userInfo && locals.routesStruct) { %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" 
+        data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           <i class="fas fa-user"></i> <%= userInfo.nom_complet %> </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-          <a class="dropdown-item" href="/profile">Profile</a>
-          <a class="dropdown-item" href="/auth/logout">DECONNEXION</a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" 
+        aria-labelledby="navbarDropdownMenuLink-4">
+
+          <a class="dropdown-item" href="<%= routesStruct.utilisateurs.profile %>">Profile</a>
+          <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">DECONNEXION</a>
+
         </div>
       </li>
       <% } %>

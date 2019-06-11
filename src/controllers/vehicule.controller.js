@@ -5,78 +5,79 @@ const { getActionName } = require("../service/url.service");
 
 class VehiculeController {
 
-    ajouter(req, res) {
+    async ajouter(req, res) {
         const { numSerie, model } = req.body;
-        const vehicule = new Vehicule((numSerie+"").trim(), (model+"").trim());
+        const vehicule = new Vehicule((numSerie + "").trim(), (model + "").trim());
 
-        vehiculeDao.insert(vehicule, (resolve) => {
-            res.render("vehicules/ajout", { msg: resolve.data || resolve.error });
-            return;
+        await vehiculeDao.insert(vehicule, async (resolve) => {
+            await res.render("vehicules/ajout",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
-    update(req, res) {
+    async update(req, res) {
         const { numSerie, model, etat } = req.body;
         const vehicule = new Vehicule(numSerie.trim(), model.trim());
 
-        vehiculeDao.update(vehicule, etat, (resolve) => {
-            res.render("vehicules/modifier", { msg: resolve.data || resolve.error });
-            return;
+        await vehiculeDao.update(vehicule, etat, async (resolve) => {
+            await res.render("vehicules/modifier",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
 
-    supprimer(req, res) {
+    async supprimer(req, res) {
         let { numSerie, model } = req.body;
         let vehicule = new Vehicule(numSerie.trim(), model.trim());
 
-        vehiculeDao.delete(vehicule, (resolve) => {
-            res.render("vehicules/supprimer", { msg: resolve.data || resolve.error });
-            return;
+        await vehiculeDao.delete(vehicule, async (resolve) => {
+            await res.render("vehicules/supprimer",
+                { msg: resolve.data || resolve.error }
+            );
         });
     }
 
 
-    getVehicule(req, res) {
+    async getVehicule(req, res) {
 
         try {
 
             let numSerie = req.query.v;
             numSerie = (numSerie + "").trim();
 
-            vehiculeDao.getVehiculeByNum(numSerie, (resolve) => {
+            await vehiculeDao.getVehiculeByNum(numSerie, async (resolve) => {
 
-                res.render(`vehicules/${getActionName(req)}`, {
-                    data: resolve.data,
-                    msg: resolve.error
-                });
-                return;
+                await res.render(`vehicules/${getActionName(req)}`,
+                    { data: resolve.data, msg: resolve.error }
+                );
             });
-        } catch (error) {
-            res.render(`error`, { exceptionMsg: error });
-            return;
+        }
+        catch (error) {
+            await res.render(`error`, { exceptionMsg: error });
         }
 
     }
 
 
-    getAll(req, res) {
-        vehiculeDao.getAll((resolve) => {
+    async getAll(req, res) {
+        await vehiculeDao.getAll(async (resolve) => {
 
-            let vehicules = resolve.data;
-            let { etatQuery } = req.query;
+            const vehicules = resolve.data;
+            const { etatQuery } = req.query;
 
             if (etatQuery) {
                 etatQuery = (etatQuery + "").trim();
 
-                res.render("vehicules/list-vehicules",
+                await res.render("vehicules/list-vehicules",
                     { msg: resolve.error, data: vehicules, etatQuery }
                 );
-                return;
             }
             else {
-                res.render("vehicules/list-vehicules", { msg: resolve.error, data: vehicules });
-                return;
+                await res.render("vehicules/list-vehicules",
+                    { msg: resolve.error, data: vehicules }
+                );
             }
         });
     }

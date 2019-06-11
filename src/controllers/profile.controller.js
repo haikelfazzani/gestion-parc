@@ -6,8 +6,8 @@ class ProfileController {
     modifier(req, res) {
         let { email, password } = req.body;
 
-        utilisateurDao.update(email, password, (resolve) => {
-            return res.render("profile/index", { msg: resolve.error || resolve.data });            
+        utilisateurDao.update(email, password, async (resolve) => {
+            await res.render("profile/index", { msg: resolve.error || resolve.data });            
         });
     }
 
