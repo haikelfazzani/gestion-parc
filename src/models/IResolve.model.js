@@ -1,4 +1,0 @@
-const IResolve = {
-    error:"",
-    data:""
-}
