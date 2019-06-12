@@ -13,12 +13,11 @@
       <div class="col-md-3 mb-3">
 
         <% if(locals.avatar) { %>
-        <img src="<%= locals.avatar %>" 
-        alt="photo de profile" class="img-thumbnail mb-3">
+        <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail mb-3">
         <% } %>
 
         <form action="/profile/avatar" method="POST" enctype="multipart/form-data">
-          <div class="input-group mb-3">
+          <div class="input-group mb-2">
   
             <div class="custom-file">
               <input type="file" class="custom-file-control form-control-file" 
@@ -27,9 +26,11 @@
             </div>
           </div>
 
+          
           <button type="submit" class="btn btn-success btn-block" id="btn-change-avatar">
-            MODIFIER
+              <i class="fas fa-upload"></i> MODIFIER
           </button>
+
         </form>
       </div><!-- /Avatar -->
 
