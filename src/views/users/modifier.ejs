@@ -43,7 +43,9 @@
           <div class="col-md-6">
             <% if(locals.division) { %>
             <div class="form-group">
-              <label for="division">Choisir un division</label>
+              <label for="division ml-3">division courante
+                <span class="badge badge-dark"><%= data.division %></span>
+              </label>
               <select class="form-control" id="division" name="division">
                 <% for(let d in division) {%>
                 <option value="<%= division[d] %>"><%= division[d] %></option>
@@ -57,7 +59,9 @@
           <div class="col-md-6">
             <% if(locals.role) { %>
             <div class="form-group">
-              <label for="role">Choisir un role</label>
+              <label for="role ml-3">role courant
+                <span class="badge badge-dark"><%= data.role %></span>
+              </label>
               <select class="form-control" id="role" name="role">
                 <% for(let a in role) {%>
                 <option value="<%= role[a] %>"><%= role[a] %></option>
@@ -69,7 +73,7 @@
         </div><!-- / ROW -->
 
 
-        <button type="submit" class="btn btn-primary">MODIFIER</button>
+        <button type="submit" class="btn btn-success">MODIFIER</button>
         <button type="reset" class="btn btn-danger">vider</button>
 
       </form>

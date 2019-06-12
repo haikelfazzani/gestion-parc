@@ -20,26 +20,20 @@ class ReservationDao {
     }
 
 
-    getAllReservations(resolve) {
+    async getAllReservations(resolve) {
 
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
-        where v.etat = 'en attente' `;
+        where v.etat = '${Etat.enAttente}' `;
 
-        db.query(sql, (err, rows) => {
+        await db.query(sql, (err, rows) => {
 
             if (!err) {
-                resolve({
-                    error: "",
-                    data: rows
-                });
+                resolve({ error: "", data: rows });
             }
             else {
-                resolve({
-                    error: "erreur !",
-                    data: ""
-                });
+                resolve({ error: "erreur !", data: "" });
             }
         });
     }
@@ -53,18 +47,11 @@ class ReservationDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "une reservation a été bien confrimée"
-                });
+                resolve({ error: "", data: "une reservation a été bien confrimée" });
             }
             else {
-                resolve({
-                    error: "erreur de confirmation!",
-                    data: ""
-                });
+                resolve({ error: "erreur de confirmation!", data: "" });
             }
-
         });
     }
 
@@ -77,17 +64,11 @@ class ReservationDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "une reservation a été bien annulée"
-                });
+                resolve({ error: "", data: "une reservation a été bien annulée" });
                 this.modifierEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod => { });
             }
             else {
-                resolve({
-                    error: "erreur d'annulation",
-                    data: ""
-                });
+                resolve({ error: "erreur d'annulation", data: "" });
             }
         });
     }
@@ -161,7 +142,7 @@ class ReservationDao {
                 data: rows
             });
         });
-    }        
+    }
 
 }
 

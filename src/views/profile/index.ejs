@@ -12,29 +12,40 @@
       <!-- Avatar -->
       <div class="col-md-3 mb-3">
 
-        <% if(locals.avatar) { %>
+        <% if(locals.avatar && locals.staticFiles) { %>
         <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail mb-3">
         <% } %>
 
-        <form action="/profile/avatar" method="POST" enctype="multipart/form-data">
+
+
+        <% if(locals.avatar) { 
+             
+            let action = locals.avatar !== staticFiles.profileImage ?
+              "/profile/avatar/modifier" : "/profile/avatar/ajout"
+        %>
+
+        <form action="<%= action %>" method="POST" enctype="multipart/form-data">
           <div class="input-group mb-2">
-  
+
             <div class="custom-file">
-              <input type="file" class="custom-file-control form-control-file" 
-              id="avatar" name="avatar" required>
+              <input type="file" class="custom-file-control form-control-file" id="avatar" name="avatar" required>
               <label class="custom-file-label" for="avatar">Changer</label>
             </div>
           </div>
 
-          
+
           <button type="submit" class="btn btn-success btn-block" id="btn-change-avatar">
-              <i class="fas fa-upload"></i> MODIFIER
+            <i class="fas fa-upload"></i> MODIFIER
           </button>
 
         </form>
+
+        <%  } %>
+
       </div><!-- /Avatar -->
 
 
+      
 
       <div class="col-md-9">
         <% if(locals.userInfo){ %>

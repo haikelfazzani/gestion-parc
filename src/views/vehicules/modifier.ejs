@@ -30,7 +30,10 @@
 
         <% if(locals.Etat) { %>
         <div class="form-group">
-          <label for="etat">Etat</label>
+          <label for="etat ml-3">Etat courante
+            <span class="badge badge-dark"><%= data.etat %></span>
+          </label>
+
           <select class="form-control" id="etat" name="etat">
             <% for(let d in Etat) {%>
             <option value="<%= Etat[d] %>"><%= Etat[d] %></option>
@@ -40,7 +43,7 @@
         <% } %>
 
 
-        <button type="submit" class="btn btn-primary">MODIFIER</button>
+        <button type="submit" class="btn btn-success">MODIFIER</button>
         <button type="reset" class="btn btn-danger">vider</button>
 
       </form>

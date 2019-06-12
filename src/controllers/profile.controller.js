@@ -1,18 +1,19 @@
 const utilisateurDao = require("../dao/utilisateur.dao");
+const imagesDao = require("../dao/images.dao");
 
 const imgBase = "data:image/png;base64,";
 
 class ProfileController {
 
-    async index(req, res) {
+    async index(req, res) { // rendering profile image
 
         const { userInfo } = req.session;
 
-        await utilisateurDao.getAvatar(userInfo.id, async (resolve) => {
+        await imagesDao.getAvatar(userInfo.id, async (resolve) => {
 
-            let avatar = resolve.data[0] && resolve.data[0].avatar.length > 5 ?
+            let avatar = resolve.data && (resolve.data[0] && resolve.data[0].avatar.length) > 5 ?
                 imgBase + resolve.data[0].avatar : "/img/profile.png";
-
+                
             await res.render("profile/index", { avatar });
         });
     }
@@ -31,11 +32,19 @@ class ProfileController {
         const { userInfo } = req.session;
         const avatar = req.file.buffer.toString("base64");
 
-        await utilisateurDao.modifierAvatar(avatar, userInfo.id, async (resolve) => {
+        await imagesDao.modifierAvatar(userInfo.id, avatar, async (resolve) => {                      
             await res.redirect("/profile");
         });
     }
 
+    async ajouterAvatar(req, res) {
+        const { userInfo } = req.session;
+        const avatar = req.file.buffer.toString("base64");
+
+        await imagesDao.ajouterAvatar(userInfo.id, avatar, async (resolve) => {                  
+            await res.redirect("/profile");
+        });
+    }
 }
 
 module.exports = new ProfileController();

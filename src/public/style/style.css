@@ -1,7 +1,8 @@
 body {
     /*background-color: #f1f1f1;*/
-    /*background-color: #3c3c3c;*/
-    background-color: #e8e8e8;
+    background-color: #3c3c3c;
+    /*background-color: #e8e8e8;*/
+    color: #ffffff;
 }
 
 .navbar {
@@ -17,6 +18,9 @@ a, label, .btn {
     font-weight: 600;
     text-transform: uppercase;
 }
+
+label { width: 100%; }
+label .badge { font-size: 13px; float: right;}
 
 h2 {
     margin-bottom: 20px;

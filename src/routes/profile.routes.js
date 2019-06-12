@@ -20,9 +20,13 @@ router.get("/avatar", redirectLogin, (req, res) => {
 });
 
 
-router.post("/avatar", [redirectLogin, upload.single("avatar")], (req, res) => {
+router.post("/avatar/modifier", [redirectLogin, upload.single("avatar")], (req, res) => {
   profileController.modifierAvatar(req, res);
 });
 
+
+router.post("/avatar/ajout", [redirectLogin, upload.single("avatar")], (req, res) => {
+  profileController.ajouterAvatar(req, res);
+});
 
 module.exports = router;

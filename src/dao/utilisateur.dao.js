@@ -38,27 +38,6 @@ class UtilisateurDao {
         });
     }
 
-
-    modifierAvatar(avatar, userId, resolve) {
-        const sql = `update ${this.tabelName} set ${this.avatar} = '${avatar}'
-        where ${this.id} = ${userId} `;
-
-        db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: "votre image a été bien modifiée"
-                });
-            }
-            else {
-                resolve({
-                    error: err,
-                    data: ""
-                });
-            }
-        });
-    }
-
     /** Update profile user */
     update(email, password, resolve) {
         const sql = `update ${this.tabelName} 
@@ -195,19 +174,7 @@ class UtilisateurDao {
             });
         });
     }
-
-
-    getAvatar(userId, resolve) {
-        const sql = `select ${this.avatar} from ${this.tabelName} 
-        where ${this.id} = ${userId} `;
-
-        db.query(sql, (err, rows) => {
-            resolve({
-                error: err,
-                data: rows
-            });
-        });
-    }
+    
 }
 
 

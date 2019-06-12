@@ -1,5 +1,5 @@
 const staticFiles = {
-    logo : "/img/logooo.png",
+    logo : "/img/logooo.png",    
     profileImage : "/img/profile.png",
     css : "/style/style.css" ,
     bootstrap : "/style/bootstrap.css",
