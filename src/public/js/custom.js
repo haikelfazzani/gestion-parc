@@ -16,6 +16,26 @@ window.onload = () => {
             }
         }
         enableButton();
-    }
+
+
+        function checkAvatarChange() {
+            const inputAvatar = document.getElementById("avatar");
+            const btnChangeAvatar = document.getElementById("btn-change-avatar");
+
+            btnChangeAvatar.disabled = true;
+            inputAvatar.onchange = (e) => { 
+                let inputValue = e.target.value; // C:\fakepath\7.PNG
+                inputValue = inputValue.match(/\.[0-9a-z]+$/i)[0];
+
+                const validExtensions = [".png", ".jpeg", ".jpg", ".svg"];
+
+                if(validExtensions.includes(inputValue.toLowerCase())) {
+                    btnChangeAvatar.disabled = false;
+                }                
+            }
+        }
+
+        checkAvatarChange();
+    }    
 
 }
