@@ -1,12 +1,12 @@
-const utilisateurDao = require("../dao/utilisateur.dao");
-const Utilisateur = require("../models/Utilisateur.model");
+const userDao = require("../dao/user.dao");
+const User = require("../models/User.model");
 const { getActionName } = require("../service/url.service");
 
-class UtilisateurController {
+class UserController {
 
-    async ajouter(req, res) {
+    async addUser(req, res) {
         const { nom, email, password, division, role } = req.body;
-        const user = new Utilisateur(
+        const user = new User(
             nom.trim(),
             email.trim(),
             password.trim(),
@@ -14,17 +14,17 @@ class UtilisateurController {
             role.trim()
         );
 
-        await utilisateurDao.insert(user, async (resolve) => {
-            await res.render("users/ajout",
+        await userDao.addUser(user, async (resolve) => {
+            await res.render("users/add-user",
                 { msg: resolve.data || resolve.error }
             );
         });
     }
 
-    async modifier(req, res) {
+    async updateUser(req, res) {
         const { nom, email, password, division, role } = req.body;
 
-        const user = new Utilisateur(
+        const user = new User(
             nom.trim(),
             email.trim(),
             password.trim(),
@@ -32,8 +32,8 @@ class UtilisateurController {
             role.trim()
         );
 
-        await utilisateurDao.modifier(user, async (resolve) => {
-            await res.render("users/modifier",
+        await userDao.updateUser(user, async (resolve) => {
+            await res.render("users/update-user",
                 { msg: resolve.data || resolve.error }
             );
         });
@@ -42,9 +42,9 @@ class UtilisateurController {
     async getUserByEmail(req, res) {
         let userEmail = req.query.u;
 
-        await utilisateurDao.isExist(userEmail, async (resolve) => {
+        await userDao.isExist(userEmail, async (resolve) => {
 
-            await res.render(`users/${getActionName(req)}`, {
+            await res.render(`users/${getActionName(req)}-user`, {
                 msg: resolve.error,
                 data: resolve.data
             });
@@ -52,8 +52,8 @@ class UtilisateurController {
 
     }
 
-    async getAll(req, res) {
-        await utilisateurDao.getAll(async (resolve) => {
+    async getUsers(req, res) {
+        await userDao.getUsers(async (resolve) => {
             await res.render("users/list-users",
                 { msg: resolve.error, data: resolve.data }
             );
@@ -61,12 +61,12 @@ class UtilisateurController {
     }
 
 
-    async supprimer(req, res) {
+    async deleteUser(req, res) {
 
         const { email } = req.body;
 
-        await utilisateurDao.delete(email, async (resolve) => {
-            await res.render("users/supprimer",
+        await userDao.deleteUser(email, async (resolve) => {
+            await res.render("users/delete-user",
                 { msg: resolve.error || resolve.data }
             );
         });
@@ -74,4 +74,4 @@ class UtilisateurController {
 }
 
 
-module.exports = new UtilisateurController();
+module.exports = new UserController();

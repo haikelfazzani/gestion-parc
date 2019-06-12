@@ -3,17 +3,17 @@
     <% if(locals.userInfo) { 
         if(userInfo.role === role.admin) {    
     %>
-    <a href="<%= routesStruct.reservations.lister %>" class="list-group-item list-group-item-action">
-        Liste des reservations
+    <a href="<%= routesStruct.reservations.list %>" class="list-group-item list-group-item-action">
+        Liste des demandes
     </a>
     <% } else { %>
 
 
-    <a href="<%= routesStruct.reservations.listervehicule %>" class="list-group-item list-group-item-action">
+    <a href="<%= routesStruct.reservations.listvehicule %>" class="list-group-item list-group-item-action">
         Liste des vehicules
     </a>
 
-    <a href="<%= routesStruct.reservations.listerreserved %>" class="list-group-item list-group-item-action">
+    <a href="<%= routesStruct.reservations.listreserved %>" class="list-group-item list-group-item-action">
         Liste des reservations
     </a>
     <% } }%>

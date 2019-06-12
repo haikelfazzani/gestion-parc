@@ -11,7 +11,7 @@ router.get("/", redirectLogin, (req, res) => {
 });
 
 router.post("/", redirectLogin, (req, res) => {
-  profileController.modifier(req, res);
+  profileController.updateUserPassword(req, res);
 });
 
 
@@ -20,13 +20,13 @@ router.get("/avatar", redirectLogin, (req, res) => {
 });
 
 
-router.post("/avatar/modifier", [redirectLogin, upload.single("avatar")], (req, res) => {
-  profileController.modifierAvatar(req, res);
+router.post("/avatar/update", [redirectLogin, upload.single("avatar")], (req, res) => {
+  profileController.updateAvatar(req, res);
 });
 
 
-router.post("/avatar/ajout", [redirectLogin, upload.single("avatar")], (req, res) => {
-  profileController.ajouterAvatar(req, res);
+router.post("/avatar/add", [redirectLogin, upload.single("avatar")], (req, res) => {
+  profileController.addAvatar(req, res);
 });
 
 module.exports = router;

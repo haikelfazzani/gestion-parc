@@ -11,29 +11,23 @@ class VehiculeDao {
         this.etat = "etat";
     }
 
-    insert(vehicule, resolve) {
+    addVehicule(vehicule, resolve) {
 
         const sql = `insert into ${this.tabelName} (${this.numSerie}, ${this.model}) 
         values('${vehicule.numSerie}', '${vehicule.model}')`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "une véhicule a été bien inséré"
-                });
+                resolve({ error: "", data: "une véhicule a été bien inséré" });
             }
             else {
-                resolve({
-                    error: "erreur d'insertion!",
-                    data: ""
-                });
+                resolve({ error: "erreur d'insertion!", data: "" });
             }
         });
     }
 
     /** Get all users from database */
-    getAll(resolve) {
+    getVehicules(resolve) {
         const sql = `select * from ${this.tabelName}`;
 
         db.query(sql, (err, rows) => {
@@ -85,7 +79,7 @@ class VehiculeDao {
     }
 
 
-    delete(vehicule, resolve) {
+    deleteVehicule(vehicule, resolve) {
         const { numSerie, model } = vehicule;
 
         const sql = `delete from ${this.tabelName} where ${this.numSerie} = '${numSerie}'`;
@@ -106,7 +100,7 @@ class VehiculeDao {
         });
     }
 
-    update(vehicule, etat, resolve) {
+    updateVehicule(vehicule, etat, resolve) {
 
         const { numSerie, model } = vehicule;
 

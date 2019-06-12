@@ -1,7 +1,7 @@
 const express = require("express"),
   router = express.Router(),
   { redirectHome } = require("../middlewares/auth.middleware"),
-  utilisateurDao = require("../dao/utilisateur.dao"),
+  userDao = require("../dao/user.dao"),
   path = require("path");
 
 const staticFiles = require("../config/static.config");
@@ -14,7 +14,7 @@ router.get('/login', redirectHome, async (req, res) => {
 router.post('/login', redirectHome, async (req, res) => {
   let { email, password } = req.body;
 
-  await utilisateurDao.getOneByEmail(email, password, (resolve) => {
+  await userDao.getOneByEmail(email, password, (resolve) => {
 
     if (resolve.data && resolve.data.length > 0) {
 
@@ -26,7 +26,9 @@ router.post('/login', redirectHome, async (req, res) => {
       return;
     }
     else {
-      res.render("login", { msg: "utilisateur n'existe pas!!" });
+      res.render("login",
+        { msg: "utilisateur n'existe pas!!", staticFiles }
+      );
       return;
     }
   });

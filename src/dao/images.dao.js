@@ -24,7 +24,7 @@ class ImagesDao {
         });
     }
 
-    modifierAvatar(userId, avatar, resolve) {
+    updateAvatar(userId, avatar, resolve) {
         const sql = `update ${this.tableName} 
         set ${this.avatar} = '${avatar}' where ${this.userId} = ${userId} `;
 
@@ -44,7 +44,7 @@ class ImagesDao {
         });
     }
 
-    ajouterAvatar(userId, avatar, resolve) {
+    addAvatar(userId, avatar, resolve) {
         const sql = `insert into ${this.tableName} (${this.avatar}, ${this.userId})
         values('${avatar}', ${userId})`;
 

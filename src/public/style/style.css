@@ -11,7 +11,10 @@ body {
     border-bottom: 2px solid #9e9e9e;
 }
 
-a { color: #3c3c3c; transition: all 0.4s ease; }
+a { 
+    /*color: #3c3c3c; */
+    transition: all 0.4s ease; 
+}
 
 a, label, .btn {
     font-size: 14px;
@@ -54,6 +57,14 @@ thead th {
 
 .navbar-nav { cursor: pointer;}
 
+
+#img-profile {
+    width: 27px;
+    height: 27px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
 @media screen and (max-width: 600px) {
     .navbar {
         padding: 10px;
@@ -62,4 +73,6 @@ thead th {
     h2 {
         font-size: 18px;
     }
+
+    #img-profile { display: none; }
   }

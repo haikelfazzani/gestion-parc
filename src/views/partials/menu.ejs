@@ -17,7 +17,7 @@
           if(userInfo.role === role.admin) {    
       %>
       <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.utilisateurs.index %>">
+        <a class="nav-link" href="<%= routesStruct.users.index %>">
           <i class="fas fa-plus"></i> Utilisateur</a>
       </li>
 
@@ -40,14 +40,20 @@
 
       <% if(locals.userInfo && locals.routesStruct) { %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" 
-        data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-          <i class="fas fa-user"></i> <%= userInfo.nom_complet %> </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" 
-        aria-labelledby="navbarDropdownMenuLink-4">
 
-          <a class="dropdown-item" href="<%= routesStruct.utilisateurs.profile %>">Profile</a>
+          <% if(locals.avatar && locals.staticFiles) { %>
+          <img src="<%= locals.avatar %>" alt="" id="img-profile">
+          <%  } %>
+          <%= userInfo.nom_complet %>
+        </a>
+
+
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+
+          <a class="dropdown-item" href="<%= routesStruct.users.profile %>">Profile</a>
+
           <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">DECONNEXION</a>
 
         </div>

@@ -20,7 +20,7 @@ class ReservationDao {
     }
 
 
-    async getAllReservations(resolve) {
+    async listRequests(resolve) {
 
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id
@@ -40,7 +40,7 @@ class ReservationDao {
 
 
     // change status of vehicule from "en attente" to "reservée"
-    confirmer(vehiculeId, resolve) {
+    confirm(vehiculeId, resolve) {
 
         const sql = `update ${this.vehiculeTable} set etat = 'réservée'
         where id_vehicule = ${vehiculeId} `;
@@ -58,14 +58,14 @@ class ReservationDao {
 
 
     // remove the reservation
-    annuler(userId, vehiculeId, resolve) {
+    cancel(userId, vehiculeId, resolve) {
 
         const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
                 resolve({ error: "", data: "une reservation a été bien annulée" });
-                this.modifierEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod => { });
+                this.updateEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod => { });
             }
             else {
                 resolve({ error: "erreur d'annulation", data: "" });
@@ -74,7 +74,7 @@ class ReservationDao {
     }
 
 
-    modifierEtatVehicule(vehiculeId, etat = Etat.enAttente, resolve) {
+    updateEtatVehicule(vehiculeId, etat = Etat.enAttente, resolve) {
 
         const sql = `update ${this.vehiculeTable} set etat = '${etat}'
         where id_vehicule = ${vehiculeId} `;
@@ -92,7 +92,7 @@ class ReservationDao {
 
 
     /* Utilisateur reservation handling */
-    envoyerDemande(reservation, resolve) {
+    sendDemand(reservation, resolve) {
 
         let { dateDepart, dateRetour, bossOrder, descMission, userId, vehiculeId } = reservation;
 
@@ -106,21 +106,13 @@ class ReservationDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "votre demande a été bien envoyée"
-                });
+                resolve({ error: "", data: "votre demande a été bien envoyée" });
 
-                // update vehicule stat after client send demand
-                this.modifierEtatVehicule(vehiculeId, "en attente", resolve => {
-
-                });
+                // update vehicule status after client send demand
+                this.updateEtatVehicule(vehiculeId, "en attente", (resolve) => {});
             }
             else {
-                resolve({
-                    error: "erreur d'envoie",
-                    data: ""
-                });
+                resolve({ error: "erreur d'envoie", data: "" });
             }
         });
 
@@ -128,7 +120,7 @@ class ReservationDao {
 
 
     // les vehicules reservées par utilisateurs
-    listerReserved(userId, resolve) {
+    listReserved(userId, resolve) {
 
         const sql = `select * from ${this.tableName} r 
         join ${this.userTable} u on r.user_id = u.id

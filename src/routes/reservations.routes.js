@@ -12,35 +12,35 @@ router.get("/", [redirectLogin], async (req, res) => {
 });
 
 /** Admin routes reservations handling */
-router.get("/list", [redirectLogin, isAdmin], async (req, res) => {
-  await reservationController.listReservations(req, res);
+router.get("/list-demands", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.listDemands(req, res);
 });
 
 
-router.get("/confirmer", [redirectLogin, isAdmin], async (req, res) => {
-  await reservationController.rendConfirmerForm(req, res);
+router.get("/confirm", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.rendConfirmForm(req, res);
 });
 
-router.post("/confirmer", [redirectLogin, isAdmin], async (req, res) => {
-  await reservationController.confirmer(req, res);
+router.post("/confirm", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.confirm(req, res);
 });
 
 
 
 
-router.get("/annuler", [redirectLogin, isAdmin], async (req, res) => {
-  await reservationController.rendAnnulerForm(req, res);
+router.get("/cancel", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.rendCancelForm(req, res);
 });
 
-router.post("/annuler", [redirectLogin, isAdmin], async (req, res) => {
-  await reservationController.annuler(req, res);
+router.post("/cancel", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.cancel(req, res);
 });
 
 
 
 /** User routes reservation handling */
 router.get("/user/list-vehicules", [redirectLogin, isNotAdmin], async (req, res) => {
-  await reservationController.getAll(req, res);
+  await reservationController.vehiculesNonReserved(req, res);
 });
 
 router.get("/user/list-reserved", [redirectLogin, isNotAdmin], async (req, res) => {
@@ -49,12 +49,12 @@ router.get("/user/list-reserved", [redirectLogin, isNotAdmin], async (req, res) 
 
 
 /** Client envoi une demande de reservation */
-router.get("/user/reserver", [redirectLogin, isNotAdmin], async (req, res) => {
-  await reservationController.rendFormReserver(req, res);
+router.get("/user/reserve", [redirectLogin, isNotAdmin], async (req, res) => {
+  await reservationController.rendFormDemand(req, res);
 });
 
-router.post("/user/reserver", [redirectLogin, isNotAdmin], async (req, res) => {
-  await reservationController.envoyer(req, res);
+router.post("/user/reserve", [redirectLogin, isNotAdmin], async (req, res) => {
+  await reservationController.sendDemand(req, res);
 });
 
 module.exports = router;

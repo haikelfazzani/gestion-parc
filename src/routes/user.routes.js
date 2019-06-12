@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // controller
-const utilisateurController = require('../controllers/utilisateur.controller');
+const userController = require('../controllers/user.controller');
 
 // middlewares
 const { redirectLogin } = require('../middlewares/auth.middleware');
@@ -15,44 +15,42 @@ router.get("/", [redirectLogin, isAdmin], (req, res) => {
 });
 
 /** Add user to database */
-router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
-
-  res.render("users/ajout")
-
+router.get("/add", [redirectLogin, isAdmin], (req, res) => {
+  res.render("users/add-user")
 });
 
 
-router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.ajouter(req, res)
+router.post("/add", [redirectLogin, isAdmin], (req, res) => {
+  userController.addUser(req, res)
 });
 
 
 
 /** modifier user */
-router.get("/modifier", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.getUserByEmail(req, res);
+router.get("/update", [redirectLogin, isAdmin], (req, res) => {
+  userController.getUserByEmail(req, res);
 });
 
-router.post("/modifier", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.modifier(req, res)
+router.post("/update", [redirectLogin, isAdmin], (req, res) => {
+  userController.updateUser(req, res)
 });
 
 
 
 /** supprimer user from database */
 router.get("/supprimer", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.getUserByEmail(req, res);
+  userController.getUserByEmail(req, res);
 });
 
 router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.supprimer(req, res)
+  userController.deleteUser(req, res)
 });
 
 
 
 /** Get all user from database */
 router.get("/list", [redirectLogin, isAdmin], (req, res) => {
-  utilisateurController.getAll(req, res);
+  userController.getUsers(req, res);
 });
 
 

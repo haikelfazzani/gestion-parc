@@ -18,13 +18,13 @@ router.get("/", [redirectLogin, isAdmin], (req, res) => {
 
 
 /** Add vehicule to database */
-router.get("/ajout", [redirectLogin, isAdmin], (req, res) => {
-    res.render("vehicules/ajout")
+router.get("/add", [redirectLogin, isAdmin], (req, res) => {
+    res.render("vehicules/add-vehicule")
 });
 
 
-router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
-    vehiculeController.ajouter(req, res);
+router.post("/add", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.addVehicule(req, res);
 });
 
 
@@ -33,23 +33,23 @@ router.post("/ajout", [redirectLogin, isAdmin], (req, res) => {
 
 
 /** Update vehicule */
-router.get("/modifier", [redirectLogin, isAdmin], (req, res) => {
+router.get("/update", [redirectLogin, isAdmin], (req, res) => {
     vehiculeController.getVehicule(req, res);
 });
 
-router.post("/modifier", [redirectLogin, isAdmin], (req, res) => {
-    vehiculeController.update(req , res);
+router.post("/update", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.updateVehicule(req , res);
 });
 
 
 
 /** Delete vehicule from database */
-router.get("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
     vehiculeController.getVehicule(req, res);
 });
 
-router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
-    vehiculeController.supprimer(req , res);
+router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
+    vehiculeController.deleteVehicule(req , res);
 });
 
 
@@ -58,7 +58,7 @@ router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
 
 /** Get all vehicules from database */
 router.get("/list", [redirectLogin, isAdmin], (req, res) => {    
-    vehiculeController.getAll(req, res);
+    vehiculeController.getVehicules(req, res);
 });
 
 

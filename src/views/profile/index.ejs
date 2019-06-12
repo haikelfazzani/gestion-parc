@@ -21,7 +21,7 @@
         <% if(locals.avatar) { 
              
             let action = locals.avatar !== staticFiles.profileImage ?
-              "/profile/avatar/modifier" : "/profile/avatar/ajout"
+              "/profile/avatar/update" : "/profile/avatar/add"
         %>
 
         <form action="<%= action %>" method="POST" enctype="multipart/form-data">

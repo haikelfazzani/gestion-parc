@@ -3,7 +3,8 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   path = require("path"),
   cookeParser = require("cookie-parser"),
-  expressSession = require("express-session");
+  expressSession = require("express-session"),
+  compression = require('compression');
 
 const staticFiles = require("./config/static.config"),
   routesStruct = require("./config/routes.config"),
@@ -32,6 +33,8 @@ app.use(async (req, res, next) => {
     res.locals.routesStruct = routesStruct;
     res.locals.staticFiles = staticFiles;
 
+    res.locals.avatar = req.session.avatar;
+
     res.locals.userInfo = userInfo;
     res.locals.role = Role;
     res.locals.division = Division;
@@ -50,16 +53,18 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // data parse
+app.use(compression())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookeParser());
+
 
 // Routers
 app.use("/", require("./routes/main.routes"));
 app.use("/auth", require("./routes/auth.routes"));
 
 app.use("/profile", require("./routes/profile.routes"));
-app.use("/utilisateur", require("./routes/utilisateur.routes"));
+app.use("/users", require("./routes/user.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
 app.use("/reservations", require("./routes/reservations.routes"));
 

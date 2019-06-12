@@ -1,6 +1,6 @@
 const db = require('../database/DbConnection');
 
-class UtilisateurDao {
+class UserDao {
 
     constructor() {
         this.tabelName = "utilisateur";
@@ -14,7 +14,7 @@ class UtilisateurDao {
         this.avatar = "avatar";
     }
 
-    insert(user, resolve) {
+    addUser(user, resolve) {
 
         const sql = `insert into ${this.tabelName} (
             ${this.nomComplet}, ${this.email}, ${this.password}, ${this.division}, ${this.role}
@@ -24,22 +24,16 @@ class UtilisateurDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "un utilisateur a été bien inséré"
-                });
+                resolve({ error: "", data: "un utilisateur a été bien inséré" });
             }
             else {
-                resolve({
-                    error: "erreur d'insertion!",
-                    data: ""
-                });
+                resolve({ error: "erreur d'insertion!", data: "" });
             }
         });
     }
 
     /** Update profile user */
-    update(email, password, resolve) {
+    updateUserPassword(email, password, resolve) {
         const sql = `update ${this.tabelName} 
         set ${this.password} = '${password}' 
         where ${this.email} = '${email}' `;
@@ -62,7 +56,7 @@ class UtilisateurDao {
 
 
     /** modification d'un utilisateur par l'admin */
-    modifier(user, resolve) {
+    updateUser(user, resolve) {
 
         const { nomComplet, email, password, division, role } = user;
 
@@ -77,16 +71,10 @@ class UtilisateurDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "un utilisateur a été modifié"
-                });
+                resolve({ error: "", data: "un utilisateur a été modifié" });
             }
             else {
-                resolve({
-                    error: "erreur de modification!",
-                    data: ""
-                });
+                resolve({ error: "erreur de modification!", data: "" });
             }
         });
     }
@@ -95,7 +83,7 @@ class UtilisateurDao {
 
 
     /** Delete user by email */
-    delete(email, resolve) {
+    deleteUser(email, resolve) {
         const sql = `delete from ${this.tabelName} where ${this.email} = '${email}'`;
 
         db.query(sql, (err, rows) => {
@@ -162,7 +150,7 @@ class UtilisateurDao {
 
 
     /** Get all users from database */
-    getAll(resolve) {
+    getUsers(resolve) {
         const sql = `select ${this.id},${this.nomComplet}, 
         ${this.email}, ${this.password}, ${this.division}, ${this.role} 
         from ${this.tabelName}`;
@@ -174,8 +162,8 @@ class UtilisateurDao {
             });
         });
     }
-    
+
 }
 
 
-module.exports = new UtilisateurDao();
+module.exports = new UserDao();

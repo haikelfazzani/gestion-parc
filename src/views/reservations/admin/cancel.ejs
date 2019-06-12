@@ -12,10 +12,10 @@
     <div class="col-md-8">
 
 
-      <h2>Confirmation</h2>
+      <h2>Annulation</h2>
 
       <% if(locals.data) { %>
-      <form action="/reservations/confirmer" method="POST">
+      <form action="/reservations/cancel" method="POST">
 
         <div class="row">
             <div class="col-md-6">
@@ -107,7 +107,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">confirmer</button>        
+        <button type="submit" class="btn btn-primary">Annuler</button>        
 
       </form>
       <% } %>
