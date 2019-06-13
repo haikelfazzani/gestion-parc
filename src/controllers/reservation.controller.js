@@ -81,7 +81,17 @@ class ReservationController {
         });
     }
 
+    async history(req, res) {
+        await reservationDao.history(async (resolve) => {
 
+            let historyRes = resolve.data;
+            req.session.historyRes = historyRes;
+
+            await res.render("reservations/admin/history",
+                { msg: resolve.error, data: historyRes }
+            );
+        });
+    }
 
 
 

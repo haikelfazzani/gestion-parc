@@ -16,25 +16,23 @@
         let i = 1;
       %>
 
-      <h2>Liste des demandes
-        <span class="badge badge-primary"><%= data.length %>
-        </span>
+      <h2>historique
+        <span class="badge badge-primary"><%= data.length %></span>
       </h2>
 
 
       <% for(let v of data){     %>
       <div class="list-group mb-3" id="list-group">
         
-
         <div class="row">
 
-          <div class="col-md-4">
+          <div class="col-md-5">
             <h5 class="mb-1"><%= v.nom_complet %></h5>
             <p>Email : <%= v.email %></p>
             <p>Division : <%= v.division %></p>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-5">
             <h5 class="mb-1"><%= v.model %></h5>
             <p>Num serie : <%= v.num_serie %></p>
             <p>Date depart : <%= locals.formatDate(v.date_depart) %></p>
@@ -46,22 +44,12 @@
               <div class="badge badge-danger"><%= v.etat %></div>
             </div>
 
-          <div class="col-md-2">
-            <a href="/reservations/confirm?v=<%= v.vehicule_id %>" class="btn btn-success">
-              <i class="fas fa-check"></i>
-            </a>
-
-            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" class="btn btn-danger">
-              <i class="fas fa-window-close"></i>
-            </a>
-          </div>
-
-          
-
         </div>
 
         
-      </div><% } %>
+      </div>
+      <% } %>
+
 
     </div>
     <% } %>

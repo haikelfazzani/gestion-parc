@@ -20,6 +20,7 @@ const routesStruct = {
     reservations: {
         index: "/reservations",
         list: "/reservations/list-demands",
+        history: "/reservations/history",
         listvehicule: "/reservations/user/list-vehicules",
         listreserved: "/reservations/user/list-reserved"
     }

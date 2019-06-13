@@ -38,6 +38,17 @@ router.post("/cancel", [redirectLogin, isAdmin], async (req, res) => {
 
 
 
+
+router.get("/history", [redirectLogin, isAdmin], async (req, res) => {
+  await reservationController.history(req, res);
+});
+
+
+
+
+
+
+
 /** User routes reservation handling */
 router.get("/user/list-vehicules", [redirectLogin, isNotAdmin], async (req, res) => {
   await reservationController.vehiculesNonReserved(req, res);

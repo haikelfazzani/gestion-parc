@@ -60,7 +60,9 @@ class ReservationDao {
     // remove the reservation
     cancel(userId, vehiculeId, resolve) {
 
-        const sql = `delete from ${this.tableName} where ${this.userId} = ${userId}`;
+        const sql = `delete from ${this.tableName} 
+        where ${this.vehiculeId} = ${vehiculeId}
+        and ${this.userId} = ${userId}`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
@@ -90,8 +92,19 @@ class ReservationDao {
     }
 
 
+    history(resolve) {
+        const sql = `select * from ${this.tableName} r 
+        join ${this.userTable} u on r.user_id = u.id
+        join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule`;
 
-    /* Utilisateur reservation handling */
+        db.query(sql, (err, rows) => {
+            resolve({ error: err, data: rows });
+        });
+    }
+
+
+
+    /* -------- Utilisateur reservation handling ---------- */
     sendDemand(reservation, resolve) {
 
         let { dateDepart, dateRetour, bossOrder, descMission, userId, vehiculeId } = reservation;
@@ -109,7 +122,7 @@ class ReservationDao {
                 resolve({ error: "", data: "votre demande a été bien envoyée" });
 
                 // update vehicule status after client send demand
-                this.updateEtatVehicule(vehiculeId, "en attente", (resolve) => {});
+                this.updateEtatVehicule(vehiculeId, "en attente", (resolve) => { });
             }
             else {
                 resolve({ error: "erreur d'envoie", data: "" });
@@ -129,10 +142,7 @@ class ReservationDao {
 
         db.query(sql, (err, rows) => {
 
-            resolve({
-                error: err,
-                data: rows
-            });
+            resolve({ error: err, data: rows });
         });
     }
 

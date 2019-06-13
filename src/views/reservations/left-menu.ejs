@@ -4,17 +4,21 @@
         if(userInfo.role === role.admin) {    
     %>
     <a href="<%= routesStruct.reservations.list %>" class="list-group-item list-group-item-action">
-        Liste des demandes
+        <i class="fas fa-list-alt"></i> Liste des demandes
+    </a>
+
+    <a href="<%= routesStruct.reservations.history %>" class="list-group-item list-group-item-action">
+        <i class="fas fa-list-alt"></i> Historique
     </a>
     <% } else { %>
 
 
     <a href="<%= routesStruct.reservations.listvehicule %>" class="list-group-item list-group-item-action">
-        Liste des vehicules
+        <i class="fas fa-list-alt"></i> Liste des vehicules
     </a>
 
     <a href="<%= routesStruct.reservations.listreserved %>" class="list-group-item list-group-item-action">
-        Liste des reservations
+        <i class="fas fa-list-alt"></i> Liste des reservations
     </a>
     <% } }%>
 
