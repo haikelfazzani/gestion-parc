@@ -50,7 +50,7 @@ app.use(cookeParser());
 app.use("/", require("./routes/main.routes"));
 app.use("/auth", require("./routes/auth.routes"));
 
-// set globall variables
+// 
 app.use(async (req, res, next) => {
   await checkVehiculeDate(req , res);
   await next();
@@ -63,8 +63,8 @@ app.use("/vehicules", require("./routes/vehicules.routes"));
 app.use("/reservations", require("./routes/reservations.routes"));
 
 
-app.use("/error", (req, res) => {
-  res.render("error")
+app.use("/error", async (req, res) => {
+  await res.render("error")
 })
 
 

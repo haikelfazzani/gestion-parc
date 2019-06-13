@@ -24,4 +24,5 @@ window.onload = () => {
     inputEmail.value = data.email;
     inputPass.value = data.password;
   }
+
 }

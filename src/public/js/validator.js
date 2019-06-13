@@ -35,7 +35,7 @@ let path = window.location.href.split("/").reverse()[0];
 let pathTabs = window.location.href.split("/");
 
 
-if (pathTabs.includes("users")) {
+if (pathTabs.includes("users") && pathTabs.includes("add")) {
     // handle form add user    
     const alert = document.getElementById("alert-form-add-user");
     alert.style.display = "none";
@@ -56,7 +56,7 @@ if (pathTabs.includes("users")) {
 }
 
 
-if (pathTabs.includes("vehicules")) {
+if (pathTabs.includes("vehicules") && pathTabs.includes("add")) {
     // handle form add vehicule
     const alertVehicule = document.getElementById("alert-form-add-vehicule");
     alertVehicule.style.display = "none";
@@ -75,23 +75,3 @@ if (pathTabs.includes("vehicules")) {
     }
 }
 
-
-if (path === 'login') {
-    // handle form Login
-    const validator = new InputValidator();
-    const alertLogin = document.getElementById("alert-form-login");
-    alertLogin.style.display = "none";
-
-    function handleFormLogin(form) {
-
-        let email = form.email.value;
-        let password = form.password.value;
-
-        if (validator.isEmail(email) && validator.isPassword(password)) {
-            return true;
-        }
-        alertLogin.style.display = "block";
-        alertLogin.innerText = "Erreur de saisie";
-        return false;
-    }
-}
