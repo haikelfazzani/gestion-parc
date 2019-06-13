@@ -40,16 +40,10 @@ class UserDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "votre mot de passe a été modifié"
-                });
+                resolve({ error: "", data: "votre mot de passe a été modifié" });
             }
             else {
-                resolve({
-                    error: "erreur de modification!",
-                    data: ""
-                });
+                resolve({ error: "erreur de modification!", data: "" });
             }
         });
     }

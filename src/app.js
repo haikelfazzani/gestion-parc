@@ -1,17 +1,17 @@
 const express = require("express"),
   app = express(),
+  helmet = require('helmet'),
   bodyParser = require("body-parser"),
   path = require("path"),
   cookeParser = require("cookie-parser"),
   expressSession = require("express-session"),
   compression = require('compression');
 
-const staticFiles = require("./config/static.config"),
-  routesStruct = require("./config/routes.config"),
-  Role = require('./models/Role.enum'),
-  Division = require("./models/Division.enum"),
-  Etat = require("./models/Etat.enum"),
-  { formatDate } = require("./service/date.service");
+const setGlobalVar = require("./config/global.config");
+
+app.use(helmet());
+app.use(helmet.xssFilter());
+app.use(helmet.frameguard());
 
 
 // sessions
@@ -26,21 +26,7 @@ app.use(expressSession({
 
 // set globall variables
 app.use(async (req, res, next) => {
-
-  if (req.session && req.session.userInfo) {
-    const { userInfo } = req.session;
-
-    res.locals.routesStruct = routesStruct;
-    res.locals.staticFiles = staticFiles;
-
-    res.locals.avatar = req.session.avatar;
-
-    res.locals.userInfo = userInfo;
-    res.locals.role = Role;
-    res.locals.division = Division;
-    res.locals.Etat = Etat;
-    res.locals.formatDate = formatDate;
-  }
+  await setGlobalVar(req, res);
   await next();
 });
 
@@ -53,7 +39,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // data parse
-app.use(compression())
+//var csrfProtection = csrf({ cookie: true });
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookeParser());
@@ -68,6 +55,9 @@ app.use("/users", require("./routes/user.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
 app.use("/reservations", require("./routes/reservations.routes"));
 
+app.use("/error", (req, res) => {
+  res.render("error")
+})
 // route
 app.use("*", async (req, res) => { await res.redirect("/"); });
 

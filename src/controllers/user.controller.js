@@ -6,6 +6,7 @@ class UserController {
 
     async addUser(req, res) {
         const { nom, email, password, division, role } = req.body;
+
         const user = new User(
             nom.trim(),
             email.trim(),
@@ -19,6 +20,7 @@ class UserController {
                 { msg: resolve.data || resolve.error }
             );
         });
+
     }
 
     async updateUser(req, res) {

@@ -7,6 +7,7 @@ class VehiculeController {
 
     async addVehicule(req, res) {
         const { numSerie, model } = req.body;
+
         const vehicule = new Vehicule((numSerie + "").trim(), (model + "").trim());
 
         await vehiculeDao.addVehicule(vehicule, async (resolve) => {
@@ -14,6 +15,7 @@ class VehiculeController {
                 { msg: resolve.data || resolve.error }
             );
         });
+
     }
 
     async updateVehicule(req, res) {

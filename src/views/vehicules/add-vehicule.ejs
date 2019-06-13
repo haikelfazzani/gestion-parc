@@ -12,7 +12,7 @@
     <div class="col-md-8">
 
       <h2>Ajout d'une véhicule</h2>
-      <form action="/vehicules/add" method="POST">
+      <form action="/vehicules/add" method="POST" onsubmit="return handleFormVehicile(this)">
 
         <div class="form-group">
           <label for="numSerie">Num serie</label>
@@ -31,6 +31,8 @@
         <button type="reset" class="btn btn-danger">vider</button>
 
       </form>
+
+      <div class="alert alert-danger mt-3" role="alert" id="alert-form-add-vehicule"></div>
 
       <% if(locals.msg) { %>
       <div class="alert alert-primary mt-3" role="alert">

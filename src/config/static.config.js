@@ -4,7 +4,10 @@ const staticFiles = {
     css : "/style/style.css" ,
     bootstrap : "/style/bootstrap.css",
     fontawesome : "/style/all.min.css",
-    js : "/js/custom.js"
+    js : {
+        custom:"/js/custom.js",
+        validator : "/js/validator.js"
+    }
 }
 
 
