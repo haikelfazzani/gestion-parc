@@ -39,7 +39,7 @@
             <td><%= reservation.model %></td>
             <td><%= locals.formatDate(reservation.date_depart) %> </td>
             <td><%= locals.formatDate(reservation.date_retour) %></td>
-            <td><%= reservation.etat %></td>
+            <td><span class="badge badge-warning"><%= reservation.etat %></span></td>
 
           </tr>
           <% } %>

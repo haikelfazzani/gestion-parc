@@ -146,6 +146,17 @@ class ReservationDao {
         });
     }
 
+
+
+
+    // check date retour and updated etat vehicule
+    checkVehiculeDateBack(user_id, id_vehicule, etat,resolve) {
+        this.cancel(user_id, id_vehicule, (reslve) => {
+            this.updateEtatVehicule(id_vehicule, etat, (r) => {
+                resolve({ reslve , r })
+            });
+        });
+    }
 }
 
 
