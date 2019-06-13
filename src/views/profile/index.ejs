@@ -77,6 +77,16 @@
           </div>
 
 
+          <% if(locals.userInfo.division) { %>
+          <div class="form-group">
+            <label for="division">Division</label>
+            <input type="text" class="form-control" id="division" name="division" 
+            value="<%= locals.userInfo.division %>"
+              readonly required>
+          </div>
+          <% } %>
+
+
           <button type="submit" class="btn btn-success" id="btn-profile">MODIFIER</button>
           <button type="reset" class="btn btn-danger">VIDER</button>
 

@@ -1,6 +1,6 @@
 const Etat = {
-    reserve: "réservée",
     nonReserved: "non réservée",
+    reserve: "réservée",    
     enAttente: "en attente",
     paned: "en pane"
 }

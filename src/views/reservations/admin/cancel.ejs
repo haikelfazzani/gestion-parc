@@ -12,7 +12,7 @@
     <div class="col-md-8">
 
 
-      <h2>Annulation</h2>
+      <h2><i class="fas fa-window-close"></i> Annulation</h2>
 
       <% if(locals.data) { %>
       <form action="/reservations/cancel" method="POST">
@@ -107,7 +107,9 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Annuler</button>        
+        <button type="submit" class="btn btn-danger">
+          <i class="fas fa-window-close"></i> Annuler
+        </button>        
 
       </form>
       <% } %>

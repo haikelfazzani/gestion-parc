@@ -13,7 +13,7 @@
 
 
 
-      <h2>Reserver une véhicule</h2>
+      <h2><i class="fas fa-paper-plane"></i> Reserver une véhicule</h2>
 
       <% if(locals.vehicule) { %>
       <form action="/reservations/user/reserve" method="POST">
@@ -75,7 +75,9 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Envoyer
+          </button>
         <button type="reset" class="btn btn-danger">vider</button>
 
       </form>
