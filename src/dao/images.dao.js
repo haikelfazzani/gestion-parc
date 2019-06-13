@@ -50,10 +50,7 @@ class ImagesDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "votre image a été bien insérée"
-                });
+                resolve({ error: "", data: "votre image a été bien insérée" });
             }
             else {
                 resolve({ error: err, data: "" });

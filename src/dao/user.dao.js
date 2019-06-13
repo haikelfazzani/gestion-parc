@@ -27,7 +27,7 @@ class UserDao {
                 resolve({ error: "", data: "un utilisateur a été bien inséré" });
             }
             else {
-                resolve({ error: "erreur d'insertion!", data: "" });
+                resolve({ error: "utilisateur existe deja!", data: "" });
             }
         });
     }

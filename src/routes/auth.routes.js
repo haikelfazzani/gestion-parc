@@ -27,7 +27,10 @@ router.post('/login', redirectHome, async (req, res) => {
     }
     else {
       res.render("login",
-        { msg: "utilisateur n'existe pas!!", staticFiles }
+        {
+          msg: "L'adresse e-mail ou le mot de passe que vous avez entré n'est pas valide. Réessayez.",
+          staticFiles
+        }
       );
       return;
     }

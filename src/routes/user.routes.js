@@ -38,11 +38,11 @@ router.post("/update", [redirectLogin, isAdmin], (req, res) => {
 
 
 /** supprimer user from database */
-router.get("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
   userController.getUserByEmail(req, res);
 });
 
-router.post("/supprimer", [redirectLogin, isAdmin], (req, res) => {
+router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
   userController.deleteUser(req, res)
 });
 

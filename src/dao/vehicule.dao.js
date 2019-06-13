@@ -18,10 +18,10 @@ class VehiculeDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({ error: "", data: "une véhicule a été bien inséré" });
+                resolve({ error: "", data: "une véhicule a été bien insérée" });
             }
             else {
-                resolve({ error: "erreur d'insertion!", data: "" });
+                resolve({ error: "véhicule existe deja", data: "" });
             }
         });
     }
@@ -31,10 +31,7 @@ class VehiculeDao {
         const sql = `select * from ${this.tabelName}`;
 
         db.query(sql, (err, rows) => {
-            resolve({
-                error: err,
-                data: rows
-            });
+            resolve({ error: err, data: rows });
         });
     }
 
@@ -43,16 +40,10 @@ class VehiculeDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: rows[0]
-                });
+                resolve({ error: "", data: rows[0] });
             }
             else {
-                resolve({
-                    error: "aucun vehicule trouvée!",
-                    data: ""
-                });
+                resolve({ error: "aucune vehicule trouvée!", data: "" });
             }
         });
     }
