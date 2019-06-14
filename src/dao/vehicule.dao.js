@@ -3,7 +3,7 @@ const db = require('../database/DbConnection');
 class VehiculeDao {
 
     constructor() {
-        this.tabelName = "vehicule";
+        this.tabelName = "vehicules";
         // les champs
         this.id = "id_vehicule";
         this.numSerie = "num_serie";

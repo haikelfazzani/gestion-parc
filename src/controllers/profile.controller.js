@@ -9,7 +9,7 @@ class ProfileController {
 
         const { userInfo } = req.session;
 
-        await imagesDao.getAvatar(userInfo.id, async (resolve) => {
+        await imagesDao.getAvatar(userInfo.id_user, async (resolve) => {
 
             let avatar = resolve.data && (resolve.data[0] && resolve.data[0].avatar.length) > 5 ?
                 imgBase + resolve.data[0].avatar : "/img/profile.png";
@@ -37,7 +37,7 @@ class ProfileController {
         const { userInfo } = req.session;
         const avatar = req.file.buffer.toString("base64");
 
-        await imagesDao.updateAvatar(userInfo.id, avatar, async (resolve) => {
+        await imagesDao.updateAvatar(userInfo.id_user, avatar, async (resolve) => {
             await res.redirect("/profile");
         });
     }
@@ -46,7 +46,7 @@ class ProfileController {
         const { userInfo } = req.session;
         const avatar = req.file.buffer.toString("base64");
 
-        await imagesDao.addAvatar(userInfo.id, avatar, async (resolve) => {
+        await imagesDao.addAvatar(userInfo.id_user, avatar, async (resolve) => {
             await res.redirect("/profile");
         });
     }

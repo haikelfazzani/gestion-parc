@@ -9,11 +9,11 @@ class InputValidator {
     }
 
     isAlphaNum(input) {
-        return (input && input.length > 3) && /^[a-z0-9 ]+$/gi.test(input)
+        return (input && input.length > 3) && /^[a-z0-9 ]+$/gi.test(input.trim())
     }
 
     isValidNumSerie(input) {
-        return (input && input.length > 6) && /^[a-z0-9-]+$/gi.test(input)
+        return (input && input.length > 6) && /^[a-z0-9\-]*$/gi.test(input.trim())
     }
 
     isEmail(input) {
@@ -66,7 +66,7 @@ if (pathTabs.includes("vehicules") && pathTabs.includes("add")) {
         let nom = form.numSerie.value;
         let model = form.model.value;
 
-        if (validator.isValidNumSerie(numSerie) && validator.isAlphaNum(model)) {
+        if (validator.isValidNumSerie(nom) && validator.isAlphaNum(model)) {
             return true;
         }
         alertVehicule.style.display = "block";

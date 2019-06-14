@@ -97,9 +97,9 @@ class ReservationController {
 
     /** User reservation handling */
     async getAllReserved(req, res) {
-        let { id } = req.session.userInfo;
+        let { id_user } = req.session.userInfo;
 
-        await reservationDao.listReserved(id, async (resolve) => {
+        await reservationDao.listReserved(id_user, async (resolve) => {
             await res.render("reservations/user/list-reserved",
                 { msg: resolve.error, data: resolve.data }
             );
@@ -142,9 +142,9 @@ class ReservationController {
         let reservation = new Reservation(
             dateDepart,
             dateRetour,
-            bossOrder,
+            bossOrder.trim(),
             descMission.trim(),
-            userInfo.id,
+            userInfo.id_user,
             vehicule.id_vehicule
         );
 

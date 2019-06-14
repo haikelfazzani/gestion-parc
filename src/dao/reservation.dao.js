@@ -4,26 +4,26 @@ const Etat = require("../models/Etat.enum");
 class ReservationDao {
 
     constructor() {
-        this.tableName = "reservation";
-        this.vehiculeTable = "vehicule";
-        this.userTable = "utilisateur";
+        this.tableName = "reservations";
+        this.vehiculeTable = "vehicules";
+        this.userTable = "users";
 
-        this.utilisateurId = "id";
+        this.utilisateurId = "id_user";
         this.vehiculeId = "id_vehicule";
         // fields
         this.dateDepart = "date_depart";
         this.dateRetour = "date_retour";
         this.bossOrder = "boss_order";
         this.descMission = "desc_mission";
-        this.userId = "user_id";
-        this.vehiculeId = "vehicule_id";
+        this.userIdRes = "user_id";
+        this.vehiculeIdRes = "vehicule_id";
     }
 
 
     async listRequests(resolve) {
 
         const sql = `select * from ${this.tableName} r 
-        join ${this.userTable} u on r.user_id = u.id
+        join ${this.userTable} u on r.user_id = u.id_user
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
         where v.etat = '${Etat.enAttente}' `;
 
@@ -42,15 +42,15 @@ class ReservationDao {
     // change status of vehicule from "en attente" to "reservée"
     confirm(vehiculeId, resolve) {
 
-        const sql = `update ${this.vehiculeTable} set etat = 'réservée'
-        where id_vehicule = ${vehiculeId} `;
+        const sql = `update ${this.vehiculeTable} set etat = '${Etat.reserve}'
+        where ${this.vehiculeId} = ${vehiculeId} `;
 
         db.query(sql, (err, rows) => {
             if (!err) {
                 resolve({ error: "", data: "une reservation a été bien confrimée" });
             }
             else {
-                resolve({ error: "erreur de confirmation!", data: "" });
+                resolve({ error: "erreur de confirmation", data: "" });
             }
         });
     }
@@ -61,8 +61,8 @@ class ReservationDao {
     cancel(userId, vehiculeId, resolve) {
 
         const sql = `delete from ${this.tableName} 
-        where ${this.vehiculeId} = ${vehiculeId}
-        and ${this.userId} = ${userId}`;
+        where ${this.vehiculeIdRes} = ${vehiculeId}
+        and ${this.userIdRes} = ${userId}`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
@@ -79,7 +79,7 @@ class ReservationDao {
     updateEtatVehicule(vehiculeId, etat = Etat.enAttente, resolve) {
 
         const sql = `update ${this.vehiculeTable} set etat = '${etat}'
-        where id_vehicule = ${vehiculeId} `;
+        where ${this.vehiculeId} = ${vehiculeId} `;
 
         db.query(sql, (err, rows) => {
             if (!err) {
@@ -94,7 +94,7 @@ class ReservationDao {
 
     history(resolve) {
         const sql = `select * from ${this.tableName} r 
-        join ${this.userTable} u on r.user_id = u.id
+        join ${this.userTable} u on r.user_id = u.id_user
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule`;
 
         db.query(sql, (err, rows) => {
@@ -109,10 +109,17 @@ class ReservationDao {
 
         let { dateDepart, dateRetour, bossOrder, descMission, userId, vehiculeId } = reservation;
 
-        const sql = `insert into 
-        ${this.tableName} (date_depart,date_retour,boss_order,desc_mission,user_id,vehicule_id)
+        const sql = `insert into ${this.tableName} (
+            ${this.dateDepart},
+            ${this.dateRetour},
+            ${this.bossOrder},
+            ${this.descMission},
+            ${this.userIdRes},
+            ${this.vehiculeIdRes}
+        )
         values(
-            '${dateDepart}' ,'${dateRetour}' ,'${bossOrder}' ,'${descMission}' ,
+            '${dateDepart}' ,'${dateRetour}' ,
+            '${bossOrder}' ,'${descMission}' ,
             ${userId} ,${vehiculeId} 
         )`;
 
@@ -136,7 +143,7 @@ class ReservationDao {
     listReserved(userId, resolve) {
 
         const sql = `select * from ${this.tableName} r 
-        join ${this.userTable} u on r.user_id = u.id
+        join ${this.userTable} u on r.user_id = u.id_user
         join ${this.vehiculeTable} v on r.vehicule_id = v.id_vehicule
         where r.user_id = ${userId}`;
 

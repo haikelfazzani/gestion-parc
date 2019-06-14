@@ -3,23 +3,34 @@ const db = require('../database/DbConnection');
 class UserDao {
 
     constructor() {
-        this.tabelName = "utilisateur";
+        this.tabelName = "users";
         // fields
-        this.id = "id";
+        this.id = "id_user";
         this.nomComplet = "nom_complet";
         this.email = "email";
         this.password = "password";
         this.division = "division";
         this.role = "role";
-        this.avatar = "avatar";
+
+        // image table
+        this.imgTable = "images";
+        this.userImgId = "user_id";
+
     }
 
     addUser(user, resolve) {
 
         const sql = `insert into ${this.tabelName} (
-            ${this.nomComplet}, ${this.email}, ${this.password}, ${this.division}, ${this.role}
+            ${this.nomComplet}, 
+            ${this.email}, 
+            ${this.password}, 
+            ${this.division}, 
+            ${this.role}
         ) 
-        values('${user.nomComplet}', '${user.email}', '${user.password}', '${user.division}' ,
+        values('${user.nomComplet}', 
+        '${user.email}', 
+        '${user.password}', 
+        '${user.division}' ,
         '${user.role}')`;
 
         db.query(sql, (err, rows) => {
@@ -82,18 +93,11 @@ class UserDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({
-                    error: "",
-                    data: "un utilisateur a été bien supprimé"
-                });
+                resolve({ error: "", data: "un utilisateur a été bien supprimé" });
             }
             else {
-                resolve({
-                    error: "erreur de suppression!",
-                    data: ""
-                });
+                resolve({ error: "erreur de suppression!", data: "" });
             }
-
         });
     }
 
@@ -101,17 +105,11 @@ class UserDao {
 
     /** Get user by email and password */
     getOneByEmail(email, password, resolve) {
-        const sql = `select ${this.id},${this.nomComplet}, 
-        ${this.email}, ${this.password}, ${this.division}, ${this.role} 
-        from ${this.tabelName}         
-        where ${this.email} = '${email}' and 
-        ${this.password} = '${password}'`;
+        const sql = `select * from ${this.tabelName}         
+        where ${this.email} = '${email}' and ${this.password} = '${password}'`;
 
         db.query(sql, (err, rows) => {
-            resolve({
-                error: err,
-                data: rows
-            });
+            resolve({ error: err, data: rows });
         });
     }
 
@@ -120,8 +118,7 @@ class UserDao {
 
     /** Get user by email and password */
     isExist(email, resolve) {
-        const sql = `select ${this.id},${this.nomComplet}, 
-        ${this.email}, ${this.password}, ${this.division}, ${this.role} from ${this.tabelName} 
+        const sql = `select * from ${this.tabelName} 
         where ${this.email} = '${email}' `;
 
         db.query(sql, (err, rows) => {
@@ -145,15 +142,10 @@ class UserDao {
 
     /** Get all users from database */
     getUsers(resolve) {
-        const sql = `select ${this.id},${this.nomComplet}, 
-        ${this.email}, ${this.password}, ${this.division}, ${this.role} 
-        from ${this.tabelName}`;
+        const sql = `select * from ${this.tabelName}`;
 
         db.query(sql, (err, rows) => {
-            resolve({
-                error: err,
-                data: rows
-            });
+            resolve({ error: err, data: rows });
         });
     }
 

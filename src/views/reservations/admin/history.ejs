@@ -41,7 +41,7 @@
 
 
           <div class="col-md-2 mb-2">
-            <% if(locals.Etat.enAttente ){ %>
+            <% if(locals.Etat.enAttente === v.etat){ %>
             <span class="badge badge-warning"><%= v.etat %></span>
             <% } else { %>
             <span class="badge badge-success"><%= v.etat %></span>
