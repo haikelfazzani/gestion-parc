@@ -1764,8 +1764,8 @@ a > code {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: #3c3c3c;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
@@ -1817,6 +1817,7 @@ a > code {
 }
 
 .form-control:disabled, .form-control[readonly] {
+  color: #000;
   background-color: #e9ecef;
   opacity: 1;
 }

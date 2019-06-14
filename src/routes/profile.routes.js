@@ -2,26 +2,26 @@ const express = require("express"), router = express.Router();
 const { redirectLogin } = require('../middlewares/auth.middleware');
 const profileController = require("../controllers/profile.controller");
 
-var multer = require('multer');
+const multer = require('multer');
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
-router.get("/", redirectLogin, (req, res) => {
-  profileController.index(req, res);
+router.get("/", redirectLogin, async (req, res) => {
+  await profileController.index(req, res);
 });
 
-router.post("/", redirectLogin, (req, res) => {
-  profileController.updateUserPassword(req, res);
-});
-
-
-router.get("/avatar", redirectLogin, (req, res) => {
-  profileController.getAvatar(req, res);
+router.post("/", redirectLogin, async (req, res) => {
+  await profileController.updateUserPassword(req, res);
 });
 
 
-router.post("/avatar/update", [redirectLogin, upload.single("avatar")], (req, res) => {
-  profileController.updateAvatar(req, res);
+router.get("/avatar", redirectLogin, async (req, res) => {
+  await profileController.getAvatar(req, res);
+});
+
+
+router.post("/avatar/update", [redirectLogin, upload.single("avatar")], async (req, res) => {
+  await profileController.updateAvatar(req, res);
 });
 
 

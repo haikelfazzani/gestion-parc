@@ -9,48 +9,48 @@ const { redirectLogin } = require('../middlewares/auth.middleware');
 const { isAdmin } = require("../middlewares/permission.middleware");
 
 
-router.get("/", [redirectLogin, isAdmin], (req, res) => {
+router.get("/", [redirectLogin, isAdmin], async (req, res) => {
   //await utilisateurController.root(req, res)
-  res.render("users/index");
+  await res.render("users/index");
 });
 
 /** Add user to database */
-router.get("/add", [redirectLogin, isAdmin], (req, res) => {
-  res.render("users/add-user")
+router.get("/add", [redirectLogin, isAdmin], async (req, res) => {
+  await res.render("users/add-user")
 });
 
 
-router.post("/add", [redirectLogin, isAdmin], (req, res) => {
-  userController.addUser(req, res)
+router.post("/add", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.addUser(req, res)
 });
 
 
 
 /** modifier user */
-router.get("/update", [redirectLogin, isAdmin], (req, res) => {
-  userController.getUserByEmail(req, res);
+router.get("/update", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.getUserByEmail(req, res);
 });
 
-router.post("/update", [redirectLogin, isAdmin], (req, res) => {
-  userController.updateUser(req, res)
+router.post("/update", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.updateUser(req, res)
 });
 
 
 
 /** supprimer user from database */
-router.get("/delete", [redirectLogin, isAdmin], (req, res) => {
-  userController.getUserByEmail(req, res);
+router.get("/delete", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.getUserByEmail(req, res);
 });
 
-router.post("/delete", [redirectLogin, isAdmin], (req, res) => {
-  userController.deleteUser(req, res)
+router.post("/delete", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.deleteUser(req, res)
 });
 
 
 
 /** Get all user from database */
-router.get("/list", [redirectLogin, isAdmin], (req, res) => {
-  userController.getUsers(req, res);
+router.get("/list", [redirectLogin, isAdmin], async (req, res) => {
+  await userController.getUsers(req, res);
 });
 
 

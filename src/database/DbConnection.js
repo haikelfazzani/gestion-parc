@@ -7,9 +7,9 @@ const db = mysql.createConnection({
     database: 'LPx4ioQKlk'
 });
 
-db.connect(function (err) {
+db.connect( async (err) => {
     if (err) throw err;
-    console.log("connected")
+    await console.log("connected")
 });
 
 module.exports = db;
