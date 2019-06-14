@@ -11,7 +11,7 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data) { 
+      <% if(locals.data && locals.Etat) { 
         data = locals.data.reverse()
         let i = 1;
       %>
@@ -24,7 +24,7 @@
 
       <% for(let v of data){     %>
       <div class="list-group mb-3" id="list-group">
-        
+
 
         <div class="row">
 
@@ -42,25 +42,30 @@
           </div>
 
 
-          <div class="col-md-2">
-              <div class="badge badge-danger"><%= v.etat %></div>
-            </div>
+          <div class="col-md-2 mb-2">
+            <% if(locals.Etat.enAttente ){ %>
+            <span class="badge badge-warning"><%= v.etat %></span>
+            <% } else { %>
+            <span class="badge badge-success"><%= v.etat %></span>
+            <% } %>
+          </div>
 
           <div class="col-md-2">
             <a href="/reservations/confirm?v=<%= v.vehicule_id %>" class="btn btn-success">
               <i class="fas fa-check"></i>
             </a>
 
-            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" class="btn btn-danger">
+            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.user_id %>" 
+              class="btn btn-danger">
               <i class="fas fa-window-close"></i>
             </a>
           </div>
 
-          
+
 
         </div>
 
-        
+
       </div><% } %>
 
     </div>

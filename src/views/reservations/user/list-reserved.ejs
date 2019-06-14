@@ -11,7 +11,7 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data) { data = data.reverse() %>
+      <% if(locals.data && locals.Etat) { data = data.reverse() %>
 
       <h2><i class="fas fa-list"></i> Liste des reservations
         <span class="badge badge-primary"><%= data.length %>
@@ -21,16 +21,15 @@
       <table class="table table-hover table-light">
         <thead>
           <tr>
-            <th scope="col">Utilisateur</th>           
-            <th scope="col">Num serie</th>
-            <th scope="col">Model</th>
-            <th scope="col">Date de depart</th>
-            <th scope="col">Date de retour</th>
-            <th scope="col">Etat</th>
+            <th>Utilisateur</th>
+            <th>Num serie</th>
+            <th>Model</th>
+            <th>Date de depart</th>
+            <th>Date de retour</th>
+            <th>Etat</th>
           </tr>
         </thead>
         <tbody>
-
 
           <% for(let reservation of data) { %>
           <tr>
@@ -39,7 +38,13 @@
             <td><%= reservation.model %></td>
             <td><%= locals.formatDate(reservation.date_depart) %> </td>
             <td><%= locals.formatDate(reservation.date_retour) %></td>
-            <td><span class="badge badge-warning"><%= reservation.etat %></span></td>
+            <td>
+              <% if(locals.Etat.enAttente ){ %>
+              <span class="badge badge-warning"><%= reservation.etat %></span>
+              <% } else { %>
+              <span class="badge badge-success"><%= reservation.etat %></span>
+              <% } %>
+            </td>
 
           </tr>
           <% } %>

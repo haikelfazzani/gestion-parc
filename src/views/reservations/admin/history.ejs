@@ -11,7 +11,7 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data) { 
+      <% if(locals.data && locals.Etat) { 
         data = locals.data.reverse()
         let i = 1;
       %>
@@ -23,7 +23,7 @@
 
       <% for(let v of data){     %>
       <div class="list-group mb-3" id="list-group">
-        
+
         <div class="row">
 
           <div class="col-md-5">
@@ -40,13 +40,17 @@
           </div>
 
 
-          <div class="col-md-2">
-              <div class="badge badge-danger"><%= v.etat %></div>
-            </div>
+          <div class="col-md-2 mb-2">
+            <% if(locals.Etat.enAttente ){ %>
+            <span class="badge badge-warning"><%= v.etat %></span>
+            <% } else { %>
+            <span class="badge badge-success"><%= v.etat %></span>
+            <% } %>
+          </div>
 
         </div>
 
-        
+
       </div>
       <% } %>
 

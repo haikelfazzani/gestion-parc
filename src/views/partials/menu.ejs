@@ -23,18 +23,18 @@
       %>
       <li class="nav-item">
         <a class="nav-link" href="<%= routesStruct.users.index %>">
-          <i class="fas fa-cogs"></i> Utilisateur</a>
+          Utilisateur</a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="<%= routesStruct.vehicules.index %>">
-          <i class="fas fa-cogs"></i> Véhicules</a>
+          Véhicules</a>
       </li>
 
       <% } }%>
       <li class="nav-item">
         <a class="nav-link" href="<%= routesStruct.reservations.index %>">
-          <i class="fas fa-cogs"></i> Reservations</a>
+          Reservations</a>
       </li>
 
     </ul>
@@ -45,7 +45,8 @@
 
       <% if(locals.userInfo && locals.routesStruct) { %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" 
+        data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
 
           <% if(locals.avatar && locals.staticFiles) { %>
@@ -55,7 +56,8 @@
         </a>
 
 
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" 
+        aria-labelledby="navbarDropdownMenuLink-4">
 
           <a class="dropdown-item" href="<%= routesStruct.users.profile %>">Profile</a>
 

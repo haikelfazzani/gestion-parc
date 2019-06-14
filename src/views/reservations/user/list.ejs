@@ -39,7 +39,9 @@
             <td><%= i++ %></td>
             <td><%= v.num_serie %></td>
             <td><%= v.model %></td>
-            <td><span class="badge badge-success"><%= v.etat %></span></td>
+            <td>
+              <span class="badge badge-success"><%= v.etat %></span>
+            </td>
 
             <td>
               <a href="/reservations/user/reserve?v=<%= v.num_serie %>" class="btn btn-success">
