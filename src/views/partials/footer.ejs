@@ -2,7 +2,7 @@
 
 <footer class="pt-5 pb-3 text-muted text-center text-small">
     <p class="mb-1">
-        COPYRIGHT &copy; 2019 SGS | <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
+        COPYRIGHT &copy; 2019 | <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
     </p>
 
     <ul class="list-inline">
@@ -15,6 +15,7 @@
 <% if(locals.staticFiles) { %>
 <script src="<%= staticFiles.js.validator %>"></script>
 <script src="<%= staticFiles.js.custom %>"></script>
+<script src="<%= staticFiles.js.theme %>"></script>
 <% } %>
 
 

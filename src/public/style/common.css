@@ -1,16 +1,10 @@
-body {
-    /*background-color: #f1f1f1;*/
-    /*background-color: #3c3c3c;*/
-    background-color: #f7f7f7;
-    color: #000000;    
-}
-
 .navbar {
-    background-color: #3c3c3c;
     padding: 15px 130px;
 }
 
 #navbarDropdownMenuLink-4 { color: #ffffff; }
+
+#btn-theme { text-transform: uppercase; }
 
 /*.navbar a { color: #87c232 !important;  }*/
 
@@ -34,7 +28,7 @@ h2 {
     text-transform: uppercase;
 }
 
-#list-group, .table , .img-thumbnail, .navbar {
+#list-group, .table , .img-thumbnail {
     /*box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16),0 1px 2px 0 rgba(0,0,0,0.12)!important;*/
     box-shadow: 0px 5px 15px 0px rgb(218, 218, 218);
 }
@@ -69,8 +63,6 @@ thead th {
     border: 2px solid #fff;
 }
 
-
-footer a { color: #3c3c3c; }
 footer p {
     font-size: 15px;
     font-weight: 600;

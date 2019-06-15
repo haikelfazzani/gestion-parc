@@ -9,8 +9,12 @@
     <link rel="icon" type="image/png" href="/img/logooo.png" sizes="32x32" />
 
     <% if(locals.staticFiles) { %>
-    <link rel="stylesheet" type="text/css" href="<%= staticFiles.bootstrap %>">    
-    <link rel="stylesheet" type="text/css" href="<%= staticFiles.css %>">
+    <link rel="stylesheet" type="text/css" href="<%= staticFiles.css.bootstrap %>">        
+    <link rel="stylesheet" type="text/css" href="<%= staticFiles.css.common %>">
+
+    <link rel="stylesheet" type="text/css" href="<%= staticFiles.css.clair %>" media="" id="clair">
+    <link rel="stylesheet" type="text/css" href="<%= staticFiles.css.dark %>" media="none" id="dark">
+
     <link rel="stylesheet" type="text/css" href="<%= staticFiles.fontawesome %>">
     <% } %>
     

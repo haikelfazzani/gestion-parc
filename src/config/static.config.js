@@ -1,12 +1,18 @@
 const staticFiles = {
     logo : "/img/logooo.png",    
     profileImage : "/img/profile.png",
-    css : "/style/style.css" ,
-    bootstrap : "/style/bootstrap.css",
+    css : {
+        clair : "/style/clair.css" ,
+        dark : "/style/dark.css" ,
+        common : "/style/common.css" ,
+        bootstrap : "/style/bootstrap.css",
+        
+    },
     fontawesome : "/style/all.min.css",
     js : {
         custom:"/js/custom.js",
-        validator : "/js/validator.js"
+        validator : "/js/validator.js",
+        theme : "/js/theme.js"
     }
 }
 
