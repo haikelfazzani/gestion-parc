@@ -20,6 +20,11 @@ function setGlobalVar(req, res) {
         res.locals.Etat = Etat;
         res.locals.formatDate = formatDate;
     }
+
+    if(req.session && req.session.notifications) {
+      res.locals.notifications = req.session.notifications;
+    }
+
 }
 
 module.exports = setGlobalVar;

@@ -15,7 +15,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<%= routesStruct.index.acceuil %>">
-            <i class="fas fa-home"></i> acceuil</a>
+          <i class="fas fa-home"></i> acceuil</a>
       </li>
 
       <% if(locals.userInfo && locals.routesStruct) { 
@@ -23,7 +23,7 @@
       %>
       <li class="nav-item">
         <a class="nav-link" href="<%= routesStruct.users.index %>">
-          Utilisateur</a>
+          Utilisateurs</a>
       </li>
 
       <li class="nav-item">
@@ -44,6 +44,8 @@
 
 
       <% if(locals.userInfo && locals.routesStruct) { %>
+
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" 
         data-toggle="dropdown" aria-haspopup="true"
@@ -61,10 +63,20 @@
 
           <a class="dropdown-item" href="<%= routesStruct.users.profile %>">Profile</a>
           <button class="dropdown-item" id="btn-theme">Theme sombre</button>
+
+          <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">DECONNEXION</a>
 
         </div>
       </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="/notifications" style="font-size: 18px;">
+          <i class="fas fa-bell"></i>
+        </a>
+      </li>
+
       <% } %>
 
 

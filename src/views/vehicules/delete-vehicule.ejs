@@ -13,25 +13,26 @@
 
       <h2><i class="fas fa-trash-alt"></i> Suppression d'une véhicule</h2>
       <% if(locals.data) { %>
-        <form action="/vehicules/delete" method="POST">
-  
-          <div class="form-group">
-            <label for="numSerie">Num serie</label>
-            <input type="text" class="form-control" id="numSerie" name="numSerie" 
-            value="<%= data.num_serie %>" required readonly>
-          </div>
-  
-          <div class="form-group">
-            <label for="model">Model</label>
-            <input type="text" class="form-control" id="model" name="model" 
-            value="<%= data.model %>" required readonly>
-          </div>
-  
-  
-          <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> SUPPRIMER</button>
-  
-        </form>
-        <% } %>
+      <form action="/vehicules/delete" method="POST" id="form-delete-vehicule">
+
+        <div class="form-group">
+          <label for="numSerie">Num serie</label>
+          <input type="text" class="form-control" id="numSerie" name="numSerie" value="<%= data.num_serie %>" required
+            readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="model">Model</label>
+          <input type="text" class="form-control" id="model" name="model" value="<%= data.model %>" required readonly>
+        </div>
+
+
+        <button type="submit" class="btn btn-danger" >
+          <i class="fas fa-trash-alt"></i> SUPPRIMER
+        </button>
+
+      </form>
+      <% } %>
 
 
       <% if(locals.msg) { %>

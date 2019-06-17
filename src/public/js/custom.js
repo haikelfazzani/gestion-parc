@@ -1,4 +1,4 @@
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", function(){
 
     const btnDrop = document.getElementById("navbarDropdownMenuLink-4");
     const menuDropDown = document.querySelector(".dropdown-menu");
@@ -7,17 +7,17 @@ window.onload = () => {
     const collapse = document.querySelector(".collapse");
 
     function toggle(parent, child) {
-        parent.onclick = () => {
+        parent.onclick = () => {            
             child.style.display = child.style.display === "block" ? "none" : "block";
         }
     }
-
+    
     toggle(btnDrop, menuDropDown);
     toggle(navbarToggler, collapse);
 
-    let path = window.location.href.split("/").reverse()[0];
+    let urlProfile = window.location.href.split("/").reverse()[0];
 
-    if (path === "profile") {
+    if (urlProfile === "profile") {
 
         const passwordProfile = document.getElementById("password-profile");
         const btnProfileUpdate = document.getElementById("btn-profile");
@@ -66,4 +66,4 @@ window.onload = () => {
         
     }
 
-}
+});

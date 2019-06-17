@@ -1,15 +1,14 @@
 const db = require("../database/DbConnection");
 const Etat = require("../models/Etat.enum");
+const notificationDao = require("../dao/notification.dao");
+const Notification = require("../models/Notification.model");
+
+let { formatLongDate } = require("../service/date.service");
 
 class ReservationDao {
 
     constructor() {
         this.tableName = "reservations";
-        this.vehiculeTable = "vehicules";
-        this.userTable = "users";
-
-        this.utilisateurId = "id_user";
-        this.vehiculeId = "id_vehicule";
         // fields
         this.dateDepart = "date_depart";
         this.dateRetour = "date_retour";
@@ -17,6 +16,13 @@ class ReservationDao {
         this.descMission = "desc_mission";
         this.userIdRes = "user_id";
         this.vehiculeIdRes = "vehicule_id";
+
+        // other tables        
+        this.vehiculeTable = "vehicules";
+        this.userTable = "users";
+
+        this.utilisateurId = "id_user";
+        this.vehiculeId = "id_vehicule";
     }
 
 
@@ -40,14 +46,19 @@ class ReservationDao {
 
 
     // change status of vehicule from "en attente" to "reservée"
-    confirm(vehiculeId, resolve) {
+    confirm(userId, vehiculeId, resolve) {
 
         const sql = `update ${this.vehiculeTable} set etat = '${Etat.reserve}'
         where ${this.vehiculeId} = ${vehiculeId} `;
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({ error: "", data: "une reservation a été bien confrimée" });
+                const msg = "une reservation a été bien confrimée";
+                resolve({ error: "", data: msg });
+
+                // add notification to database to this user id                
+                notificationDao.addNotif(formatLongDate(), 
+                new Notification("votre demande a été confirmée", userId), (res) => { });
             }
             else {
                 resolve({ error: "erreur de confirmation", data: "" });
@@ -66,12 +77,20 @@ class ReservationDao {
 
         db.query(sql, (err, rows) => {
             if (!err) {
-                resolve({ error: "", data: "une reservation a été bien annulée" });
-                this.updateEtatVehicule(vehiculeId, Etat.nonReserved, resolveMod => { });
+                const msg = "une reservation a été bien annulée";
+                resolve({ error: "", data: msg });
+                // update vehicule etat from enAttente => nonReserve
+                this.updateEtatVehicule(vehiculeId, Etat.nonReserved, (resolveMod) => { });
+
+                // add notification to database to this user id
+                const note = "votre demande a été annulée";
+                notificationDao.addNotif(formatLongDate(), new Notification(note, userId), (res) => { });
+
             }
             else {
                 resolve({ error: "erreur d'annulation", data: "" });
             }
+
         });
     }
 
@@ -130,6 +149,9 @@ class ReservationDao {
 
                 // update vehicule status after client send demand
                 this.updateEtatVehicule(vehiculeId, "en attente", (resolve) => { });
+
+                notificationDao.addNotif(formatLongDate(), new Notification(
+                    "une nouvelle demande de reservation", 1), (res) => { });
             }
             else {
                 resolve({ error: "erreur d'envoie", data: "" });
@@ -157,16 +179,15 @@ class ReservationDao {
 
 
     // check date retour and updated etat vehicule
-    checkVehiculeDateBack(user_id, id_vehicule, etat,resolve) {
+    checkVehiculeDateBack(user_id, id_vehicule, etat, resolve) {
         this.cancel(user_id, id_vehicule, (reslve) => {
             this.updateEtatVehicule(id_vehicule, etat, (r) => {
-                resolve({ reslve , r })
+                resolve({ reslve, r })
             });
         });
     }
+
+
 }
-
-
-
 
 module.exports = new ReservationDao();

@@ -10,10 +10,13 @@ class ReservationController {
         if (req.session && req.session.reservationsUsers) {
 
             let vehiculeId = req.query.v;
+            let userId = req.query.u;
+            
             let { reservationsUsers } = req.session;
             let reserv = reservationsUsers.find(r => r.id_vehicule == vehiculeId);
 
             req.session.vehiculeIdToConfirm = vehiculeId;
+            req.session.userToConfirm = userId;
 
             await res.render("reservations/admin/confirm", { data: reserv });
         }
@@ -25,10 +28,14 @@ class ReservationController {
 
     async confirm(req, res) {
 
-        let { vehiculeIdToConfirm } = req.session;
+        let { vehiculeIdToConfirm, userToConfirm } = req.session;
 
-        await reservationDao.confirm(parseInt(vehiculeIdToConfirm), async (resolve) => {
+        await reservationDao.confirm(
+            parseInt(userToConfirm),
+            parseInt(vehiculeIdToConfirm),             
+            async (resolve) => {
 
+                console.log(userToConfirm)
             await res.render("reservations/admin/confirm",
                 { msg: resolve.data || resolve.error }
             );
