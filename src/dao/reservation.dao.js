@@ -56,7 +56,7 @@ class ReservationDao {
                 const msg = "une reservation a été bien confrimée";
                 resolve({ error: "", data: msg });
 
-                // add notification to database to this user id                
+                // add notification to database to this user id                            
                 notificationDao.addNotif(formatLongDate(), 
                 new Notification("votre demande a été confirmée", userId), (res) => { });
             }

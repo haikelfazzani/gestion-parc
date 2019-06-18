@@ -5,50 +5,101 @@
 <div class="container mt-5 mb-5">
 
 
-    <div class="row">
+  <div class="row">
 
-        <div class="col-md-4">
-            <div class="alert alert-light" role="alert">
-                A simple primary alert—check it out!
-            </div>
-        </div>
+    <div class="col-md-4">
+      <div class="alert alert-light" role="alert">
+        A simple primary alert—check it out!
+      </div>
+    </div>
 
-        <div class="col-md-8">
-            <h2><i class="fas fa-bell"></i> Notifications</h2>
-            <div class="list-group" id="list-notifications"></div>
-        </div>
+    <div class="col-md-8">
+      <h2><i class="fas fa-bell"></i> Notifications</h2>
+      <div class="list-group" id="list-notifications"></div>
+
+      <ul class="pagination mt-3">
+        <li class="page-item"><a class="page-link" href="#" id="btn-previous">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" id="btn-next">Next</a></li>
+      </ul>
 
     </div>
+
+  </div>
 
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch("http://localhost:3000/notifications/read")
-            .then(res => res.json())
-            .then(data => {
+  document.addEventListener("DOMContentLoaded", function () {
 
-                const listNotifs = document.getElementById("list-notifications");
-                if (data && data.length > 0) {
+    var listNotifications = [];
+    let step = 5;
+    let end = step;
+    let start = 0;
 
-                    data = data.reverse();
+    fetch("http://localhost:3000/notifications/read")
+      .then(res => res.json())
+      .then(data => pagination(data))
+      .catch(err => console.log(err));
 
-                    for (let d of data) {
-                        listNotifs.innerHTML += `
+
+    function pagination(data) {
+
+      const listNotifs = document.getElementById("list-notifications");
+      const btnNext = document.getElementById("btn-next");
+      const btnPrev = document.getElementById("btn-previous");
+
+
+      if (data && data.length > 0) {
+
+        const len = data.length;
+        data = data.reverse();
+        listNotifications = data.slice(0, 5);
+        displayList(listNotifications, start, end);
+
+        btnNext.onclick = () => {
+          
+          if (end < len - 1) {
+            start += 5;
+            end += 5;
+            listNotifications = data.slice(start, end);
+            displayList(listNotifications, start, end);
+          }
+
+        }
+
+        btnPrev.onclick = () => {
+
+          if (start > 0) {
+            start -= 5;
+            end -= 5;
+            listNotifications = data.slice(start, end);
+            displayList(listNotifications, start, end);
+          }
+
+        }
+
+        function displayList(listNotifications, start, end) {
+          listNotifs.innerHTML = "";
+          for (let d of listNotifications) {
+
+            listNotifs.innerHTML += `
                 
-                        <a href="/reservations/list-demands" class="list-group-item list-group-item-action">
-                            <i class="fas fa-bookmark mr-3"></i> ${d.message}
-                            <span class="badge badge-info" style="float:right">
-                                ${d.date_notif}
-                            </span>
-                        </a>
-            
-                        `;
-                    }
-                }
-            })
-            .catch(err => console.log(err));
-    });
+              <a href="/reservations/list-demands" class="list-group-item list-group-item-action">
+                <i class="fas fa-bookmark mr-3"></i> ${d.message}
+                <span class="badge badge-info" style="float:right">
+                    ${d.date_notif}
+                </span>
+              </a>
+            `;
+          }
+        }
+
+
+      }
+    }
+
+
+  });
 </script>
 
 <% include partials/footer %>
