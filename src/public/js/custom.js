@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
     const btnDrop = document.getElementById("navbarDropdownMenuLink-4");
     const menuDropDown = document.querySelector(".dropdown-menu");
@@ -7,17 +7,17 @@ document.addEventListener("DOMContentLoaded", function(){
     const collapse = document.querySelector(".collapse");
 
     function toggle(parent, child) {
-        parent.onclick = () => {            
+        parent.onclick = () => {
             child.style.display = child.style.display === "block" ? "none" : "block";
         }
     }
-    
+
     toggle(btnDrop, menuDropDown);
     toggle(navbarToggler, collapse);
 
-    let urlProfile = window.location.href.split("/").reverse()[0];
+    let urlPath = window.location.href.split("/");
 
-    if (urlProfile === "profile") {
+    if (urlPath.includes("profile")) {
 
         const passwordProfile = document.getElementById("password-profile");
         const btnProfileUpdate = document.getElementById("btn-profile");
@@ -50,20 +50,50 @@ document.addEventListener("DOMContentLoaded", function(){
                 isValid ? previewImage(event) : "";
             }
         }());
-                
+
 
         function previewImage(event) {
-            const imgField = document.querySelector(".img-thumbnail");                        
+            const imgField = document.querySelector(".img-thumbnail");
             const reader = new FileReader();
 
             reader.onload = () => {
-                if(reader.readyState === 2) {
+                if (reader.readyState === 2) {
                     imgField.src = reader.result;
                 }
             }
             reader.readAsDataURL(event.target.files[0]);
         }
-        
+
+    }
+
+
+
+    if (urlPath.includes("reservations") && urlPath.includes("user")) {
+
+        const dateDepart = document.getElementById("date-depart");
+        const dateRetour = document.getElementById("date-retour");
+        const alertReserve = document.getElementById("alert-reserve");
+        const formReserve = document.getElementById("form-reserve");
+
+        if (alertReserve) alertReserve.style.display = "none";
+
+        let dateDep = "", dateRet = "";
+        dateDepart.onchange = (e) => {
+            dateDep = (e.target.value).split("-").reduce((a, c) => a + +c, 0);
+        }
+
+        dateRetour.onchange = (e) => {
+            dateRet = (e.target.value).split("-").reduce((a, c) => a + +c, 0);
+        }
+
+        formReserve.onsubmit = () => {
+            if (dateDep > dateRet) {
+                alertReserve.style.display = "block";
+                alertReserve.textContent = "La date de depart doit étre < à la date de retour";
+                return false;
+            }
+            return true;
+        }
     }
 
 });
