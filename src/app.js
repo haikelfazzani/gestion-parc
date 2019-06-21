@@ -1,5 +1,7 @@
 const express = require("express"),
   app = express(),
+  cors = require('cors'),  
+  corsOptions = require("./middlewares/cors.middleware");
   helmet = require('helmet'),
   bodyParser = require("body-parser"),
   path = require("path"),
@@ -9,6 +11,8 @@ const express = require("express"),
 
 const setGlobalVar = require("./config/global.config");
 const checkVehiculeDate = require("./service/vehicule.trigger");
+
+app.use(cors(corsOptions))
 
 app.use(helmet());
 app.use(helmet.xssFilter());

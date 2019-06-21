@@ -6,7 +6,7 @@ const staticFiles = {
         dark : "/style/dark.css" ,
         common : "/style/common.css" ,
         bootstrap : "/style/bootstrap.css",
-        
+        animation : "/style/animation.css"
     },
     fontawesome : "/style/all.min.css",
     js : {

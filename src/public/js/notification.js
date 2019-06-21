@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // https://gestion-park.herokuapp.com
+    // https://gestion-park.herokuapp.com/notifications/unread
     // http://localhost:3000/notifications/unread
-    fetch(" https://gestion-park.herokuapp.com/notifications/unread")
+    fetch("https://gestion-park.herokuapp.com/notifications/unread")
         .then(res => res.json())
         .then(data => {
             const notifIcon = document.querySelector(".fa-bell");

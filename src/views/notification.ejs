@@ -19,6 +19,7 @@
 
       <ul class="pagination mt-3">
         <li class="page-item"><a class="page-link" href="#" id="btn-previous">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" id="pages">1</a></li>
         <li class="page-item"><a class="page-link" href="#" id="btn-next">Next</a></li>
       </ul>
 
@@ -36,7 +37,9 @@
     let end = step;
     let start = 0;
 
-    fetch("http://localhost:3000/notifications/read")
+    // https://gestion-park.herokuapp.com/notifications/unread
+    // http://localhost:3000/notifications/read
+    fetch("https://gestion-park.herokuapp.com/notifications/read")
       .then(res => res.json())
       .then(data => pagination(data))
       .catch(err => console.log(err));
@@ -47,6 +50,8 @@
       const listNotifs = document.getElementById("list-notifications");
       const btnNext = document.getElementById("btn-next");
       const btnPrev = document.getElementById("btn-previous");
+      const pages = document.getElementById("pages");
+      let i = 1;      
 
 
       if (data && data.length > 0) {
@@ -59,6 +64,8 @@
         btnNext.onclick = () => {
           
           if (end < len - 1) {
+            i++;
+            pages.innerHTML = i + " ";            
             start += 5;
             end += 5;
             listNotifications = data.slice(start, end);
@@ -70,6 +77,8 @@
         btnPrev.onclick = () => {
 
           if (start > 0) {
+            i--;
+            pages.innerHTML = i + " ";            
             start -= 5;
             end -= 5;
             listNotifications = data.slice(start, end);
@@ -84,7 +93,8 @@
 
             listNotifs.innerHTML += `
                 
-              <a href="/reservations/list-demands" class="list-group-item list-group-item-action">
+              <a href="/reservations/list-demands" 
+              class="list-group-item list-group-item-action scale-in-tl">
                 <i class="fas fa-bookmark mr-3"></i> ${d.message}
                 <span class="badge badge-info" style="float:right">
                     ${d.date_notif}
