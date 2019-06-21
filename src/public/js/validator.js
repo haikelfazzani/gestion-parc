@@ -64,9 +64,9 @@ if (pathTabs.includes("vehicules") && pathTabs.includes("add")) {
     function handleFormVehicile(form) {
 
         let nom = form.numSerie.value;
-        let model = form.model.value;
+        let marque = form.marque.value;
 
-        if (validator.isValidNumSerie(nom) && validator.isAlphaNum(model)) {
+        if (validator.isValidNumSerie(nom) && validator.isAlphaNum(marque)) {
             return true;
         }
         alertVehicule.style.display = "block";

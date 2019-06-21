@@ -6,9 +6,9 @@ const { getActionName } = require("../service/url.service");
 class VehiculeController {
 
     async addVehicule(req, res) {
-        const { numSerie, model } = req.body;
+        const { numSerie, marque } = req.body;
 
-        const vehicule = new Vehicule((numSerie + "").trim(), (model + "").trim());
+        const vehicule = new Vehicule((numSerie + "").trim(), (marque + "").trim());
 
         await vehiculeDao.addVehicule(vehicule, async (resolve) => {
             await res.render("vehicules/add-vehicule",
@@ -19,8 +19,8 @@ class VehiculeController {
     }
 
     async updateVehicule(req, res) {
-        const { numSerie, model, etat } = req.body;
-        const vehicule = new Vehicule(numSerie.trim(), model.trim());
+        const { numSerie, marque, etat } = req.body;
+        const vehicule = new Vehicule(numSerie.trim(), marque.trim());
 
         await vehiculeDao.updateVehicule(vehicule, etat, async (resolve) => {
             await res.render("vehicules/update-vehicule",
@@ -31,8 +31,8 @@ class VehiculeController {
 
 
     async deleteVehicule(req, res) {
-        let { numSerie, model } = req.body;
-        let vehicule = new Vehicule(numSerie.trim(), model.trim());
+        let { numSerie, marque } = req.body;
+        let vehicule = new Vehicule(numSerie.trim(), marque.trim());
 
         await vehiculeDao.deleteVehicule(vehicule, async (resolve) => {
             await res.render("vehicules/delete-vehicule",

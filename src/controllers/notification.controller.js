@@ -1,4 +1,6 @@
 const notificationDao = require("../dao/notification.dao");
+const getCurrentUserId = require("../service/utilisateur.service");
+
 class NotificationController {
 
     async index(req, res) {
@@ -8,20 +10,21 @@ class NotificationController {
     }
 
     async getNotifs(req, res) {
-        const { id_user } = req.session.userInfo;
+        const { id_utilisateur } = req.session.userInfo;
 
-        await notificationDao.getNotifs(id_user, async (resolve) => {
+        await notificationDao.getNotifs(id_utilisateur, async (resolve) => {
             await res.json(resolve.data);
         });
     }
 
     async getNotifsUnread(req, res) {
-        const { id_user } = req.session.userInfo;
+        const { id_utilisateur } = req.session.userInfo;
 
-        await notificationDao.getNotifsUnread(id_user, async (resolve) => {
+        await notificationDao.getNotifsUnread(id_utilisateur, async (resolve) => {
             await res.json(resolve.data);
         });
     }
+
 }
 
 module.exports = new NotificationController();

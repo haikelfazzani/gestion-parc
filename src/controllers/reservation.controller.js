@@ -34,8 +34,7 @@ class ReservationController {
             parseInt(userToConfirm),
             parseInt(vehiculeIdToConfirm),             
             async (resolve) => {
-
-                console.log(userToConfirm)
+                
             await res.render("reservations/admin/confirm",
                 { msg: resolve.data || resolve.error }
             );
@@ -104,9 +103,9 @@ class ReservationController {
 
     /** User reservation handling */
     async getAllReserved(req, res) {
-        let { id_user } = req.session.userInfo;
+        let { id_utilisateur } = req.session.userInfo;
 
-        await reservationDao.listReserved(id_user, async (resolve) => {
+        await reservationDao.listReserved(id_utilisateur, async (resolve) => {
             await res.render("reservations/user/list-reserved",
                 { msg: resolve.error, data: resolve.data }
             );
@@ -151,7 +150,7 @@ class ReservationController {
             dateRetour,
             bossOrder.trim(),
             descMission.trim(),
-            userInfo.id_user,
+            userInfo.id_utilisateur,
             vehicule.id_vehicule
         );
 

@@ -1,7 +1,7 @@
 const express = require("express"),
   router = express.Router(),
   { redirectHome } = require("../middlewares/auth.middleware"),
-  userDao = require("../dao/user.dao"),
+  userDao = require("../dao/utilisateur.dao"),
   path = require("path");
 
 const inputValidator = require('../service/validator.service');

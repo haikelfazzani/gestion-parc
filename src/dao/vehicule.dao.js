@@ -7,14 +7,14 @@ class VehiculeDao {
         // les champs
         this.id = "id_vehicule";
         this.numSerie = "num_serie";
-        this.model = "model";
+        this.marque = "marque";
         this.etat = "etat";
     }
 
     addVehicule(vehicule, resolve) {
 
-        const sql = `insert into ${this.tabelName} (${this.numSerie}, ${this.model}) 
-        values('${vehicule.numSerie}', '${vehicule.model}')`;
+        const sql = `insert into ${this.tabelName} (${this.numSerie}, ${this.marque}) 
+        values('${vehicule.numSerie}', '${vehicule.marque}')`;
 
         db.query(sql, (err, rows) => {
             if (!err) {
@@ -71,7 +71,7 @@ class VehiculeDao {
 
 
     deleteVehicule(vehicule, resolve) {
-        const { numSerie, model } = vehicule;
+        const { numSerie, marque } = vehicule;
 
         const sql = `delete from ${this.tabelName} where ${this.numSerie} = '${numSerie}'`;
 
@@ -93,10 +93,10 @@ class VehiculeDao {
 
     updateVehicule(vehicule, etat, resolve) {
 
-        const { numSerie, model } = vehicule;
+        const { numSerie, marque } = vehicule;
 
         const sql = `update ${this.tabelName} 
-        set ${this.model} = '${model}' , ${this.etat} = '${etat}'
+        set ${this.marque} = '${marque}' , ${this.etat} = '${etat}'
         where ${this.numSerie} = '${numSerie}'`;
 
         db.query(sql, (err, rows) => {

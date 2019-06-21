@@ -1,8 +1,8 @@
 class Vehicule {
 
-    constructor(numSerie, model) {
+    constructor(numSerie, marque) {
         this.numSerie = numSerie;
-        this.model = model;
+        this.marque = marque;
     }
 
 }

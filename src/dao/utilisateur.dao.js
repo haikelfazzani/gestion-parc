@@ -3,9 +3,9 @@ const db = require('../database/DbConnection');
 class UserDao {
 
     constructor() {
-        this.tabelName = "users";
+        this.tabelName = "utilisateurs";
         // fields
-        this.id = "id_user";
+        this.id = "id_utilisateur";
         this.nomComplet = "nom_complet";
         this.email = "email";
         this.password = "password";

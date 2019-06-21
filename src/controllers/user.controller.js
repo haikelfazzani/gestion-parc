@@ -1,5 +1,5 @@
-const userDao = require("../dao/user.dao");
-const User = require("../models/User.model");
+const userDao = require("../dao/utilisateur.dao");
+const Utilisateur = require("../models/Utilisateur.model");
 const { getActionName } = require("../service/url.service");
 
 class UserController {
@@ -7,7 +7,7 @@ class UserController {
     async addUser(req, res) {
         const { nom, email, password, division, role } = req.body;
 
-        const user = new User(
+        const user = new Utilisateur(
             nom.trim(),
             email.trim(),
             password.trim(),
@@ -26,7 +26,7 @@ class UserController {
     async updateUser(req, res) {
         const { nom, email, password, division, role } = req.body;
 
-        const user = new User(
+        const user = new Utilisateur(
             nom.trim(),
             email.trim(),
             password.trim(),

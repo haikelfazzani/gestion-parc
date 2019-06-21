@@ -1,4 +1,4 @@
-class User {
+class Utilisateur {
 
     constructor(nomComplet, email, password, division, role) {
         this.nomComplet = nomComplet;
@@ -10,4 +10,4 @@ class User {
 
 }
 
-module.exports = User;
+module.exports = Utilisateur;
