@@ -16,10 +16,13 @@
       <% if(locals.data) { %>
       <form action="/vehicules/update" method="POST">
 
+        <input type="text" class="form-control" id="id" name="id" 
+          value="<%= data.id_vehicule %>" readonly hidden>
+
         <div class="form-group">
           <label for="numSerie">Num serie</label>
           <input type="text" class="form-control" id="numSerie" name="numSerie" 
-          value="<%= data.num_serie %>" required readonly>
+          value="<%= data.num_serie %>" required>
         </div>
 
         <div class="form-group">

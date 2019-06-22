@@ -7,8 +7,8 @@ class ImagesDao {
         const sql = `select ${imgTable.avatar} from ${imgTable.tableName}
         where ${imgTable.userId} = ${userId} `;
 
-        db.query(sql, (err, rows) => {
-            resolve({
+        db.query(sql, async (err, rows) => {
+            await resolve({
                 error: err ? "aucun avatar a été trouvé" : "",
                 data: err ? "" : rows
             });
@@ -19,9 +19,9 @@ class ImagesDao {
         const sql = `update ${imgTable.tableName} 
         set ${imgTable.avatar} = '${avatar}' where ${imgTable.userId} = ${userId} `;
 
-        db.query(sql, (err, rows) => {
+        db.query(sql, async (err, rows) => {
 
-            resolve({
+            await resolve({
                 error: err ? err : "",
                 data: err ? "" : "votre image a été bien modifiée"
             });
@@ -32,9 +32,9 @@ class ImagesDao {
         const sql = `insert into ${imgTable.tableName} (${imgTable.avatar}, ${imgTable.userId})
         values('${avatar}', ${userId})`;
 
-        db.query(sql, (err, rows) => {
+        db.query(sql, async (err, rows) => {
 
-            resolve({
+            await resolve({
                 error: err ? err : "",
                 data: err ? "" : "votre image a été bien insérée"
             });

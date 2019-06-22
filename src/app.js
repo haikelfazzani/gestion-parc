@@ -54,13 +54,13 @@ app.use(cookeParser());
 app.use("/", require("./routes/main.routes"));
 app.use("/auth", require("./routes/auth.routes"));
 
-// 
+// trigger to compare date back with current date
 app.use(async (req, res, next) => {
   await checkVehiculeDate(req , res);
   await next();
 });
 
-
+// other routes
 app.use("/profile", require("./routes/profile.routes"));
 app.use("/users", require("./routes/utilisateur.routes"));
 app.use("/vehicules", require("./routes/vehicules.routes"));
@@ -73,7 +73,7 @@ app.use("/error", async (req, res) => {
 })
 
 
-// route
+// route not found
 app.use("*", async (req, res) => {   
   await res.redirect("/"); 
 });

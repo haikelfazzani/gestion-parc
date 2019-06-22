@@ -11,15 +11,15 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data && locals.Etat) { 
-        data = locals.data.reverse()
-        let i = 1;
-      %>
-
       <h2><i class="fas fa-list"></i> Liste des demandes
         <span class="badge badge-primary"><%= data.length %>
         </span>
       </h2>
+
+      <% if((locals.data && locals.data.length > 0) && locals.Etat) { 
+        data = locals.data.reverse()
+        let i = 1;
+      %>
 
 
       <% for(let v of data){     %>
@@ -51,13 +51,11 @@
           </div>
 
           <div class="col-md-2">
-            <a href="/reservations/confirm?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" 
-              class="btn btn-success">
+            <a href="/reservations/confirm?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-success">
               <i class="fas fa-check"></i>
             </a>
 
-            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" 
-              class="btn btn-danger">
+            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-danger">
               <i class="fas fa-window-close"></i>
             </a>
           </div>
@@ -67,8 +65,13 @@
         </div>
 
 
-      </div><% } %>
+      </div>
+      <% } %>
 
+    </div>
+    <% } else { %>
+    <div class="alert alert-info" role="alert">
+      aucune demande n'a été envoyée
     </div>
     <% } %>
 

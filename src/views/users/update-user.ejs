@@ -16,6 +16,9 @@
       <% if(locals.data) { %>
       <form action="/users/update" method="POST">
 
+        <input type="text" class="form-control" id="id" name="id" 
+          value="<%= data.id_utilisateur %>" readonly hidden>
+
         <div class="form-group">
           <label for="nom">Nom d'utilisateur</label>
           <input type="text" class="form-control" id="nom" name="nom" 
@@ -27,7 +30,7 @@
           <label for="email">Adresse Email</label>
           <input type="email" class="form-control" id="email" name="email" 
           value="<%= data.email %>"
-          placeholder="Entrer email" required readonly>
+          placeholder="Entrer email" required>
         </div>
 
 

@@ -20,13 +20,13 @@ class UtilisateurController {
     }
 
     async updateUser(req, res) {
-        const { nom, email, password, division, role } = req.body;
+        const { id, nom, email, password, division, role } = req.body;
 
         const user = new Utilisateur(
             nom.trim(), email.trim(), password.trim(), division.trim(), role.trim()
         );
 
-        await userDao.updateUser(user, async (resolve) => {
+        await userDao.updateUser(id, user, async (resolve) => {
             await res.render("users/update-user",
                 { msg: resolve.data || resolve.error }
             );

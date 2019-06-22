@@ -41,17 +41,17 @@ class UserDao {
 
 
     /** modification d'un utilisateur par l'admin */
-    updateUser(user, resolve) {
+    updateUser(id, user, resolve) {
 
         const { nomComplet, email, password, division, role } = user;
 
         const sql = `update ${utilisateurTable.tabelName} 
-                    set 
+                    set ${utilisateurTable.email} = '${email}',
                         ${utilisateurTable.nomComplet} = '${nomComplet}',
                         ${utilisateurTable.password} = '${password}',
                         ${utilisateurTable.division} = '${division}' ,
                         ${utilisateurTable.role} = '${role}' 
-                    where ${utilisateurTable.email} = '${email}' 
+                    where ${utilisateurTable.id} = ${id} 
         `;
 
         db.query(sql, (err, rows) => {

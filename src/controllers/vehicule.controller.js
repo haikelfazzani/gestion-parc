@@ -19,10 +19,10 @@ class VehiculeController {
     }
 
     async updateVehicule(req, res) {
-        const { numSerie, marque, etat } = req.body;
+        const { id, numSerie, marque, etat } = req.body;
         const vehicule = new Vehicule(numSerie.trim(), marque.trim());
 
-        await vehiculeDao.updateVehicule(vehicule, etat, async (resolve) => {
+        await vehiculeDao.updateVehicule(id, vehicule, etat, async (resolve) => {
             await res.render("vehicules/update-vehicule",
                 { msg: resolve.data || resolve.error }
             );

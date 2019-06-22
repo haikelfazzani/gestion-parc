@@ -36,4 +36,5 @@ function dateToNumber(input) { // 2019-06-13 => 2038
   return input.split("-").reduce((a, c) => a + +c, 0);
 }
 
+
 module.exports = checkVehiculeDate;

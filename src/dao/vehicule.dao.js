@@ -73,14 +73,16 @@ class VehiculeDao {
         });
     }
 
-    updateVehicule(vehicule, etat, resolve) {
+    updateVehicule(idVehicule, vehicule, etat, resolve) {
 
         const { numSerie, marque } = vehicule;
 
 
         const sql = `update ${tableName} 
-        set ${marqueField} = '${marque}' , ${etatField} = '${etat}'
-        where ${numSerieField} = '${numSerie}'`;
+        set ${numSerieField} = '${numSerie}',
+            ${marqueField} = '${marque}' , 
+            ${etatField} = '${etat}'
+        where ${vIdField} = '${idVehicule}'`;
 
         db.query(sql, (err, rows) => {
 
