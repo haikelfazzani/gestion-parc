@@ -1,4 +1,9 @@
-<p>Gestion parc</p>
+<h5>Gestion parc</h5>
+
+<div>
+<p>Class diagram</p>
+<img src="https://i.ibb.co/ZGQ52Cv/globale2.png" alt="globale2" border="0">
+</div>
 
 <div>
 <p>relational schema of the database</p>
