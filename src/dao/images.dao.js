@@ -1,60 +1,43 @@
 const db = require("../database/DbConnection");
+const { imgTable } = require("../database/migration");
 
 class ImagesDao {
 
-    constructor() {
-        this.tableName = "images";
-        // fields
-        this.id = "images_id";
-        this.avatar = "avatar";
-        this.userId = "user_id";
-
-        this.userTable = "utilisateur";
-    }
-
     getAvatar(userId, resolve) {
-        const sql = `select ${this.avatar} from ${this.tableName}
-        where ${this.userId} = ${userId} `;
+        const sql = `select ${imgTable.avatar} from ${imgTable.tableName}
+        where ${imgTable.userId} = ${userId} `;
 
         db.query(sql, (err, rows) => {
             resolve({
-                error: err,
-                data: rows
+                error: err ? "aucun avatar a été trouvé" : "",
+                data: err ? "" : rows
             });
         });
     }
 
     updateAvatar(userId, avatar, resolve) {
-        const sql = `update ${this.tableName} 
-        set ${this.avatar} = '${avatar}' where ${this.userId} = ${userId} `;
+        const sql = `update ${imgTable.tableName} 
+        set ${imgTable.avatar} = '${avatar}' where ${imgTable.userId} = ${userId} `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: "votre image a été bien modifiée"
-                });
-            }
-            else {
-                resolve({
-                    error: err,
-                    data: ""
-                });
-            }
+
+            resolve({
+                error: err ? err : "",
+                data: err ? "" : "votre image a été bien modifiée"
+            });
         });
     }
 
     addAvatar(userId, avatar, resolve) {
-        const sql = `insert into ${this.tableName} (${this.avatar}, ${this.userId})
+        const sql = `insert into ${imgTable.tableName} (${imgTable.avatar}, ${imgTable.userId})
         values('${avatar}', ${userId})`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "votre image a été bien insérée" });
-            }
-            else {
-                resolve({ error: err, data: "" });
-            }
+
+            resolve({
+                error: err ? err : "",
+                data: err ? "" : "votre image a été bien insérée"
+            });
         });
     }
 }

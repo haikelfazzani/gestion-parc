@@ -1,34 +1,23 @@
 const db = require("../database/DbConnection");
+const { notifTable } = require("../database/migration");
 
 class NotificationDao {
 
-    constructor() {
-        this.tableName = "notifications";
-        // fields
-        this.idNotif = "id_notif";
-        this.message = "message";
-        this.etatNotif = "etat_notif";
-        this.dateNotif = "date_notif";
-        this.userId = "utilisateur_id";
-    }
-
-    addNotif(dateNotif, notification, resolve) {
+    async addNotif(dateNotif, notification, resolve) {
         const { message, userId } = notification;
-        const sql = `insert into ${this.tableName} (
-            ${this.message}, 
-            ${this.dateNotif},
-            ${this.userId}
-            ) 
-        values('${message}', '${dateNotif}',${userId})`;
+        const sql = `insert into ${notifTable.tableName} (
+            ${notifTable.message}, ${notifTable.dateNotif}, ${notifTable.userId}
+        ) 
+        values('${message}', '${dateNotif}', ${userId} )`;
 
-        db.query(sql, (err, rows) => {
-            resolve({ err, rows });            
+        await db.query(sql, async (err, rows) => {
+            await resolve({ err, rows });
         });
     }
 
     // update notif etat from 0 -> 1 when usre lick on notification icon
     updateEtatNotif(resolve) {
-        const sql = `update ${this.tableName} set ${this.etatNotif} = 1`;
+        const sql = `update ${notifTable.tableName} set ${notifTable.etatNotif} = 1`;
         db.query(sql, (err, rows) => {
             if (!err) resolve({ error: "", data: "notification mise à jour" });
         });
@@ -37,8 +26,9 @@ class NotificationDao {
     deleteNotif(resolve) { }
 
     getNotifs(userId, resolve) {
-        const sql = `select * from ${this.tableName} 
-        where ${this.etatNotif} = 1 and ${this.userId} = ${userId}`;
+        const sql = `select * from ${notifTable.tableName} 
+        where ${notifTable.etatNotif} = 1 
+        and ${notifTable.userId} = ${userId}`;
 
         db.query(sql, (err, rows) => {
             if (!err) resolve({ error: "", data: rows });
@@ -46,11 +36,15 @@ class NotificationDao {
     }
 
     getNotifsUnread(userId, resolve) {
-        const sql = `select * from ${this.tableName} 
-        where ${this.etatNotif} = 0 and ${this.userId} = ${userId}`;
+        const sql = `select * from ${notifTable.tableName} 
+        where ${notifTable.etatNotif} = 0 
+        and ${notifTable.userId} = ${userId}`;
 
         db.query(sql, (err, rows) => {
-            if (!err) resolve({ error: "", data: rows });
+            if (!err) resolve({ 
+                error: "", 
+                data: rows 
+            });
         });
     }
 }

@@ -8,11 +8,7 @@ class UserController {
         const { nom, email, password, division, role } = req.body;
 
         const user = new Utilisateur(
-            nom.trim(),
-            email.trim(),
-            password.trim(),
-            division.trim(),
-            role.trim()
+            nom.trim(), email.trim(), password.trim(), division.trim(), role.trim()
         );
 
         await userDao.addUser(user, async (resolve) => {
@@ -27,11 +23,7 @@ class UserController {
         const { nom, email, password, division, role } = req.body;
 
         const user = new Utilisateur(
-            nom.trim(),
-            email.trim(),
-            password.trim(),
-            division.trim(),
-            role.trim()
+            nom.trim(), email.trim(), password.trim(), division.trim(), role.trim()
         );
 
         await userDao.updateUser(user, async (resolve) => {

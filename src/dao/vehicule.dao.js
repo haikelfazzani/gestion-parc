@@ -1,71 +1,59 @@
 const db = require('../database/DbConnection');
 
-class VehiculeDao {
+const { vehiculeTable } = require("../database/migration");
+const { tableName, vIdField, numSerieField, marqueField, etatField } = vehiculeTable;
 
-    constructor() {
-        this.tabelName = "vehicules";
-        // les champs
-        this.id = "id_vehicule";
-        this.numSerie = "num_serie";
-        this.marque = "marque";
-        this.etat = "etat";
-    }
+
+class VehiculeDao {
 
     addVehicule(vehicule, resolve) {
 
-        const sql = `insert into ${this.tabelName} (${this.numSerie}, ${this.marque}) 
+        const sql = `insert into ${tableName} (${numSerieField}, ${marqueField}) 
         values('${vehicule.numSerie}', '${vehicule.marque}')`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "une véhicule a été bien insérée" });
-            }
-            else {
-                resolve({ error: "véhicule existe deja", data: "" });
-            }
+
+            resolve({
+                error: err ? "véhicule existe deja" : "",
+                data: err ? "" : "une véhicule a été bien insérée"
+            });
         });
     }
 
     /** Get all users from database */
     getVehicules(resolve) {
-        const sql = `select * from ${this.tabelName}`;
+        const sql = `select * from ${tableName}`;
 
         db.query(sql, (err, rows) => {
-            resolve({ error: err, data: rows });
+            resolve({ error: err ? err : "", data: err ? "" : rows });
         });
     }
 
     getVehiculeByNum(numSerie, resolve) {
-        const sql = `select * from ${this.tabelName} where ${this.numSerie} = '${numSerie}'`;
+        const sql = `select * from ${tableName} 
+        where ${numSerieField} = '${numSerie}'`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: rows[0] });
-            }
-            else {
-                resolve({ error: "aucune vehicule trouvée!", data: "" });
-            }
+
+            resolve({
+                error: err ? "aucune vehicule trouvée!" : "",
+                data: err ? "" : rows[0]
+            });
         });
     }
 
     // lister les véhicules par etat
     getVehiculeByEtat(etat, resolve) {
 
-        const sql = `select * from ${this.tabelName} where ${this.etat} = '${etat}'`;
+        const sql = `select * from ${vehiculeTable.tableName} 
+        where ${vehiculeTable.etatField} = '${etat}'  `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: rows
-                });
-            }
-            else {
-                resolve({
-                    error: "aucun vehicule trouvée!",
-                    data: ""
-                });
-            }
+
+            resolve({
+                error: err ? "aucun vehicule trouvée!" : "",
+                data: err ? "" : rows
+            });
         });
     }
 
@@ -73,21 +61,15 @@ class VehiculeDao {
     deleteVehicule(vehicule, resolve) {
         const { numSerie, marque } = vehicule;
 
-        const sql = `delete from ${this.tabelName} where ${this.numSerie} = '${numSerie}'`;
+        const sql = `delete from ${vehiculeTable.tableName} 
+        where ${numSerieField} = '${numSerie}'  `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: "une vehicule a été bien supprimée"
-                });
-            }
-            else {
-                resolve({
-                    error: "erreur de suppression!",
-                    data: ""
-                });
-            }
+
+            resolve({
+                error: err ? "erreur de suppression!" : "",
+                data: err ? "" : "une vehicule a été bien supprimée"
+            });
         });
     }
 
@@ -95,23 +77,17 @@ class VehiculeDao {
 
         const { numSerie, marque } = vehicule;
 
-        const sql = `update ${this.tabelName} 
-        set ${this.marque} = '${marque}' , ${this.etat} = '${etat}'
-        where ${this.numSerie} = '${numSerie}'`;
+
+        const sql = `update ${tableName} 
+        set ${marqueField} = '${marque}' , ${etatField} = '${etat}'
+        where ${numSerieField} = '${numSerie}'`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: "une vehicule a été bien modifiée"
-                });
-            }
-            else {
-                resolve({
-                    error: "erreur de modification!",
-                    data: ""
-                });
-            }
+
+            resolve({
+                error: err ? "erreur de modification!" : "",
+                data: err ? "" : "une vehicule a été bien modifiée"
+            });
         });
     }
 }

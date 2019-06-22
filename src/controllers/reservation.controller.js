@@ -11,7 +11,7 @@ class ReservationController {
 
             let vehiculeId = req.query.v;
             let userId = req.query.u;
-            
+
             let { reservationsUsers } = req.session;
             let reserv = reservationsUsers.find(r => r.id_vehicule == vehiculeId);
 
@@ -32,13 +32,13 @@ class ReservationController {
 
         await reservationDao.confirm(
             parseInt(userToConfirm),
-            parseInt(vehiculeIdToConfirm),             
+            parseInt(vehiculeIdToConfirm),
             async (resolve) => {
-                
-            await res.render("reservations/admin/confirm",
-                { msg: resolve.data || resolve.error }
-            );
-        });
+
+                await res.render("reservations/admin/confirm",
+                    { msg: resolve.data || resolve.error }
+                );
+            });
     }
 
     async rendCancelForm(req, res) {
@@ -63,12 +63,13 @@ class ReservationController {
     }
 
     async cancel(req, res) {
+   
         let { vehiculeIdToConfirm, userToConfirm } = req.session;
 
         await reservationDao.cancel(
             parseInt(userToConfirm), parseInt(vehiculeIdToConfirm), async (resolve) => {
 
-                await res.render("reservations/admin/confirm",
+                await res.render("reservations/admin/cancel",
                     { msg: resolve.data || resolve.error }
                 );
             });
@@ -147,11 +148,8 @@ class ReservationController {
 
         let reservation = new Reservation(
             dateDepart,
-            dateRetour,
-            bossOrder.trim(),
-            descMission.trim(),
-            userInfo.id_utilisateur,
-            vehicule.id_vehicule
+            dateRetour, bossOrder.trim(), descMission.trim(),
+            userInfo.id_utilisateur, vehicule.id_vehicule
         );
 
         await reservationDao.sendDemand(reservation, async (resolve) => {

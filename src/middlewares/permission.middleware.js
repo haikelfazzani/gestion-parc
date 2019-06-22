@@ -1,4 +1,3 @@
-
 const Role = require("../models/Role.enum");
 
 function isAdmin(req, res, next) {
@@ -9,7 +8,6 @@ function isAdmin(req, res, next) {
         res.redirect("/");
         return;
     }
-
     next();
 }
 
@@ -21,7 +19,6 @@ function isNotAdmin(req, res, next) {
         res.redirect("/");
         return;
     }
-
     next();
 }
 

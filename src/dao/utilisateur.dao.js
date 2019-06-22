@@ -1,61 +1,41 @@
 const db = require('../database/DbConnection');
+const { utilisateurTable } = require("../database/migration");
 
 class UserDao {
 
-    constructor() {
-        this.tabelName = "utilisateurs";
-        // fields
-        this.id = "id_utilisateur";
-        this.nomComplet = "nom_complet";
-        this.email = "email";
-        this.password = "password";
-        this.division = "division";
-        this.role = "role";
-
-        // image table
-        this.imgTable = "images";
-        this.userImgId = "user_id";
-
-    }
-
     addUser(user, resolve) {
 
-        const sql = `insert into ${this.tabelName} (
-            ${this.nomComplet}, 
-            ${this.email}, 
-            ${this.password}, 
-            ${this.division}, 
-            ${this.role}
+        const sql = `insert into ${utilisateurTable.tabelName} (
+            ${utilisateurTable.nomComplet}, 
+            ${utilisateurTable.email}, 
+            ${utilisateurTable.password}, 
+            ${utilisateurTable.division}, 
+            ${utilisateurTable.role}
         ) 
         values('${user.nomComplet}', 
-        '${user.email}', 
-        '${user.password}', 
-        '${user.division}' ,
-        '${user.role}')`;
+        '${user.email}', '${user.password}', '${user.division}' ,'${user.role}')`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "un utilisateur a été bien inséré" });
-            }
-            else {
-                resolve({ error: "utilisateur existe deja!", data: "" });
-            }
+
+            resolve({
+                error: err ? "utilisateur existe deja!" : "",
+                data: err ? "" : "un utilisateur a été bien inséré"
+            });
         });
     }
 
     /** Update profile user */
     updateUserPassword(email, password, resolve) {
-        const sql = `update ${this.tabelName} 
-        set ${this.password} = '${password}' 
-        where ${this.email} = '${email}' `;
+        const sql = `update ${utilisateurTable.tabelName} 
+        set ${utilisateurTable.password} = '${password}' 
+        where ${utilisateurTable.email} = '${email}' `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "votre mot de passe a été modifié" });
-            }
-            else {
-                resolve({ error: "erreur de modification!", data: "" });
-            }
+
+            resolve({
+                error: err ? "erreur de modification!" : "",
+                data: err ? "" : "votre mot de passe a été modifié"
+            });
         });
     }
 
@@ -65,22 +45,21 @@ class UserDao {
 
         const { nomComplet, email, password, division, role } = user;
 
-        const sql = `update ${this.tabelName} 
+        const sql = `update ${utilisateurTable.tabelName} 
                     set 
-                        ${this.nomComplet} = '${nomComplet}',
-                        ${this.password} = '${password}',
-                        ${this.division} = '${division}' ,
-                        ${this.role} = '${role}' 
-                    where ${this.email} = '${email}' 
+                        ${utilisateurTable.nomComplet} = '${nomComplet}',
+                        ${utilisateurTable.password} = '${password}',
+                        ${utilisateurTable.division} = '${division}' ,
+                        ${utilisateurTable.role} = '${role}' 
+                    where ${utilisateurTable.email} = '${email}' 
         `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "un utilisateur a été modifié" });
-            }
-            else {
-                resolve({ error: "erreur de modification!", data: "" });
-            }
+
+            resolve({
+                error: err ? "erreur de modification!" : "",
+                data: err ? "" : "un utilisateur a été modifié"
+            });
         });
     }
 
@@ -89,15 +68,15 @@ class UserDao {
 
     /** Delete user by email */
     deleteUser(email, resolve) {
-        const sql = `delete from ${this.tabelName} where ${this.email} = '${email}'`;
+        const sql = `delete from ${utilisateurTable.tabelName} 
+        where ${utilisateurTable.email} = '${email}'`;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({ error: "", data: "un utilisateur a été bien supprimé" });
-            }
-            else {
-                resolve({ error: "erreur de suppression!", data: "" });
-            }
+
+            resolve({
+                error: err ? "erreur de suppression!" : "",
+                data: err ? "" : "un utilisateur a été bien supprimé"
+            });
         });
     }
 
@@ -105,8 +84,9 @@ class UserDao {
 
     /** Get user by email and password */
     getOneByEmail(email, password, resolve) {
-        const sql = `select * from ${this.tabelName}         
-        where ${this.email} = '${email}' and ${this.password} = '${password}'`;
+        const sql = `select * from ${utilisateurTable.tabelName}         
+        where ${utilisateurTable.email} = '${email}' 
+        and ${utilisateurTable.password} = '${password}'`;
 
         db.query(sql, (err, rows) => {
             resolve({ error: err, data: rows });
@@ -118,22 +98,15 @@ class UserDao {
 
     /** Get user by email and password */
     isExist(email, resolve) {
-        const sql = `select * from ${this.tabelName} 
-        where ${this.email} = '${email}' `;
+        const sql = `select * from ${utilisateurTable.tabelName} 
+        where ${utilisateurTable.email} = '${email}' `;
 
         db.query(sql, (err, rows) => {
-            if (!err) {
-                resolve({
-                    error: "",
-                    data: rows[0]
-                });
-            }
-            else {
-                resolve({
-                    error: "erreur! l'utilisateur n'existe pas",
-                    data: ""
-                });
-            }
+
+            resolve({
+                error: err ? "erreur! l'utilisateur n'existe pas" : "",
+                data: err ? "" : rows[0]
+            });
         });
     }
 
@@ -142,7 +115,7 @@ class UserDao {
 
     /** Get all users from database */
     getUsers(resolve) {
-        const sql = `select * from ${this.tabelName}`;
+        const sql = `select * from ${utilisateurTable.tabelName}`;
 
         db.query(sql, (err, rows) => {
             resolve({ error: err, data: rows });
