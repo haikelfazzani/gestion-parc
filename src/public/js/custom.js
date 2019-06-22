@@ -78,22 +78,22 @@ document.addEventListener("DOMContentLoaded", function () {
         if (alertReserve) alertReserve.style.display = "none";
 
         let dateDep = "", dateRet = "";
-        dateDepart.onchange = (e) => {
+        dateDepart ? dateDepart.onchange = (e) => {
             dateDep = (e.target.value).split("-").reduce((a, c) => a + +c, 0);
-        }
+        } : "";
 
-        dateRetour.onchange = (e) => {
+        dateRetour ? dateRetour.onchange = (e) => {
             dateRet = (e.target.value).split("-").reduce((a, c) => a + +c, 0);
-        }
+        } : "";
 
-        formReserve.onsubmit = () => {
+        formReserve ? formReserve.onsubmit = () => {
             if (dateDep > dateRet) {
                 alertReserve.style.display = "block";
                 alertReserve.textContent = "La date de depart doit étre < à la date de retour";
                 return false;
             }
             return true;
-        }
+        } : "";
     }
 
 });
