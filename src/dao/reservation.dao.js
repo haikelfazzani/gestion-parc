@@ -129,10 +129,7 @@ class ReservationDao {
                 resolve({ error: "", data: "votre demande a été bien envoyée" });
 
                 // update vehicule status after client send demand
-                this.updateEtatVehicule(vehiculeId, Etat.enAttente, (resolve) => {
-                    console.log(vehiculeId, Etat.enAttente)
-                    console.log(resolve)
-                });
+                this.updateEtatVehicule(vehiculeId, Etat.enAttente, (resolve) => {});
 
                 notificationDao.addNotif(formatLongDate(), new Notification(
                     "une nouvelle demande de reservation", adminId), (res) => { });
