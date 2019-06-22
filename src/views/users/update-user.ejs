@@ -14,7 +14,7 @@
       <h2><i class="fas fa-pencil-ruler"></i> Modification d'un utilisateur</h2>
 
       <% if(locals.data) { %>
-      <form action="/users/update" method="POST">
+      <form action="/users/update" method="POST" id="form-update">
 
         <input type="text" class="form-control" id="id" name="id" 
           value="<%= data.id_utilisateur %>" readonly hidden>

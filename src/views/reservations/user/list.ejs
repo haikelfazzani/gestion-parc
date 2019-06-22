@@ -11,15 +11,15 @@
 
     <div class="col-md-8">
 
-      <% if(locals.data) { 
-        data = locals.data.reverse()
-        let i = 1;
-      %>
-
       <h2><i class="fas fa-list"></i> Liste des véhicules
         <span class="badge badge-primary"><%= data.length %>
         </span>
       </h2>
+
+      <% if(locals.data && locals.data.length > 0) { 
+        data = locals.data.reverse()
+        let i = 1;
+      %>      
 
       <table class="table table-hover table-light">
         <thead>
@@ -56,6 +56,10 @@
         </tbody>
       </table>
 
+    </div>
+    <% } else { %>
+    <div class="alert alert-info" role="alert">
+      aucune véhicule n'a été trouvée
     </div>
     <% } %>
 
