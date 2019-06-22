@@ -2,7 +2,7 @@ const userDao = require("../dao/utilisateur.dao");
 const Utilisateur = require("../models/Utilisateur.model");
 const { getActionName } = require("../service/url.service");
 
-class UserController {
+class UtilisateurController {
 
     async addUser(req, res) {
         const { nom, email, password, division, role } = req.body;
@@ -68,4 +68,4 @@ class UserController {
 }
 
 
-module.exports = new UserController();
+module.exports = new UtilisateurController();
