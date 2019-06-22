@@ -2,7 +2,7 @@
 
 <div>
 <p>Class diagram</p>
-<img src="https://i.ibb.co/ZGQ52Cv/globale2.png" alt="globale2" border="0">
+<img src="https://i.ibb.co/19mtrQf/globale2.png" alt="globale2" border="0">
 </div>
 
 <div>
