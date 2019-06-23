@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const len = data.length;
             data = data.reverse();
             msg.innerHTML = `<a href="/reservations/list-demands" 
-              class="list-group-item list-group-item-action scale-in-tl">
+              class="list-group-item list-group-item-action">
                 <i class="fas fa-bookmark mr-3"></i> ${data[0].message}
                 <span class="badge badge-info">
                     ${data[0].date_notif}

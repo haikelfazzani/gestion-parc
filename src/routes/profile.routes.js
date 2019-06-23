@@ -25,8 +25,8 @@ router.post("/avatar/update", [redirectLogin, upload.single("avatar")], async (r
 });
 
 
-router.post("/avatar/add", [redirectLogin, upload.single("avatar")], (req, res) => {
-  profileController.addAvatar(req, res);
+router.post("/avatar/add", [redirectLogin, upload.single("avatar")], async (req, res) => {
+  await profileController.addAvatar(req, res);
 });
 
 module.exports = router;
