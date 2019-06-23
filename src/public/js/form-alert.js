@@ -5,14 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkURL(basePath, key) {
         return baseURL.includes(basePath) && baseURL.some(i => i.startsWith(key))
     }
-    //form-update
+    
     if (checkURL("users", "delete")) {
 
         const formDelete = document.getElementById("form-delete-user");
         formDelete ? formDelete.onsubmit = () => confirm("voulez-vous vraiment supprimer?") : "";
     }
 
-    if (checkURL("users", "update")) {
+    if (checkURL("users" , "update")) {
 
         const formUpdate = document.getElementById("form-update");
         formUpdate ? formUpdate.onsubmit = () => confirm("voulez-vous vraiment modifier?") : "";
@@ -23,6 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formDelete = document.getElementById("form-delete-vehicule");
         formDelete ? formDelete.onsubmit = () => confirm("voulez-vous vraiment supprimer?") : "";
+    }
+
+
+    if (checkURL("vehicules", "update")) {
+
+        const formUpdate = document.getElementById("form-update");
+        formUpdate ? formUpdate.onsubmit = () => confirm("voulez-vous vraiment modifier?") : "";
     }
 
 
