@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    let mode = "prod";
+    const mode = "prod";
 
+    // notifications
     const prod = "https://gestion-park.herokuapp.com/notifications/unread";
     const dev = "http://localhost:3000/notifications/unread";
 
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    // pagination 
+    // pagination notifications
 
     var listNotifications = [];
     let step = 5;
@@ -56,11 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
             listNotifications = data.slice(0, 5);
             displayList(listNotifications, start, end);
 
+            pages.textContent = 1 + " / " + Math.ceil(len/step);
+
             btnNext.onclick = () => {
 
                 if (end < len - 1) {
                     i++;
-                    pages.innerHTML = i + " ";
+                    pages.textContent = i + " / " + Math.ceil(len/step);
                     start += 5;
                     end += 5;
                     listNotifications = data.slice(start, end);
@@ -73,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (start > 0) {
                     i--;
-                    pages.innerHTML = i + " ";
+                    pages.textContent = i + " / " + Math.ceil(len/step);
                     start -= 5;
                     end -= 5;
                     listNotifications = data.slice(start, end);
@@ -104,6 +107,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    
 
 });

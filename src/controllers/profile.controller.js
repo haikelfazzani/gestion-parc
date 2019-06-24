@@ -5,51 +5,52 @@ const imgBase = "data:image/png;base64,";
 
 class ProfileController {
 
-    async index(req, res) { // rendering profile image
+  async index(req, res) { // rendering profile image
 
-        const { id_utilisateur } = req.session.userInfo;
+    const { id_utilisateur } = req.session.userInfo;
 
-        await imagesDao.getAvatar(id_utilisateur, async (resolve) => {
+    await imagesDao.getAvatar(id_utilisateur, async (resolve) => {
 
-            let avatar = resolve.data && (resolve.data[0] && resolve.data[0].avatar.length) > 5 ?
-                imgBase + resolve.data[0].avatar : "/img/profile.png";
+      const data = resolve.data;
 
-            req.session.avatar = avatar;
+      let avatar = data && (data[0] && data[0].avatar.length) > 5 ?
+        imgBase + data[0].avatar : "/img/profile.png";
 
-            await res.render("profile/index", { avatar });
-        });
-    }
+      req.session.avatar = avatar;
 
-    /** Modification de mot de passe de profile */
-    async updateUserPassword(req, res) {
-        let { email, password } = req.body;
-        let { avatar } = req.session;
+      await res.render("profile/index", { avatar });
+    });
+  }
 
-        await userDao.updateUserPassword(email, password, async (resolve) => {
-            await res.render("profile/index",
-                { msg: resolve.error || resolve.data, avatar }
-            );
-        });
-    }
+  /** Modification de mot de passe de profile */
+  async updateUserPassword(req, res) {
+
+    let { email, password } = req.body;
+    let { avatar } = req.session;
+
+    await userDao.updateUserPassword(email, password, async (resolve) => {
+      await res.render("profile/index", { msg: resolve.error || resolve.data, avatar });
+    });
+  }
 
 
-    async updateAvatar(req, res) {
-        const { id_utilisateur } = req.session.userInfo;
-        const avatar = req.file.buffer.toString("base64");
+  async updateAvatar(req, res) {
+    const { id_utilisateur } = req.session.userInfo;
+    const avatar = req.file.buffer.toString("base64");
 
-        await imagesDao.updateAvatar(id_utilisateur, avatar, async (resolve) => {
-            await res.redirect("/profile");
-        });
-    }
+    await imagesDao.updateAvatar(id_utilisateur, avatar, async (resolve) => {
+      await res.redirect("/profile");
+    });
+  }
 
-    async addAvatar(req, res) {
-        const { id_utilisateur } = req.session.userInfo;
-        const avatar = req.file.buffer.toString("base64");
+  async addAvatar(req, res) {
+    const { id_utilisateur } = req.session.userInfo;
+    const avatar = req.file.buffer.toString("base64");
 
-        await imagesDao.addAvatar(id_utilisateur, avatar, async (resolve) => {
-            await res.redirect("/profile");
-        });
-    }
+    await imagesDao.addAvatar(id_utilisateur, avatar, async (resolve) => {
+      await res.redirect("/profile");
+    });
+  }
 }
 
 module.exports = new ProfileController();

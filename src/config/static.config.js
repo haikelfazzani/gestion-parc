@@ -12,7 +12,7 @@ const staticFiles = {
     js : {
         custom:"/js/custom.js",
         validator : "/js/validator.js",
-        notification:"/js/notification.js",
+        fetch:"/js/fetch.js",
         formAlert:"/js/form-alert.js",
         theme : "/js/theme.js"
     }

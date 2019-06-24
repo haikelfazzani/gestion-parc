@@ -1,5 +1,4 @@
 const notificationDao = require("../dao/notification.dao");
-const getCurrentUserId = require("../service/utilisateur.service");
 
 class NotificationController {
 

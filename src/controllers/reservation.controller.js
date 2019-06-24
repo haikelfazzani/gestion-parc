@@ -142,8 +142,8 @@ class ReservationController {
 
     async sendDemand(req, res) { // post
 
-        let { dateDepart, dateRetour, bossOrder, descMission, numSerie } = req.body;
-        let { vehicules, userInfo } = req.session;
+        const { dateDepart, dateRetour, bossOrder, descMission, numSerie } = req.body;
+        const { vehicules, userInfo } = req.session;
         let vehicule = vehicules.find(v => v.num_serie === numSerie.trim());
 
         let reservation = new Reservation(
