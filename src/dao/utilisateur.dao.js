@@ -64,8 +64,6 @@ class UserDao {
   }
 
 
-
-
   /** Delete user by email */
   deleteUser(email, resolve) {
     const sql = `delete from ${utilisateurTable.tabelName} 
@@ -79,7 +77,6 @@ class UserDao {
       });
     });
   }
-
 
 
   /** Get user by email and password */
@@ -99,14 +96,12 @@ class UserDao {
   }
 
 
-
-
   /** Get user by email and password */
-  isExist(email, resolve) {
+  async isExist(email, resolve) {
     const sql = `select * from ${utilisateurTable.tabelName} 
         where ${utilisateurTable.email} = '${email}' `;
 
-    db.query(sql, (err, rows) => {
+    await db.query(sql, (err, rows) => {
 
       resolve({
         error: err || rows.length < 1 ? "erreur! l'utilisateur n'existe pas" : "",
@@ -114,8 +109,6 @@ class UserDao {
       });
     });
   }
-
-
 
 
   /** Get all users from database */

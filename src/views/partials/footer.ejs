@@ -1,15 +1,20 @@
+<footer class="footer fixed-bottom mt-5 py-3" style="background-color: #f5f5f5">
 
+  <div class="container d-flex justify-content-between">
+    
 
-<footer class="pt-5 pb-3 text-muted text-center text-small">
-    <p class="mb-1">
-        COPYRIGHT &copy; 2019 | <i class="fas fa-calendar-alt"></i> <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
-    </p>
-
-    <ul class="list-inline">
-        <li class="list-inline-item"><a href="<%= routesStruct.index %>">ACCEUIL</a></li>
-        <li class="list-inline-item"><a href="<%= routesStruct.users.profile %>">PROFILE</a></li>
-        <li class="list-inline-item"><a href="<%= routesStruct.auth.logout %>">DECONNEXION</a></li>
+    <ul class="list-inline m-0">
+      <li class="list-inline-item"><a href="<%= routesStruct.index %>">ACCEUIL</a></li>
+      <li class="list-inline-item"><a href="<%= routesStruct.users.profile %>">PROFILE</a></li>
+      <li class="list-inline-item"><a href="<%= routesStruct.auth.logout %>">DECONNEXION</a></li>
     </ul>
+
+    <p class="text-muted font-weight-light text-uppercase m-0">
+        ©  COPYRIGHT &copy; 2019 -
+        <i class="fas fa-calendar-alt"></i> <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
+      </p>
+  </div>
+
 </footer>
 
 <% if(locals.staticFiles) { %>
