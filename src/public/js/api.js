@@ -1,7 +1,6 @@
 const mode = "dev";
 
-var baseURL = window.location.href.split("/");
-
 function checkURL(basePath, key) {
-    return baseURL.includes(basePath) && baseURL.some(i => i.startsWith(key))
+    let pathURL = window.location.href.split("/");
+    return pathURL.includes(basePath) && pathURL.some(i => i.startsWith(key))
 }

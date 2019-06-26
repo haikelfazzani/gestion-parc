@@ -1,8 +1,6 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-  let path = window.location.href.split("/").reverse()[0];
-
-  if (path === "login") {
+  if (checkURL("login", "")) {
     const inputEmail = document.getElementById("login-email");
     const inputPass = document.getElementById("login-password");
 
