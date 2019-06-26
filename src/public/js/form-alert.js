@@ -1,10 +1,4 @@
-const baseURL = window.location.href.split("/");
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    function checkURL(basePath, key) {
-        return baseURL.includes(basePath) && baseURL.some(i => i.startsWith(key))
-    }
+document.addEventListener("DOMContentLoaded", function () {    
     
     if (checkURL("users", "delete")) {
 

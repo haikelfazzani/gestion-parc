@@ -65,11 +65,16 @@
 
         <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
 
-          <a class="dropdown-item" href="<%= routesStruct.users.profile %>">Profile</a>
+          <a class="dropdown-item" href="<%= routesStruct.users.profile %>">
+            <i class="fas fa-address-card"></i> Profile
+          </a>
+
           <button class="dropdown-item" id="btn-theme">Theme sombre</button>
 
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">DECONNEXION</a>
+          <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">
+              <i class="fas fa-sign-out-alt"></i> DECONNEXION
+            </a>
 
         </div>
       </li>

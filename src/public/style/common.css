@@ -69,6 +69,14 @@ footer p {
     font-family: sans-serif;
 }
 
+.cadre {
+    font-size: 12px;
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: white;
+}
+
 @media screen and (max-width: 600px) {
     .navbar {
         padding: 10px;

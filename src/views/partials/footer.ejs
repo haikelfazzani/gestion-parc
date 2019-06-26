@@ -1,27 +1,24 @@
-<footer class="footer fixed-bottom mt-5 py-3" style="background-color: #f5f5f5">
+<footer class="navbar bg-light fixed-bottom mt-5">
 
-  <div class="container d-flex justify-content-between">
-    
+  <p class="cadre text-muted font-weight-light text-uppercase m-0">
+    <i class="fas fa-calendar-alt"></i> <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
+  </p>
 
-    <ul class="list-inline m-0">
-      <li class="list-inline-item"><a href="<%= routesStruct.index %>">ACCEUIL</a></li>
-      <li class="list-inline-item"><a href="<%= routesStruct.users.profile %>">PROFILE</a></li>
-      <li class="list-inline-item"><a href="<%= routesStruct.auth.logout %>">DECONNEXION</a></li>
-    </ul>
-
-    <p class="text-muted font-weight-light text-uppercase m-0">
-        ©  COPYRIGHT &copy; 2019 -
-        <i class="fas fa-calendar-alt"></i> <%= locals.formatDate((new Date().toISOString()).slice(0, 10)) %>
-      </p>
-  </div>
+  <ul class="list-inline m-0">
+    <li class="list-inline-item"><a href="<%= routesStruct.index %>">ACCEUIL</a></li>
+    <li class="list-inline-item"><a href="<%= routesStruct.users.profile %>">PROFILE</a></li>
+    <li class="list-inline-item"><a href="<%= routesStruct.auth.logout %>">DECONNEXION</a></li>
+  </ul>
 
 </footer>
 
 <% if(locals.staticFiles) { %>
+  <script src="<%= staticFiles.js.api %>"></script>
 <script src="<%= staticFiles.js.custom %>"></script>
 <script src="<%= staticFiles.js.validator %>"></script>
 <script src="<%= staticFiles.js.fetch %>"></script>
 <script src="<%= staticFiles.js.formAlert %>"></script>
+<script src="<%= staticFiles.js.pagination %>"></script>
 <script src="<%= staticFiles.js.theme %>"></script>
 <% } %>
 
