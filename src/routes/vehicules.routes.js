@@ -9,14 +9,6 @@ const { isAdmin } = require("../middlewares/permission.middleware");
 const vehiculeController = require("../controllers/vehicule.controller");
 
 
-// index : main route
-router.get("/", [redirectLogin, isAdmin], async (req, res) => {
-    await res.render("vehicules/index");
-});
-
-
-
-
 /** Add vehicule to database */
 router.get("/add", [redirectLogin, isAdmin], async (req, res) => {
     await res.render("vehicules/add-vehicule")
@@ -26,10 +18,6 @@ router.get("/add", [redirectLogin, isAdmin], async (req, res) => {
 router.post("/add", [redirectLogin, isAdmin], async (req, res) => {
     await vehiculeController.addVehicule(req, res);
 });
-
-
-
-
 
 
 /** Update vehicule */

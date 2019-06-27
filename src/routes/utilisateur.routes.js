@@ -8,12 +8,6 @@ const utilisateurController = require('../controllers/utilisateur.controller');
 const { redirectLogin } = require('../middlewares/auth.middleware');
 const { isAdmin } = require("../middlewares/permission.middleware");
 
-
-router.get("/", [redirectLogin, isAdmin], async (req, res) => {
-  //await utilisateurController.root(req, res)
-  await res.render("users/index");
-});
-
 /** Add user to database */
 router.get("/add", [redirectLogin, isAdmin], async (req, res) => {
   await res.render("users/add-user")
