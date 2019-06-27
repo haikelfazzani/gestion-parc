@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const len = data.length;
         data = data.reverse();
+
         msg.innerHTML = `<a href="/reservations/list-demands" 
             class="list-group-item list-group-item-action">
               <i class="fas fa-bookmark mr-3"></i> ${data[0].message}
@@ -73,16 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
           listNotifs.innerHTML = "";
           for (let d of listNotifications) {
 
-            listNotifs.innerHTML += `
-              
-            <a href="/reservations/list-demands" 
-            class="list-group-item list-group-item-action scale-in-tl">
-              <i class="fas fa-bookmark mr-3"></i> ${d.message}
-              <span class="badge badge-info" style="float:right">
-                  ${d.date_notif}
-              </span>
-            </a>
-          `;
+            let elemnt = `<div class="media notif-style mb-2">
+              <img src="/img/notifications.png" class="mr-3" alt="..." width="50" height="50">
+              <div class="media-body">
+                <h5 class="m-0 p-0">${d.message}</h5>
+                <small class="text-muted"><i class="fas fa-clock"></i> ${d.date_notif}</small>
+              </div>
+            </div>`;
+
+            listNotifs.innerHTML += elemnt;
           }
         }
 

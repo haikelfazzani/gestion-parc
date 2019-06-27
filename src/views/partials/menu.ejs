@@ -28,8 +28,12 @@
           Utilisateurs
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<%= routesStruct.users.add %>">Ajout</a>
-          <a class="dropdown-item" href="<%= routesStruct.users.list %>">Liste des Utilisateurs</a>
+          <a class="dropdown-item" href="<%= routesStruct.users.add %>">
+            <i class="fas fa-user-plus"></i> AJOUT D'UN UTILISATEUR
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.users.list %>"><i class="fas fa-list"></i>
+            Liste des Utilisateurs
+          </a>
         </div>
       </li>
 
@@ -40,8 +44,12 @@
           Véhicules
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<%= routesStruct.vehicules.add %>">Ajout</a>
-          <a class="dropdown-item" href="<%= routesStruct.vehicules.list %>">Liste de véhicules</a>
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.add %>">
+            <i class="fas fa-plus"></i> AJOUT D'UNe véhicule
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.list %>">
+            <i class="fas fa-list"></i> Liste de véhicules
+          </a>
         </div>
       </li>
 
@@ -58,12 +66,20 @@
           <% if(locals.userInfo && locals.routesStruct) { 
               if(userInfo.role === role.admin) {    
           %>
-          <a class="dropdown-item" href="<%= routesStruct.reservations.list %>">Liste des demandes</a>
-          <a class="dropdown-item" href="<%= routesStruct.reservations.history %>">Historique</a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.list %>">
+            <i class="fas fa-list"></i> Liste des demandes
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.history %>">
+            <i class="fas fa-list"></i> Historique
+          </a>
           <% } else { %>
 
-          <a class="dropdown-item" href="<%= routesStruct.reservations.listvehicule %>">Liste de véhicules</a>
-          <a class="dropdown-item" href="<%= routesStruct.reservations.listreserved %>">Liste des reservations</a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listvehicule %>">
+            <i class="fas fa-list"></i> Liste de véhicules
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listreserved %>">
+            <i class="fas fa-list"></i> Liste des reservations
+          </a>
           <% } } %>
         </div>
       </li>

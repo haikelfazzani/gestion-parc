@@ -39,7 +39,7 @@
             <td><%= locals.formatDate(reservation.date_depart) %> </td>
             <td><%= locals.formatDate(reservation.date_retour) %></td>
             <td>
-              <% if(locals.Etat.enAttente ){ %>
+              <% if(reservation.etat === locals.Etat.enAttente ){ %>
               <span class="badge badge-warning"><%= reservation.etat %></span>
               <% } else { %>
               <span class="badge badge-success"><%= reservation.etat %></span>

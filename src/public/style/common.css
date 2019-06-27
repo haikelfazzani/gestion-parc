@@ -15,6 +15,13 @@ body {min-height: 100vh;}
     transform: translateY(-50%);
   }
 
+
+  .notif-style {
+    background-color: white;
+    padding: 5px;
+    border-left: 2px solid #3c3c3c;
+  }
+
 /*.navbar a { color: #87c232 !important;  }*/
 
 a {     
