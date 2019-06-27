@@ -21,21 +21,54 @@
       <% if(locals.userInfo && locals.routesStruct) { 
           if(userInfo.role === role.admin) {    
       %>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.users.index %>">
-          Utilisateurs</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Utilisateurs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= routesStruct.users.add %>">Ajout</a>
+          <a class="dropdown-item" href="<%= routesStruct.users.list %>">Liste des Utilisateurs</a>
+        </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.vehicules.index %>">
-          Véhicules</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Véhicules
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.add %>">Ajout</a>
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.list %>">Liste de véhicules</a>
+        </div>
       </li>
+
 
       <% } }%>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.reservations.index %>">
-          Reservations</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Reservations
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <% if(locals.userInfo && locals.routesStruct) { 
+              if(userInfo.role === role.admin) {    
+          %>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.list %>">Liste des demandes</a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.history %>">Historique</a>
+          <% } else { %>
+
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listvehicule %>">Liste de véhicules</a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listreserved %>">Liste des reservations</a>
+          <% } } %>
+        </div>
       </li>
+
+
 
     </ul>
 
@@ -73,8 +106,8 @@
 
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">
-              <i class="fas fa-sign-out-alt"></i> DECONNEXION
-            </a>
+            <i class="fas fa-sign-out-alt"></i> DECONNEXION
+          </a>
 
         </div>
       </li>
