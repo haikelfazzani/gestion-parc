@@ -1,3 +1,4 @@
+body {min-height: 100vh;}
 .navbar {
     padding: 15px 130px;
 }
@@ -5,6 +6,14 @@
 #navbarDropdownMenuLink-4 { color: #ffffff; }
 
 #btn-theme { text-transform: uppercase; }
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
 
 /*.navbar a { color: #87c232 !important;  }*/
 
