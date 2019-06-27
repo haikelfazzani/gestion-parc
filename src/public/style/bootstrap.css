@@ -2913,7 +2913,7 @@ input[type="button"].btn-block {
   width: 100%;
   padding: 0.25rem 1.5rem;
   clear: both;
-  font-weight: 400;
+  font-weight: 600;
   color: #212529;
   text-align: inherit;
   white-space: nowrap;
@@ -4476,8 +4476,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-dark {
-  color: #1b1e21;
-  background-color: #d6d8d9;
+  color: #ffffff !important;
+  background-color: #3c3c3c;
   border-color: #c6c8ca;
 }
 
@@ -4486,7 +4486,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-dark .alert-link {
-  color: #040505;
+  color: #ffffff;
 }
 
 @-webkit-keyframes progress-bar-stripes {
