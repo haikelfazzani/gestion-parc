@@ -1,31 +1,25 @@
 <!-- Sidebar Holder -->
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h3>Gestion des reservations</h3>
+    <h3>Boudjbel Vacpa</h3>
   </div>
 
   <ul class="list-unstyled components">
 
-    <% if(locals.avatar && locals.staticFiles) { %>
-    <div class="d-flex justify-content-center mb-2">
-      <img src="<%= locals.avatar %>" 
-      alt="" id="img-profile" width="150" height="150" style="border-radius: 50%">
-    </div>
-    <%  } %>
-    
-
     <li>
-      <a href="/">Acceuil</a>
+      <a href="/"><i class="fas fa-home"></i> Acceuil</a>
       <% if(locals.userInfo && locals.routesStruct) { 
         if(userInfo.role === role.admin) {    
       %>
-      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Utilisateurs</a>
+      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-users"></i> Utilisateurs
+      </a>
       <ul class="collapse list-unstyled" id="pageSubmenu">
         <li>
-          <a href="<%= routesStruct.users.add %>">Ajout Utilisateur</a>
+          <a href="<%= routesStruct.users.add %>"><i class="fas fa-plus"></i> Ajout Utilisateur</a>
         </li>
         <li>
-          <a href="<%= routesStruct.users.list %>">Liste des Utilisateurs</a>
+          <a href="<%= routesStruct.users.list %>"><i class="fas fa-list"></i> Liste des Utilisateurs</a>
         </li>
 
       </ul>
@@ -37,20 +31,24 @@
       if(userInfo.role === role.admin) {    
     %>
     <li>
-      <a href="#vsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Véhicules</a>
+      <a href="#vsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-car"></i> Véhicules
+      </a>
       <ul class="collapse list-unstyled" id="vsubmenu">
         <li>
-          <a href="<%= routesStruct.vehicules.add %>">Ajout</a>
+          <a href="<%= routesStruct.vehicules.add %>"><i class="fas fa-plus"></i> Ajout véhicule</a>
         </li>
         <li>
-          <a href="<%= routesStruct.vehicules.list %>">Liste</a>
+          <a href="<%= routesStruct.vehicules.list %>"><i class="fas fa-list"></i> Liste des véhicules</a>
         </li>
       </ul>
     </li>
     <% } }%>
 
     <li>
-      <a href="#rsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reservations</a>
+      <a href="#rsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-calendar-check"></i> Reservations
+      </a>
       <ul class="collapse list-unstyled" id="rsubmenu">
         <% if(locals.userInfo && locals.routesStruct) { 
             if(userInfo.role === role.admin) {    

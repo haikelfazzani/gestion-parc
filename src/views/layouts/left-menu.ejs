@@ -22,9 +22,19 @@
           </a>
         </li>
 
+        <% if(locals.avatar && locals.staticFiles) { %>
+        <li class="nav-item active">
+          
+            <img src="<%= locals.avatar %>" 
+             alt="" id="img-profile"style="border-radius: 50%" width="40" height="40">
+          
+        </li>
+        <%  } %>
+          
+
         <li class="nav-item active">
           <a class="nav-link" href="<%= routesStruct.users.profile %>">
-            <i class="fas fa-user"></i> <%= userInfo.nom_complet %>
+            <%= userInfo.nom_complet %>
           </a>
         </li>
 

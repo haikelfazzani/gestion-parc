@@ -6,16 +6,22 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #f0efef;
+  background-color: #ececec;
 }
 .container { margin-bottom: 50px !important; }
 .components a, .btn, label { font-size: 14px !important; font-weight: 600; text-transform: uppercase; }
+.components a {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+#list-group {background-color: #f8f9fa;padding: 20px;}
 
 h2 {
   padding-bottom: 10px;
-    border-bottom: 2px solid #525252;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+  border-bottom: 2px solid #525252;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 form {  
@@ -99,6 +105,12 @@ SIDEBAR STYLE
 #sidebar ul.components {
   padding: 20px 0;
   border-bottom: 1px solid #47748b;
+}
+
+.components i {     
+  margin-right: .6rem;     
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 #sidebar ul p {
