@@ -12,32 +12,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch(mode === "dev" ? readDev : readProd)
       .then(res => res.json())
-      .then(data => pagination(data))
+      .then(data => localStorage.setItem("notifications", JSON.stringify(data.reverse())))
       .catch(err => console.log(err));
 
+    pagination();
 
-    function pagination(data) {
+    function pagination() {
 
-      const listNotifs = document.getElementById("list-notifications");
-      const btnNext = document.getElementById("btn-next");
-      const btnPrev = document.getElementById("btn-previous");
-      const pages = document.getElementById("pages");
-      const msg = document.getElementById("msg");
-      let i = 1;
-
+      data = JSON.parse(localStorage.getItem("notifications"));
 
       if (data && data.length > 0) {
 
-        const len = data.length;
-        data = data.reverse();
+        const listNotifs = document.getElementById("list-notifications");
+        const btnNext = document.getElementById("btn-next");
+        const btnPrev = document.getElementById("btn-previous");
+        const pages = document.getElementById("pages");
 
-        msg.innerHTML = `<a href="/reservations/list-demands" 
-            class="list-group-item list-group-item-action">
-              <i class="fas fa-bookmark mr-3"></i> ${data[0].message}
-              <span class="badge badge-info">
-                  ${data[0].date_notif}
-              </span>
-            </a>`;
+        let i = 1;
+        let len = data.length;
 
         listNotifications = data.slice(0, 5);
         displayList(listNotifications, start, end);

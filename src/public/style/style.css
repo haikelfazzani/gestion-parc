@@ -8,13 +8,15 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #ececec;
 }
+/**/
 .container { margin-bottom: 50px !important; }
 .components a, .btn, label { font-size: 14px !important; font-weight: 600; text-transform: uppercase; }
 .components a {
   font-size: 1.25rem;
-  line-height: 1.5;
+  line-height: 2;
 }
-
+.notif-style { background-color: #f8f9fa; padding: 10px; }
+/**/
 #list-group {background-color: #f8f9fa;padding: 20px;}
 
 h2 {

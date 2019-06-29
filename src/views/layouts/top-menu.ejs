@@ -11,7 +11,7 @@
       <% if(locals.userInfo && locals.routesStruct) { 
         if(userInfo.role === role.admin) {    
       %>
-      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle user">
         <i class="fas fa-users"></i> Utilisateurs
       </a>
       <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -31,7 +31,7 @@
       if(userInfo.role === role.admin) {    
     %>
     <li>
-      <a href="#vsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#vsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle vehi">
         <i class="fas fa-car"></i> Véhicules
       </a>
       <ul class="collapse list-unstyled" id="vsubmenu">
@@ -46,7 +46,7 @@
     <% } }%>
 
     <li>
-      <a href="#rsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <a href="#rsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle resv">
         <i class="fas fa-calendar-check"></i> Reservations
       </a>
       <ul class="collapse list-unstyled" id="rsubmenu">
