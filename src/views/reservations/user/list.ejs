@@ -1,70 +1,76 @@
-<% include ../../partials/head %>
+<% include ../../layouts/head %>
 
-<% include ../../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include ../left-menu %>
+    <% include ../../layouts/top-menu %>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+      <% include ../../layouts/left-menu %>
+
+      <div class="container">
+
+
+        <h2><i class="fas fa-list"></i> Liste des véhicules
+          <span class="badge badge-primary"><%= data.length %>
+          </span>
+        </h2>
+
+        <% if(locals.data && locals.data.length > 0) { 
+                data = locals.data.reverse()
+                let i = 1;
+              %>
+
+        <table class="table table-hover table-light">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Num serie</th>
+              <th scope="col">marque</th>
+              <th scope="col">Etat</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <% for(let v of data) { %>
+            <tr>
+              <td><%= i++ %></td>
+              <td><%= v.num_serie %></td>
+              <td><%= v.marque %></td>
+              <td>
+                <span class="badge badge-success"><%= v.etat %></span>
+              </td>
+
+              <td>
+                <a href="/reservations/user/reserve?v=<%= v.num_serie %>" class="btn btn-success">
+                  <i class="fas fa-car"></i>
+                </a>
+
+              </td>
+
+            </tr>
+            <% } %>
+
+          </tbody>
+        </table>
+
+        <% } else { %>
+        <div class="alert alert-info" role="alert">
+          aucune véhicule n'a été trouvée
+        </div>
+        <% } %>
+
+
+      </div>
+
     </div>
-
-    <div class="col-md-8">
-
-      <h2><i class="fas fa-list"></i> Liste des véhicules
-        <span class="badge badge-primary"><%= data.length %>
-        </span>
-      </h2>
-
-      <% if(locals.data && locals.data.length > 0) { 
-        data = locals.data.reverse()
-        let i = 1;
-      %>      
-
-      <table class="table table-hover table-light">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Num serie</th>
-            <th scope="col">marque</th>
-            <th scope="col">Etat</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-
-
-          <% for(let v of data) { %>
-          <tr>
-            <td><%= i++ %></td>
-            <td><%= v.num_serie %></td>
-            <td><%= v.marque %></td>
-            <td>
-              <span class="badge badge-success"><%= v.etat %></span>
-            </td>
-
-            <td>
-              <a href="/reservations/user/reserve?v=<%= v.num_serie %>" class="btn btn-success">
-                <i class="fas fa-car"></i>
-              </a>
-
-            </td>
-
-          </tr>
-          <% } %>
-
-        </tbody>
-      </table>
-
-    </div>
-    <% } else { %>
-    <div class="alert alert-info" role="alert">
-      aucune véhicule n'a été trouvée
-    </div>
-    <% } %>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../../partials/footer %>
+  <% include ../../layouts/footer %>

@@ -1,99 +1,101 @@
-<% include ../../partials/head %>
+<% include ../../layouts/head %>
 
-<% include ../../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include ../left-menu %>
-    </div>
+    <% include ../../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-paper-plane"></i> Reserver une véhicule</h2>
+      <% include ../../layouts/left-menu %>
 
-      <% if(locals.vehicule) { %>
-      <form action="/reservations/user/reserve" method="POST" id="form-reserve">
+      <div class="container">
 
-        <div class="row">
-          <div class="col-md-6">
-            <!-- Date de depart -->
-            <div class="form-group">
-              <label for="date-depart">Date de depart</label>
-              <input type="date" class="form-control" id="date-depart" name="dateDepart" placeholder="Enter date depart"
-                required>
+
+        <h2><i class="fas fa-paper-plane"></i> Reserver une véhicule</h2>
+
+        <% if(locals.vehicule) { %>
+        <form action="/reservations/user/reserve" method="POST" id="form-reserve">
+
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Date de depart -->
+              <div class="form-group">
+                <label for="date-depart">Date de depart</label>
+                <input type="date" class="form-control" id="date-depart" name="dateDepart"
+                  placeholder="Enter date depart" required>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <!-- Date de retour -->
+              <div class="form-group">
+                <label for="date-retour">Date de retour</label>
+                <input type="date" class="form-control" id="date-retour" name="dateRetour"
+                  placeholder="Enter date retour" required>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Boss order -->
+          <div class="form-group">
+            <label for="boss-order">Boss order</label>
+            <input type="number" class="form-control" id="boss-order" name="bossOrder" placeholder="Enter boss order"
+              required>
+          </div>
+
+          <!-- Description de mission -->
+          <div class="form-group">
+            <label for="desc-mission">Description de mission</label>
+            <textarea class="form-control" id="desc-mission" name="descMission" rows="3" required></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="vehicule">Vehicule</label>
+                <input type="text" class="form-control" id="vehicule" value="<%= vehicule.marque %>" readonly required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="numSerie">Num serie</label>
+                <input type="text" class="form-control" id="numSerie" value="<%= vehicule.num_serie %>" name="numSerie"
+                  readonly required>
+              </div>
             </div>
 
           </div>
 
-          <div class="col-md-6">
-            <!-- Date de retour -->
-            <div class="form-group">
-              <label for="date-retour">Date de retour</label>
-              <input type="date" class="form-control" id="date-retour" name="dateRetour" placeholder="Enter date retour"
-                required>
-            </div>
-          </div>
-        </div>
 
-
-
-        <!-- Boss order -->
-        <div class="form-group">
-          <label for="boss-order">Boss order</label>
-          <input type="number" class="form-control" id="boss-order" name="bossOrder" 
-          placeholder="Enter boss order"
-            required>
-        </div>
-
-        <!-- Description de mission -->
-        <div class="form-group">
-          <label for="desc-mission">Description de mission</label>
-          <textarea class="form-control" id="desc-mission" name="descMission" 
-          rows="3" required></textarea>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="vehicule">Vehicule</label>
-              <input type="text" class="form-control" id="vehicule" value="<%= vehicule.marque %>" readonly required>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="numSerie">Num serie</label>
-              <input type="text" class="form-control" id="numSerie" value="<%= vehicule.num_serie %>" name="numSerie"
-                readonly required>
-            </div>
-          </div>
-
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i> Envoyer
           </button>
-        <button type="reset" class="btn btn-danger">vider</button>
+          <button type="reset" class="btn btn-danger">vider</button>
 
-      </form>
-      <% } %>
+        </form>
+        <% } %>
 
-      <div class="alert alert-danger mt-3" role="alert" id="alert-reserve"></div>
+        <div class="alert alert-danger mt-3" role="alert" id="alert-reserve"></div>
 
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
+        </div>
+        <% } %>
+
+
       </div>
-      <% } %>
 
     </div>
-
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../../partials/footer %>
+  <% include ../../layouts/footer %>

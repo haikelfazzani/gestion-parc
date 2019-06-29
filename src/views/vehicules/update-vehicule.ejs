@@ -1,68 +1,71 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
-<% include ../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include left-menu %>
-    </div>
+    <% include ../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-pencil-ruler"></i> Modification d'une véhicule</h2>
+      <% include ../layouts/left-menu %>
 
-      <% if(locals.data) { %>
-      <form action="/vehicules/update" method="POST" id="form-update">
+      <div class="container">
 
-        <input type="text" class="form-control" id="id" name="id" 
-          value="<%= data.id_vehicule %>" readonly hidden>
+        <h2><i class="fas fa-pencil-ruler"></i> Modification d'une véhicule</h2>
 
-        <div class="form-group">
-          <label for="numSerie">Num serie</label>
-          <input type="text" class="form-control" id="numSerie" name="numSerie" 
-          value="<%= data.num_serie %>" required>
-        </div>
+        <% if(locals.data) { %>
+        <form action="/vehicules/update" method="POST" id="form-update">
 
-        <div class="form-group">
-          <label for="marque">marque</label>
-          <input type="text" class="form-control" id="marque" name="marque" 
-          value="<%= data.marque %>" required>
-        </div>
+          <input type="text" class="form-control" id="id" name="id" value="<%= data.id_vehicule %>" readonly hidden>
 
-        <% if(locals.Etat) { %>
-        <div class="form-group">
-          <label for="etat ml-3">Etat courante
-            <span class="badge badge-dark"><%= data.etat %></span>
-          </label>
+          <div class="form-group">
+            <label for="numSerie">Num serie</label>
+            <input type="text" class="form-control" id="numSerie" name="numSerie" value="<%= data.num_serie %>"
+              required>
+          </div>
 
-          <select class="form-control" id="etat" name="etat">
-            <% for(let d in Etat) {%>
-            <option value="<%= Etat[d] %>"><%= Etat[d] %></option>
-            <% } %>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="marque">marque</label>
+            <input type="text" class="form-control" id="marque" name="marque" value="<%= data.marque %>" required>
+          </div>
+
+          <% if(locals.Etat) { %>
+          <div class="form-group">
+            <label for="etat ml-3">Etat courante
+              <span class="badge badge-dark"><%= data.etat %></span>
+            </label>
+
+            <select class="form-control" id="etat" name="etat">
+              <% for(let d in Etat) {%>
+              <option value="<%= Etat[d] %>"><%= Etat[d] %></option>
+              <% } %>
+            </select>
+          </div>
+          <% } %>
+
+
+          <button type="submit" class="btn btn-success"><i class="fas fa-pencil-ruler"></i> MODIFIER</button>
+          <button type="reset" class="btn btn-danger">vider</button>
+
+        </form>
         <% } %>
 
 
-        <button type="submit" class="btn btn-success"><i class="fas fa-pencil-ruler"></i> MODIFIER</button>
-        <button type="reset" class="btn btn-danger">vider</button>
 
-      </form>
-      <% } %>
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
+        </div>
+        <% } %>
 
-
-
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
       </div>
-      <% } %>
+
+
     </div>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../partials/footer %>
+  <% include ../layouts/footer %>

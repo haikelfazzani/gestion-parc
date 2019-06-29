@@ -3,6 +3,12 @@ body {min-height: 100vh;}
     padding: 15px 130px;
 }
 
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
 #navbarDropdownMenuLink-4 { color: #ffffff; }
 
 #btn-theme { text-transform: uppercase; }
@@ -24,9 +30,7 @@ body {min-height: 100vh;}
 
 /*.navbar a { color: #87c232 !important;  }*/
 
-a {     
-    transition: all 0.4s ease; 
-}
+a {     transition: all 0.4s ease; }
 
 a, label, .btn {
     font-size: 14px;

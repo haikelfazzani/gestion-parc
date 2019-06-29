@@ -1,113 +1,124 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
 <body>
 
-  <% include ../partials/menu %>
+  <div class="wrapper">
 
-  <div class="container py-5 mb-5">
-    <h2 class="mb-4"><i class="fas fa-address-card"></i> Profile</h2>
+    <% include ../layouts/top-menu %>
 
-    <div class="row">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <!-- Avatar -->
-      <div class="col-md-3 mb-3">
+      <% include ../layouts/left-menu %>
 
-        <% if(locals.avatar && locals.staticFiles) { %>
-        <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail fade-in mb-3">
-        <% } %>
-
-
-
-        <% if(locals.avatar) { 
-             
-            let action = locals.avatar !== staticFiles.profileImage ?
-              "/profile/avatar/update" : "/profile/avatar/add"
-        %>
-
-        <form action="<%= action %>" method="POST" enctype="multipart/form-data">
-          <div class="input-group mb-2">
-
-            <div class="custom-file">
-              <input type="file" class="custom-file-control form-control-file" id="avatar" name="avatar" required>
-              <label class="custom-file-label" for="avatar">
-                choisir un fichier
-              </label>
-            </div>
-          </div>
-
-
-          <button type="submit" class="btn btn-success btn-block" id="btn-change-avatar">
-            <i class="fas fa-upload"></i> MODIFIER
-          </button>
-
-        </form>
-
-        <%  } %>
-
-      </div><!-- /Avatar -->
-
-
+      <div class="container">
+          <h2 class="mb-4"><i class="fas fa-address-card"></i> Profile</h2>
       
-
-      <div class="col-md-9">
-        <% if(locals.userInfo){ %>
-
-        <form action="/profile" method="POST" id="form-profile">
-
-
-          <div class="form-group">
-            <label for="nomcomplet">Nom Complet</label>
-            <input type="text" class="form-control" id="nomcomplet" name="nomcomplet"
-              value="<%= locals.userInfo.nom_complet %>" disabled required>
+          <div class="row">
+      
+            <!-- Avatar -->
+            <div class="col-md-3 mb-3">
+      
+              <% if(locals.avatar && locals.staticFiles) { %>
+              <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail fade-in mb-3">
+              <% } %>      
+      
+      
+              <% if(locals.avatar) { 
+                   
+                  let action = locals.avatar !== staticFiles.profileImage ?
+                    "/profile/avatar/update" : "/profile/avatar/add"
+              %>
+      
+              <form action="<%= action %>" method="POST" enctype="multipart/form-data">
+                <div class="input-group mb-2">
+      
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-control form-control-file" id="avatar" name="avatar" required>
+                    <label class="custom-file-label" for="avatar">
+                      choisir un fichier
+                    </label>
+                  </div>
+                </div>
+      
+      
+                <button type="submit" class="btn btn-success btn-block" id="btn-change-avatar">
+                  <i class="fas fa-upload"></i> MODIFIER
+                </button>
+      
+              </form>
+      
+              <%  } %>
+      
+            </div><!-- /Avatar -->
+      
+      
+            
+      
+            <div class="col-md-9">
+              <% if(locals.userInfo){ %>
+      
+              <form action="/profile" method="POST" id="form-profile">
+      
+      
+                <div class="form-group">
+                  <label for="nomcomplet">Nom Complet</label>
+                  <input type="text" class="form-control" id="nomcomplet" name="nomcomplet"
+                    value="<%= locals.userInfo.nom_complet %>" disabled required>
+                </div>
+      
+      
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" 
+                  value="<%= locals.userInfo.email %>"
+                    readonly required>
+                </div>
+      
+                <div class="form-group">
+                  <label for="password-profile">Mot de passe</label>
+                  <input type="password" class="form-control" id="password-profile" 
+                  placeholder="*******" name="password"
+                    required>
+                </div>
+      
+      
+                <% if(locals.userInfo.division) { %>
+                <div class="form-group">
+                  <label for="division">Division</label>
+                  <input type="text" class="form-control" id="division" name="division" 
+                  value="<%= locals.userInfo.division %>"
+                    readonly required>
+                </div>
+                <% } %>
+      
+      
+                <button type="submit" class="btn btn-success" id="btn-profile">MODIFIER</button>
+                <button type="reset" class="btn btn-danger">VIDER</button>
+      
+              </form>
+      
+              <% } %>
+      
+      
+              <% if(locals.msg) { %>
+              <div class="alert alert-primary mt-3 mb-3" role="alert">
+                <%= locals.msg %>
+              </div>
+              <% } %>
+            </div>
+      
+      
+      
+      
           </div>
-
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" 
-            value="<%= locals.userInfo.email %>"
-              readonly required>
-          </div>
-
-          <div class="form-group">
-            <label for="password-profile">Mot de passe</label>
-            <input type="password" class="form-control" id="password-profile" 
-            placeholder="*******" name="password"
-              required>
-          </div>
-
-
-          <% if(locals.userInfo.division) { %>
-          <div class="form-group">
-            <label for="division">Division</label>
-            <input type="text" class="form-control" id="division" name="division" 
-            value="<%= locals.userInfo.division %>"
-              readonly required>
-          </div>
-          <% } %>
-
-
-          <button type="submit" class="btn btn-success" id="btn-profile">MODIFIER</button>
-          <button type="reset" class="btn btn-danger">VIDER</button>
-
-        </form>
-
-        <% } %>
-
-
-        <% if(locals.msg) { %>
-        <div class="alert alert-primary mt-3 mb-3" role="alert">
-          <%= locals.msg %>
+      
+      
         </div>
-        <% } %>
-      </div>
-
-
-
 
     </div>
-
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-  <% include ../partials/footer %>
+  <% include ../layouts/footer %>

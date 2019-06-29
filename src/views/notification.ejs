@@ -1,34 +1,33 @@
-<% include partials/head %>
+<% include layouts/head %>
 
-<% include partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
+
+    <% include layouts/top-menu %>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+      <% include layouts/left-menu %>
+
+      <div class="container">
+
+        <h2><i class="fas fa-bell"></i> Notifications</h2>
+        <div class="list-group" id="list-notifications"></div>
+
+        <ul class="pagination mt-3">
+          <li class="page-item"><a class="page-link" href="#" id="btn-previous">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#" id="pages">1</a></li>
+          <li class="page-item"><a class="page-link" href="#" id="btn-next">Next</a></li>
+        </ul>
 
 
-  <div class="row">
-
-    <div class="col-md-8">
-      <h2><i class="fas fa-bell"></i> Notifications</h2>
-      <div class="list-group" id="list-notifications"></div>
-
-      <ul class="pagination mt-3">
-        <li class="page-item"><a class="page-link" href="#" id="btn-previous">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#" id="pages">1</a></li>
-        <li class="page-item"><a class="page-link" href="#" id="btn-next">Next</a></li>
-      </ul>
-
-    </div>
-
-    <div class="col-md-4 mt-5">
-
-      <div class="alert alert-danger" id="msg" role="alert">
-        A simple primary alert—check it out!
       </div>
+
     </div>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-
-<% include partials/footer %>
+  <% include layouts/footer %>

@@ -1,54 +1,60 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
-<% include ../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include left-menu %>
-    </div>
+    <% include ../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-trash-alt"></i> Suppression d'une véhicule</h2>
-      <% if(locals.data) { %>
-      <form action="/vehicules/delete" method="POST" id="form-delete-vehicule">
+      <% include ../layouts/left-menu %>
 
-        <div class="form-group">
-          <label for="numSerie">Num serie</label>
-          <input type="text" class="form-control" id="numSerie" name="numSerie" value="<%= data.num_serie %>" required
-            readonly>
-        </div>
+      <div class="container">
 
-        <div class="form-group">
-          <label for="marque">marque</label>
-          <input type="text" class="form-control" id="marque" name="marque" value="<%= data.marque %>" required readonly>
-        </div>
+        <h2><i class="fas fa-trash-alt"></i> Suppression d'une véhicule</h2>
+        <% if(locals.data) { %>
+        <form action="/vehicules/delete" method="POST" id="form-delete-vehicule">
 
-        <div class="form-group">
+          <div class="form-group">
+            <label for="numSerie">Num serie</label>
+            <input type="text" class="form-control" id="numSerie" name="numSerie" value="<%= data.num_serie %>" required
+              readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="marque">marque</label>
+            <input type="text" class="form-control" id="marque" name="marque" value="<%= data.marque %>" required
+              readonly>
+          </div>
+
+          <div class="form-group">
             <label for="etat">Etat courante</label>
             <input type="text" class="form-control" id="etat" name="etat" value="<%= data.etat %>" required readonly>
           </div>
 
 
-        <button type="submit" class="btn btn-danger" >
-          <i class="fas fa-trash-alt"></i> SUPPRIMER
-        </button>
+          <button type="submit" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i> SUPPRIMER
+          </button>
 
-      </form>
-      <% } %>
+        </form>
+        <% } %>
 
 
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
+        </div>
+        <% } %>
+
+
       </div>
-      <% } %>
+
     </div>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../partials/footer %>
+  <% include ../layouts/footer %>

@@ -1,5 +1,5 @@
 body {
-    background-color: #3c3c3c;
+    background-color: #2f2d2d;
     color: #fff;    
 }
 
@@ -8,3 +8,4 @@ body {
     box-shadow: 0px 5px 15px 0px #3a3939;
 }
 
+form { color: #000000 !important; }

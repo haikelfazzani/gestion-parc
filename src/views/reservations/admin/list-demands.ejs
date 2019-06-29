@@ -1,82 +1,89 @@
-<% include ../../partials/head %>
+<% include ../../layouts/head %>
 
-<% include ../../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include ../left-menu %>
-    </div>
+    <% include ../../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-list"></i> Liste des demandes
-        <span class="badge badge-primary"><%= data.length %>
-        </span>
-      </h2>
+      <% include ../../layouts/left-menu %>
 
-      <% if((locals.data && locals.data.length > 0) && locals.Etat) { 
-        data = locals.data.reverse()
-        let i = 1;
-      %>
+      <div class="container">
 
 
-      <% for(let v of data){     %>
-      <div class="list-group mb-3" id="list-group">
+        <h2><i class="fas fa-list"></i> Liste des demandes
+          <span class="badge badge-primary"><%= data.length %>
+          </span>
+        </h2>
+
+        <% if((locals.data && locals.data.length > 0) && locals.Etat) { 
+                data = locals.data.reverse()
+                let i = 1;
+              %>
 
 
-        <div class="row">
+        <% for(let v of data){     %>
+        <div class="list-group mb-3" id="list-group">
 
-          <div class="col-md-4">
-            <h5 class="mb-1"><%= v.nom_complet %></h5>
-            <p>Email : <%= v.email %></p>
-            <p>Division : <%= v.division %></p>
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <h5 class="mb-1"><%= v.nom_complet %></h5>
+              <p>Email : <%= v.email %></p>
+              <p>Division : <%= v.division %></p>
+            </div>
+
+            <div class="col-md-4">
+              <h5 class="mb-1"><%= v.marque %></h5>
+              <p>Num serie : <%= v.num_serie %></p>
+              <p>Date depart : <%= locals.formatDate(v.date_depart) %></p>
+              <p>Date retour : <%= locals.formatDate(v.date_retour) %></p>
+            </div>
+
+
+            <div class="col-md-2 mb-2">
+              <% if(locals.Etat.enAttente ){ %>
+              <span class="badge badge-warning"><%= v.etat %></span>
+              <% } else { %>
+              <span class="badge badge-success"><%= v.etat %></span>
+              <% } %>
+            </div>
+
+            <div class="col-md-2">
+              <a href="/reservations/confirm?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-success">
+                <i class="fas fa-check"></i>
+              </a>
+
+              <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-danger">
+                <i class="fas fa-window-close"></i>
+              </a>
+            </div>
+
+
+
           </div>
-
-          <div class="col-md-4">
-            <h5 class="mb-1"><%= v.marque %></h5>
-            <p>Num serie : <%= v.num_serie %></p>
-            <p>Date depart : <%= locals.formatDate(v.date_depart) %></p>
-            <p>Date retour : <%= locals.formatDate(v.date_retour) %></p>
-          </div>
-
-
-          <div class="col-md-2 mb-2">
-            <% if(locals.Etat.enAttente ){ %>
-            <span class="badge badge-warning"><%= v.etat %></span>
-            <% } else { %>
-            <span class="badge badge-success"><%= v.etat %></span>
-            <% } %>
-          </div>
-
-          <div class="col-md-2">
-            <a href="/reservations/confirm?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-success">
-              <i class="fas fa-check"></i>
-            </a>
-
-            <a href="/reservations/cancel?v=<%= v.vehicule_id %>&u=<%= v.utilisateur_id %>" class="btn btn-danger">
-              <i class="fas fa-window-close"></i>
-            </a>
-          </div>
-
 
 
         </div>
+        <% } %>
+
+        <% } else { %>
+        <div class="alert alert-info" role="alert">
+          aucune demande n'a été envoyée
+        </div>
+        <% } %>
 
 
       </div>
-      <% } %>
+
 
     </div>
-    <% } else { %>
-    <div class="alert alert-info" role="alert">
-      aucune demande n'a été envoyée
-    </div>
-    <% } %>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../../partials/footer %>
+  <% include ../../layouts/footer %>
