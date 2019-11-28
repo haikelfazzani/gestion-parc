@@ -11,7 +11,7 @@
 
       <% include ../layouts/left-menu %>
 
-      <div class="container">
+      <div class="container py-5">
 
 
         <h2><i class="fas fa-plus"></i> Ajout d'une véhicule</h2>
@@ -19,13 +19,17 @@
 
           <div class="form-group">
             <label for="numSerie">Num serie</label>
-            <input type="text" class="form-control" id="numSerie" name="numSerie" placeholder="Enter num serie"
+            <input type="text" class="form-control" id="numSerie" 
+            pattern="[a-zA-Z0-9 _- ]+"
+            name="numSerie" placeholder="Enter num serie"
               required>
           </div>
 
           <div class="form-group">
             <label for="marque">marque</label>
-            <input type="text" class="form-control" id="marque" name="marque" placeholder="Entrer marque" required>
+            <input type="text" class="form-control" 
+            pattern="[a-zA-Z]+"
+            id="marque" name="marque" placeholder="Entrer marque" required>
           </div>
 
 

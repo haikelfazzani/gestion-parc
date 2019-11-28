@@ -45,14 +45,16 @@
     </li>
     <% } }%>
 
+
+    <% if(locals.userInfo && locals.routesStruct) { 
+      if(userInfo.role === role.admin) {    
+    %>
     <li>
-      <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle res" id="resv">
+      <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle resv">
         <i class="fas fa-calendar-check"></i> Reservations
       </a>
       <ul class="collapse list-unstyled" id="rsubmenu">
-        <% if(locals.userInfo && locals.routesStruct) { 
-            if(userInfo.role === role.admin) {    
-        %>
+
         <li>
           <a href="<%= routesStruct.reservations.list %>">
             <i class="fas fa-list"></i> Liste des demandes
@@ -63,7 +65,20 @@
             <i class="fab fa-algolia"></i> history
           </a>
         </li>
-        <% } else { %>
+      </ul>
+    </li>
+    <% } } %>
+
+
+    <% if(locals.userInfo && locals.routesStruct) { 
+      if(userInfo.role !== role.admin) {    
+    %>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle res">
+        <i class="fas fa-calendar-check"></i> Reservations
+      </a>
+      <ul class="collapse list-unstyled" id="rrsubmenu">
+
         <li>
           <a href="<%= routesStruct.reservations.listvehicule %>">
             <i class="fas fa-list"></i> Liste de véhicules
@@ -74,10 +89,10 @@
             <i class="fas fa-list"></i> Liste des reservations
           </a>
         </li>
-        <% } } %>
+
       </ul>
     </li>
-
+    <% } } %>
   </ul>
 
   <ul class="list-unstyled CTAs">

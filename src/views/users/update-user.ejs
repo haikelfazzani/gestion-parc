@@ -11,18 +11,21 @@
 
       <% include ../layouts/left-menu %>
 
-      <div class="container">
+      <div class="container py-5">
 
         <h2><i class="fas fa-pencil-ruler"></i> Modification d'un utilisateur</h2>
 
         <% if(locals.data) { %>
         <form action="/users/update" method="POST" id="form-update">
 
-          <input type="text" class="form-control" id="id" name="id" value="<%= data.id_utilisateur %>" readonly hidden>
+          <input type="text" class="form-control" id="id" name="id"           
+          value="<%= data.id_utilisateur %>" readonly hidden>
 
           <div class="form-group">
             <label for="nom">Nom d'utilisateur</label>
-            <input type="text" class="form-control" id="nom" name="nom" value="<%= data.nom_complet %>"
+            <input type="text" class="form-control" id="nom" 
+            pattern="[a-zA-Z ]+"
+            name="nom" value="<%= data.nom_complet %>"
               placeholder="Enter nom complet" required>
           </div>
 
