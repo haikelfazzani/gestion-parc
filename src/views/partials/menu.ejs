@@ -21,21 +21,70 @@
       <% if(locals.userInfo && locals.routesStruct) { 
           if(userInfo.role === role.admin) {    
       %>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.users.index %>">
-          Utilisateurs</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Utilisateurs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= routesStruct.users.add %>">
+            <i class="fas fa-user-plus"></i> AJOUT D'UN UTILISATEUR
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.users.list %>"><i class="fas fa-list"></i>
+            Liste des Utilisateurs
+          </a>
+        </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.vehicules.index %>">
-          Véhicules</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Véhicules
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.add %>">
+            <i class="fas fa-plus"></i> AJOUT D'UNe véhicule
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.vehicules.list %>">
+            <i class="fas fa-list"></i> Liste des véhicules
+          </a>
+        </div>
       </li>
+
 
       <% } }%>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= routesStruct.reservations.index %>">
-          Reservations</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Reservations
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <% if(locals.userInfo && locals.routesStruct) { 
+              if(userInfo.role === role.admin) {    
+          %>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.list %>">
+            <i class="fas fa-list"></i> Liste des demandes
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.history %>">
+            <i class="fab fa-algolia"></i> Historique
+          </a>
+          <% } else { %>
+
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listvehicule %>">
+            <i class="fas fa-list"></i> Liste de véhicules
+          </a>
+          <a class="dropdown-item" href="<%= routesStruct.reservations.listreserved %>">
+            <i class="fas fa-list"></i> Liste des reservations
+          </a>
+          <% } } %>
+        </div>
       </li>
+
+
 
     </ul>
 
@@ -73,8 +122,8 @@
 
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<%= routesStruct.auth.logout %>">
-              <i class="fas fa-sign-out-alt"></i> DECONNEXION
-            </a>
+            <i class="fas fa-sign-out-alt"></i> DECONNEXION
+          </a>
 
         </div>
       </li>

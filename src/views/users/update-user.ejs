@@ -1,99 +1,99 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
-<% include ../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include left-menu %>
-    </div>
+    <% include ../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-pencil-ruler"></i> Modification d'un utilisateur</h2>
+      <% include ../layouts/left-menu %>
 
-      <% if(locals.data) { %>
-      <form action="/users/update" method="POST" id="form-update">
+      <div class="container py-5">
 
-        <input type="text" class="form-control" id="id" name="id" 
+        <h2><i class="fas fa-pencil-ruler"></i> Modification d'un utilisateur</h2>
+
+        <% if(locals.data) { %>
+        <form action="/users/update" method="POST" id="form-update">
+
+          <input type="text" class="form-control" id="id" name="id"           
           value="<%= data.id_utilisateur %>" readonly hidden>
 
-        <div class="form-group">
-          <label for="nom">Nom d'utilisateur</label>
-          <input type="text" class="form-control" id="nom" name="nom" 
-          value="<%= data.nom_complet %>"
-          placeholder="Enter nom complet" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Adresse Email</label>
-          <input type="email" class="form-control" id="email" name="email" 
-          value="<%= data.email %>"
-          placeholder="Entrer email" required>
-        </div>
-
-
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input type="password" class="form-control" id="password" name="password" 
-          value="<%= data.password %>"
-          placeholder="Entrer mot de passe"
-            required>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <% if(locals.division) { %>
-            <div class="form-group">
-              <label for="division ml-3">division courante
-                <span class="badge badge-dark"><%= data.division %></span>
-              </label>
-              <select class="form-control" id="division" name="division">
-                <% for(let d in division) {%>
-                <option value="<%= division[d] %>"><%= division[d] %></option>
-                <% } %>
-              </select>
-            </div>
-            <% } %>
-
+          <div class="form-group">
+            <label for="nom">Nom d'utilisateur</label>
+            <input type="text" class="form-control" id="nom" 
+            pattern="[a-zA-Z ]+"
+            name="nom" value="<%= data.nom_complet %>"
+              placeholder="Enter nom complet" required>
           </div>
 
-          <div class="col-md-6">
-            <% if(locals.role) { %>
-            <div class="form-group">
-              <label for="role ml-3">role courant
-                <span class="badge badge-dark"><%= data.role %></span>
-              </label>
-              <select class="form-control" id="role" name="role">
-                <% for(let a in role) {%>
-                <option value="<%= role[a] %>"><%= role[a] %></option>
-                <% } %>
-              </select>
-            </div>
-            <% } %>
+          <div class="form-group">
+            <label for="email">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= data.email %>"
+              placeholder="Entrer email" required>
           </div>
-        </div><!-- / ROW -->
 
 
-        <button type="submit" class="btn btn-success"><i class="fas fa-pencil-ruler"></i> MODIFIER</button>
-        <button type="reset" class="btn btn-danger">vider</button>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" value="<%= data.password %>"
+              placeholder="Entrer mot de passe" required>
+          </div>
 
-      </form>
-      <% } %>
+          <div class="row">
+            <div class="col-md-6">
+              <% if(locals.division) { %>
+              <div class="form-group">
+                <label for="division ml-3">division courante
+                  <span class="badge badge-dark"><%= data.division %></span>
+                </label>
+                <select class="form-control" id="division" name="division">
+                  <% for(let d in division) {%>
+                  <option value="<%= division[d] %>"><%= division[d] %></option>
+                  <% } %>
+                </select>
+              </div>
+              <% } %>
+
+            </div>
+
+            <div class="col-md-6">
+              <% if(locals.role) { %>
+              <div class="form-group">
+                <label for="role ml-3">role courant
+                  <span class="badge badge-dark"><%= data.role %></span>
+                </label>
+                <select class="form-control" id="role" name="role">
+                  <% for(let a in role) {%>
+                  <option value="<%= role[a] %>"><%= role[a] %></option>
+                  <% } %>
+                </select>
+              </div>
+              <% } %>
+            </div>
+          </div><!-- / ROW -->
 
 
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
+          <button type="submit" class="btn btn-success"><i class="fas fa-pencil-ruler"></i> MODIFIER</button>
+          <button type="reset" class="btn btn-danger">vider</button>
+
+        </form>
+        <% } %>
+
+
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
+        </div>
+        <% } %>
+        
       </div>
-      <% } %>
-
 
     </div>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../partials/footer %>
+  <% include ../layouts/footer %>

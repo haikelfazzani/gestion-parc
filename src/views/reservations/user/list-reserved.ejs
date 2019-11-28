@@ -1,62 +1,68 @@
-<% include ../../partials/head %>
+<% include ../../layouts/head %>
 
-<% include ../../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include ../left-menu %>
+    <% include ../../layouts/top-menu %>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+      <% include ../../layouts/left-menu %>
+
+      <div class="container py-5">
+
+        <% if(locals.data && locals.Etat) { data = data.reverse() %>
+
+        <h2><i class="fas fa-list"></i> Liste des reservations
+          <span class="badge badge-primary"><%= data.length %>
+          </span>
+        </h2>
+
+        <table class="table table-hover table-light">
+          <thead>
+            <tr>
+              <th>Utilisateur</th>
+              <th>Num serie</th>
+              <th>marque</th>
+              <th>Date de depart</th>
+              <th>Date de retour</th>
+              <th>Etat</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% for(let reservation of data) { %>
+            <tr>
+              <td><%= reservation.nom_complet %></td>
+              <td><%= reservation.num_serie %></td>
+              <td><%= reservation.marque %></td>
+              <td><%= locals.formatDate(reservation.date_depart) %> </td>
+              <td><%= locals.formatDate(reservation.date_retour) %></td>
+              <td>
+                <% if(reservation.etat === locals.Etat.enAttente ){ %>
+                <span class="badge badge-warning"><%= reservation.etat %></span>
+                <% } else { %>
+                <span class="badge badge-success"><%= reservation.etat %></span>
+                <% } %>
+              </td>
+
+            </tr>
+            <% } %>
+
+          </tbody>
+        </table>
+
+        <% } %>
+
+
+      </div>
+
+
     </div>
-
-    <div class="col-md-8">
-
-      <% if(locals.data && locals.Etat) { data = data.reverse() %>
-
-      <h2><i class="fas fa-list"></i> Liste des reservations
-        <span class="badge badge-primary"><%= data.length %>
-        </span>
-      </h2>
-
-      <table class="table table-hover table-light">
-        <thead>
-          <tr>
-            <th>Utilisateur</th>
-            <th>Num serie</th>
-            <th>marque</th>
-            <th>Date de depart</th>
-            <th>Date de retour</th>
-            <th>Etat</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <% for(let reservation of data) { %>
-          <tr>
-            <td><%= reservation.nom_complet %></td>
-            <td><%= reservation.num_serie %></td>
-            <td><%= reservation.marque %></td>
-            <td><%= locals.formatDate(reservation.date_depart) %> </td>
-            <td><%= locals.formatDate(reservation.date_retour) %></td>
-            <td>
-              <% if(locals.Etat.enAttente ){ %>
-              <span class="badge badge-warning"><%= reservation.etat %></span>
-              <% } else { %>
-              <span class="badge badge-success"><%= reservation.etat %></span>
-              <% } %>
-            </td>
-
-          </tr>
-          <% } %>
-
-        </tbody>
-      </table>
-
-    </div>
-    <% } %>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../../partials/footer %>
+  <% include ../../layouts/footer %>

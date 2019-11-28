@@ -62,7 +62,7 @@ if (checkURL("vehicules", "add")) {
         let nom = form.numSerie.value;
         let marque = form.marque.value;
 
-        if (validator.isValidNumSerie(nom) && validator.isAlphaNum(marque)) {
+        if (validator.isValidNumSerie(nom)) {
             return true;
         }
         alertVehicule.style.display = "block";

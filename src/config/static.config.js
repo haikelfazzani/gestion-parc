@@ -2,11 +2,7 @@ const staticFiles = {
     logo: "/img/logooo.png",
     profileImage: "/img/profile.png",
     css: {
-        clair: "/style/clair.css",
-        dark: "/style/dark.css",
-        common: "/style/common.css",
-        bootstrap: "/style/bootstrap.css",
-        animation: "/style/animation.css"
+        bootstrap: "/style/bootstrap.css"
     },
     fontawesome: "/style/all.min.css",
     js: {
@@ -15,8 +11,7 @@ const staticFiles = {
         validator: "/js/validator.js",
         fetch: "/js/fetch.js",
         formAlert: "/js/form-alert.js",
-        pagination: "/js/pagination.js",
-        theme: "/js/theme.js"
+        pagination: "/js/pagination.js"
     }
 }
 

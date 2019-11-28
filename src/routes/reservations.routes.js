@@ -7,10 +7,6 @@ const { isAdmin, isNotAdmin } = require("../middlewares/permission.middleware");
 const reservationController = require("../controllers/reservation.controller");
 
 
-router.get("/", [redirectLogin], async (req, res) => {
-  await res.render("reservations/index");
-});
-
 /** Admin routes reservations handling */
 router.get("/list-demands", [redirectLogin, isAdmin], async (req, res) => {
   await reservationController.listDemands(req, res);

@@ -1,131 +1,125 @@
-<% include ../../partials/head %>
+<% include ../../layouts/head %>
 
-<% include ../../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include ../left-menu %>
-    </div>
+    <% include ../../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
+
+      <% include ../../layouts/left-menu %>
+
+      <div class="container py-5">
 
 
-      <h2><i class="fas fa-check-square"></i> Confirmation</h2>
+        <h2><i class="fas fa-check-square"></i> Confirmation</h2>
 
-      <% if(locals.data) { %>
-      <form action="/reservations/confirm" method="POST" id="form-confirm">
+        <% if(locals.data) { %>
+        <form action="/reservations/confirm" method="POST" id="form-confirm">
 
-        <div class="row">
+          <div class="row">
             <div class="col-md-6">
               <!-- User name -->
               <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" 
-                name="nom" 
-                value="<%= data.nom_complet %>"
-                  required readonly>
+                <input type="text" class="form-control" id="nom" name="nom" value="<%= data.nom_complet %>" required
+                  readonly>
               </div>
-  
+
             </div>
-  
+
             <div class="col-md-6">
               <!-- User email -->
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" 
-                name="email" value="<%= data.email %>"
-                  required readonly>
+                <input type="email" class="form-control" id="email" name="email" value="<%= data.email %>" required
+                  readonly>
               </div>
             </div>
           </div>
 
 
 
-        <div class="row">
-          <div class="col-md-6">
-            <!-- Date de depart -->
-            <div class="form-group">
-              <label for="date-depart">Date de depart</label>
-              <input type="date" class="form-control" id="date-depart" 
-              name="dateDepart" placeholder="Enter date depart"
-              value="<%= data.date_depart %>"
-                required readonly>
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Date de depart -->
+              <div class="form-group">
+                <label for="date-depart">Date de depart</label>
+                <input type="date" class="form-control" id="date-depart" name="dateDepart"
+                  placeholder="Enter date depart" value="<%= data.date_depart %>" required readonly>
+              </div>
+
+            </div>
+
+            <div class="col-md-6">
+              <!-- Date de retour -->
+              <div class="form-group">
+                <label for="date-retour">Date de retour</label>
+                <input type="date" class="form-control" id="date-retour" name="dateRetour"
+                  value="<%= data.date_retour %>" required readonly>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Boss order -->
+          <div class="form-group">
+            <label for="boss-order">Boss order</label>
+            <input type="number" class="form-control" id="boss-order" name="bossOrder" value="<%= data.boss_order %>"
+              required readonly>
+          </div>
+
+          <!-- Description de mission -->
+          <div class="form-group">
+            <label for="desc-mission">Description de mission</label>
+            <textarea class="form-control" id="desc-mission" name="descMission" rows="3" required
+              readonly><%= data.desc_mission %></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="vehicule">Vehicule</label>
+                <input type="text" class="form-control" id="vehicule" value="<%= data.marque %>" readonly required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="numSerie">Num serie</label>
+                <input type="text" class="form-control" id="numSerie" value="<%= data.num_serie %>" name="numSerie"
+                  readonly required>
+              </div>
             </div>
 
           </div>
 
-          <div class="col-md-6">
-            <!-- Date de retour -->
-            <div class="form-group">
-              <label for="date-retour">Date de retour</label>
-              <input type="date" class="form-control" id="date-retour" 
-              name="dateRetour" value="<%= data.date_retour %>"
-                required readonly>
-            </div>
-          </div>
+
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-check"></i> confirmer
+          </button>
+
+        </form>
+        <% } %>
+
+
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
         </div>
+        <% } %>
 
 
 
-        <!-- Boss order -->
-        <div class="form-group">
-          <label for="boss-order">Boss order</label>
-          <input type="number" class="form-control" id="boss-order" 
-          name="bossOrder" value="<%= data.boss_order %>"
-            required readonly>
-        </div>
-
-        <!-- Description de mission -->
-        <div class="form-group">
-          <label for="desc-mission">Description de mission</label>
-          <textarea class="form-control" id="desc-mission" 
-          name="descMission" rows="3" 
-          required readonly><%= data.desc_mission %></textarea>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="vehicule">Vehicule</label>
-              <input type="text" class="form-control" id="vehicule" 
-              value="<%= data.marque %>" readonly required>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="numSerie">Num serie</label>
-              <input type="text" class="form-control" id="numSerie" 
-              value="<%= data.num_serie %>" name="numSerie"
-                readonly required>
-            </div>
-          </div>
-
-        </div>
-
-
-        <button type="submit" class="btn btn-success">
-          <i class="fas fa-check"></i> confirmer
-        </button>        
-
-      </form>
-      <% } %>
-
-      
-
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
       </div>
-      <% } %>
+
 
     </div>
-
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../../partials/footer %>
+  <% include ../../layouts/footer %>

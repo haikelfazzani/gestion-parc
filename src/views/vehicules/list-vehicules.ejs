@@ -1,80 +1,85 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
-<% include ../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include left-menu %>
-    </div>
+    <% include ../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <% if(locals.data) { 
-        let i = 1;
-        if(locals.etatQuery) {
-          data = data.filter(d => d.etat === etatQuery)
-        }
-      %>
+      <% include ../layouts/left-menu %>
 
-      <h2><i class="fas fa-list"></i> Liste des véhicules
-        <span class="badge badge-primary"><%= data.length %>
-        </span>
-      </h2>
+      <div class="container py-5">
 
-      <% if(locals.Etat) { %>
-      <div class="d-flex flex-row-reverse mb-2">
-        <% for(let e in Etat) { %>
-        <a href="/vehicules/list?etatQuery=<%= Etat[e] %>" class="mr-2">
-          <span class="badge badge-primary"><%= Etat[e] %></span>
-        </a>
-        <% } %>
-      </div>
-      <% } %>
+        <% if(locals.data) { 
+                let i = 1;
+                if(locals.etatQuery) {
+                  data = data.filter(d => d.etat === etatQuery)
+                }
+              %>
 
-      <table class="table table-hover table-light">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Num serie</th>
-            <th scope="col">marque</th>
-            <th scope="col">Etat</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
+        <h2><i class="fas fa-list"></i> Liste des véhicules
+          <span class="badge badge-primary"><%= data.length %>
+          </span>
+        </h2>
 
-
-          <% for(let v of data) { %>
-          <tr>
-            <td><%= i++ %></td>
-            <td><%= v.num_serie %></td>
-            <td><%= v.marque %></td>
-            <td><%= v.etat %></td>
-
-            <td>
-              <a href="/vehicules/update?v=<%= v.num_serie %>" class="btn btn-success">
-                <i class="fas fa-pen"></i>
-              </a>
-
-              <a href="/vehicules/delete?v=<%= v.num_serie %>" class="btn btn-danger">
-                <i class="far fa-trash-alt"></i>
-              </a>
-
-            </td>
-
-          </tr>
+        <% if(locals.Etat) { %>
+        <div class="d-flex flex-row-reverse mb-2">
+          <% for(let e in Etat) { %>
+          <a href="/vehicules/list?etatQuery=<%= Etat[e] %>" class="mr-2">
+            <span class="badge badge-primary"><%= Etat[e] %></span>
+          </a>
           <% } %>
+        </div>
+        <% } %>
 
-        </tbody>
-      </table>
+        <table class="table table-hover table-light">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Num serie</th>
+              <th scope="col">marque</th>
+              <th scope="col">Etat</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <% for(let v of data) { %>
+            <tr>
+              <td><%= i++ %></td>
+              <td><%= v.num_serie %></td>
+              <td><%= v.marque %></td>
+              <td><%= v.etat %></td>
+
+              <td>
+                <a href="/vehicules/update?v=<%= v.num_serie %>" class="btn btn-success">
+                  <i class="fas fa-pen"></i>
+                </a>
+
+                <a href="/vehicules/delete?v=<%= v.num_serie %>" class="btn btn-danger">
+                  <i class="far fa-trash-alt"></i>
+                </a>
+
+              </td>
+
+            </tr>
+            <% } %>
+
+          </tbody>
+        </table>
+
+        <% } %>
+
+
+      </div>
 
     </div>
-    <% } %>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../partials/footer %>
+  <% include ../layouts/footer %>

@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const btnDrop = document.getElementById("navbarDropdownMenuLink-4");
-    const menuDropDown = document.querySelector(".dropdown-menu");
+  function toggle(parent, child) {
+    // reservation buttons in left side menu
+    let parentBtn = document.querySelector(parent);;
+    let childBtn = document.querySelector(child);
 
-    const navbarToggler = document.querySelector(".navbar-toggler");
-    const collapse = document.querySelector(".collapse");
+    parentBtn ? parentBtn.onclick = () => {
+      (childBtn.style.display = childBtn.style.display === "block" ? "none" : "block", childBtn.style.transtion = "all .5s ease")
+    } : "";
+  }
 
-    function toggle(parent, child) {
-        parent.onclick = () => {
-            child.style.display = child.style.display === "block" ? "none" : "block";
-        }
-    }
+  toggle(".user", "#pageSubmenu");
+  toggle(".vehi", "#vsubmenu");
+  toggle(".resv", "#rsubmenu");
+  toggle(".res", "#rrsubmenu");
 
-    toggle(btnDrop, menuDropDown);
-    toggle(navbarToggler, collapse);    
+  toggle("#sidebarCollapse", "#sidebar");
 
 });

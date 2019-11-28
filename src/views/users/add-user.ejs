@@ -1,85 +1,94 @@
-<% include ../partials/head %>
+<% include ../layouts/head %>
 
-<% include ../partials/menu %>
+<body>
 
-<div class="container py-5 mb-5">
+  <div class="wrapper">
 
-  <div class="row">
-    <div class="col-md-4">
-      <% include left-menu %>
-    </div>
+    <% include ../layouts/top-menu %>
 
-    <div class="col-md-8">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-      <h2><i class="fas fa-plus"></i> Ajout d'un utilisateur</h2>
-      <form action="/users/add" method="POST" onsubmit="return handleForm(this)" name="adduser">
+      <% include ../layouts/left-menu %>
 
-        <div class="form-group">
-          <label for="nom">Nom d'utilisateur</label>
-          <input type="text" class="form-control" id="nom" name="nom" placeholder="Enter nom complet" required>
-        </div>
+      <div class="container py-5">
 
-        <div class="form-group">
-          <label for="email">Adresse Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Entrer email" required>
-        </div>
+        <h2><i class="fas fa-plus"></i> Ajout d'un utilisateur</h2>
+        <form action="/users/add" method="POST" onsubmit="return handleForm(this)" name="adduser">
 
-
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe"
-            required>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <% if(locals.division) { %>
-            <div class="form-group">
-              <label for="division">Choisir un division</label>
-              <select class="form-control" id="division" name="division">
-                <% for(let d in division) {%>
-                <option value="<%= division[d] %>"><%= division[d] %></option>
-                <% } %>
-              </select>
-            </div>
-            <% } %>
-
+          <div class="form-group">
+            <label for="nom">Nom d'utilisateur</label>
+            <input type="text" class="form-control" id="nom" name="nom" 
+            pattern="[a-zA-Z ]+"
+            placeholder="Enter nom complet" required>
           </div>
 
-          <div class="col-md-6">
-            <% if(locals.role) { %>
-            <div class="form-group">
-              <label for="role">Choisir un role</label>
-              <select class="form-control" id="role" name="role">
-                <% for(let a in role) {%>
-                <option value="<%= role[a] %>"><%= role[a] %></option>
-                <% } %>
-              </select>
-            </div>
-            <% } %>
+          <div class="form-group">
+            <label for="email">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Entrer email" required>
           </div>
-        </div><!-- / ROW -->
 
 
-        <button type="submit" class="btn btn-primary" id="btn-add-user">
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrer mot de passe"
+              required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <% if(locals.division) { %>
+              <div class="form-group">
+                <label for="division">Choisir un division</label>
+                <select class="form-control" id="division" name="division">
+                  <% for(let d in division) {%>
+                  <option value="<%= division[d] %>"><%= division[d] %></option>
+                  <% } %>
+                </select>
+              </div>
+              <% } %>
+
+            </div>
+
+            <div class="col-md-6">
+              <% if(locals.role) { %>
+              <div class="form-group">
+                <label for="role">Choisir un role</label>
+                <select class="form-control" id="role" name="role">
+                  <% for(let a in role) {%>
+                  <option value="<%= role[a] %>"><%= role[a] %></option>
+                  <% } %>
+                </select>
+              </div>
+              <% } %>
+            </div>
+          </div><!-- / ROW -->
+
+
+          <button type="submit" class="btn btn-primary" id="btn-add-user">
             <i class="fas fa-plus"></i> Ajouter
           </button>
-        <button type="reset" class="btn btn-danger">vider</button>
+          <button type="reset" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i> vider
+          </button>
 
 
-      </form>
+        </form>
 
-      <div class="alert alert-danger mt-3" role="alert" id="alert-form-add-user"></div>
+        <div class="alert alert-danger mt-3" role="alert" id="alert-form-add-user"></div>
 
-      <% if(locals.msg) { %>
-      <div class="alert alert-primary mt-3" role="alert">
-        <%= msg %>
+        <% if(locals.msg) { %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= msg %>
+        </div>
+        <% } %>
+
+
       </div>
-      <% } %>
+
     </div>
-
+    <!--/content-->
   </div>
+  <!--/wrapper-->
 
-</div>
-
-<% include ../partials/footer %>
+  <% include ../layouts/footer %>
